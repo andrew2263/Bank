@@ -1,2 +1,0 @@
-# Liga-Bank
-Liga Bank
