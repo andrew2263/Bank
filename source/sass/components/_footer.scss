@@ -1,11 +1,27 @@
 .footer {
   background-color: #f6f7ff;
-  padding: 60px 0;
+  padding: 58px 0;
+}
+
+.footer__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer__first,
+.footer__second {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.footer__left {
+  margin-right: 190px;
 }
 
 .footer__logo {
   position: relative;
-  width: 250px;
   padding-left: 37px;
   font-size: 20px;
   font-weight: bold;
@@ -33,13 +49,13 @@
 .footer__info {
   position: absolute;
   left: 0;
-  top: 44px;
+  top: 34px;
 }
 
 .footer__item {
   font-size: 16px;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 11px;
 
   &:last-child {
     margin-bottom: 0;
@@ -62,6 +78,7 @@
 .footer__phone {
   display: flex;
   flex-direction: row;
+  margin-right: 80px;
 }
 
 .footer__phone img {
@@ -72,7 +89,7 @@
   display: block;
   font-size: 16px;
   font-weight: 500;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   transition: all 0.5s;
 
   &:hover {
@@ -101,17 +118,23 @@
 }
 
 @media (max-width: 1199px) {
-  .footer__container {
+  .footer__first,
+  .footer__second {
     flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: stretch;
-    max-height: 280px;
+  }
+
+  .footer__first {
+    width: 52.2%;
+  }
+
+  .footer__second {
+    width: 47.8%;
   }
 
   .footer__left {
     order: 1;
-    margin-bottom: 35px;
+    margin-bottom: 23px;
+    margin-right: 0;
   }
 
   .footer__logo {
@@ -136,27 +159,21 @@
     top: auto;
   }
 
-  .footer__break {
-    display: block;
-    flex-basis: 100%;
-    width: 0;
-    order: 4;
-  }
-
   .footer__phone {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    margin-right: 0;
   }
 
   .footer__phone_mobile {
-    order: 5;
+    order: 4;
   }
 
   .footer__phone_st {
-    order: 6;
+    order: 5;
   }
 
   .footer__social {
-    order: 7;
+    order: 6;
   }
 
   .footer__social-item {
@@ -166,17 +183,23 @@
 
 @media (max-width: 767px) {
   .footer {
-    padding: 45px 0;
+    padding: 42px 0;
   }
 
   .footer__container {
-    flex-wrap: nowrap;
-    height: auto;
-    max-height: none;
+    flex-direction: column;
+  }
+
+  .footer__first {
+    width: 100%;
+  }
+
+  .footer__second {
+    width: 100%;
   }
 
   .footer__left {
-    margin-bottom: 30px;
+    margin-bottom: 23px;
   }
 
   .footer__logo {
@@ -195,15 +218,16 @@
   }
 
   .footer__list {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
 
   .footer__item {
     font-size: 14px;
+    margin-bottom: 13px;
   }
 
   .footer__phone {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
   }
 
   .footer__phone_mobile {

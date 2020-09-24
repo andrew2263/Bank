@@ -65,7 +65,7 @@
   display: none;
   background-color: #f6f7ff;
   border-radius: 0 4px 4px 4px;
-  padding: 0px 135px 0 70px;
+  padding: 0 135px 0 70px;
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
@@ -84,7 +84,7 @@
 }
 
 .tabs__wrapper_text {
-  padding: 60px 0;
+  padding: 55px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -105,7 +105,7 @@
   line-height: 140%;
   font-weight: 500;
   max-width: 410px;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
 }
 
 .tabs__text_sub {
@@ -121,7 +121,7 @@
 }
 
 .tabs__service-list {
-  margin-bottom: 40px;
+  margin-bottom: 35px;
   max-width: 400px;
 }
 
@@ -129,7 +129,7 @@
   position: relative;
   font-size: 18px;
   line-height: 130%;
-  margin-bottom: 20px;
+  margin-bottom: 14.5px;
   padding-left: 21px;
 
   &::before {
@@ -173,7 +173,7 @@
 @media (max-width: 1199px) {
   .tabs__text {
     font-size: 18px;
-    margin-bottom: 35px;
+    margin-bottom: 24px;
     max-width: 340px;
   }
 
@@ -198,7 +198,11 @@
 @media (max-width: 767px) {
   .tabs__text {
     font-size: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 18px;
+  }
+
+  .tabs__service-list {
+    margin-bottom: 23px;
   }
 
   .tabs__service-item {

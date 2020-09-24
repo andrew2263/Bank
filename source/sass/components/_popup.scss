@@ -11,6 +11,10 @@
   overflow-y: scroll;
 }
 
+.popup-container_active {
+  display: flex;
+}
+
 .popup {
   position: relative;
   z-index: 2000;
@@ -23,6 +27,10 @@
   background-color: #f6f7ff;
   padding: 60px;
   margin: auto;
+}
+
+.popup__login_active {
+  display: block;
 }
 
 .popup__login-top {
@@ -125,7 +133,7 @@
   opacity: 0;
 }
 
-.popup__show-password+label {
+.popup__show-password + label {
   position: absolute;
   top: 24px;
   right: 24px;
@@ -138,7 +146,7 @@
   border-radius: 0;
 }
 
-.popup__show-password:checked+label {
+.popup__show-password:checked + label {
   background-color: transparent;
   background-image: url("../img/show-password.svg");
 }
@@ -210,7 +218,7 @@
     margin-bottom: 25px;
   }
 
-  .popup__show-password+label {
+  .popup__show-password + label {
     right: 15px;
   }
 
@@ -238,14 +246,6 @@
   }
 }
 
-.popup__message {
-  display: none;
-  width: 500px;
-  background-color: #f6f7ff;
-  border-radius: 4px;
-  padding: 60px 58px;
-}
-
 .popup__text-main {
   font-size: 22px;
   font-weight: 500;
@@ -260,11 +260,6 @@
 }
 
 @media (max-width: 1199px) {
-  .popup__message {
-    width: 100%;
-    padding: 60px;
-  }
-
   .popup__text-main {
     max-width: 360px;
   }
@@ -275,10 +270,6 @@
 }
 
 @media (max-width: 767px) {
-  .popup__message {
-    padding: 40px 15px;
-  }
-
   .popup__text-main {
     font-size: 18px;
   }
@@ -292,6 +283,10 @@
   border-radius: 4px;
   padding: 60px;
   text-align: center;
+}
+
+.popup__thanks_active {
+  display: block;
 }
 
 .popup__close_thanks {
