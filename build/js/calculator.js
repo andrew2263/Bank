@@ -19,6 +19,10 @@
   var calculatorCheckbox = calculator.querySelectorAll('.calculator__checkbox');
   var block;
   var id;
+  var addRequest = false;
+  var calculatorForm = calculator.querySelector('.calculator__form');
+  var myStorage = localStorage;
+  var requests = [];
 
   var sumCreditName = {
     'mortgage': 'Сумма ипотеки',
@@ -32,6 +36,19 @@
     'consumer': 'Сумма потребительского кредита'
   };
 
+  var makeCounnt = function () {
+    var count = 1;
+    return function () {
+      if (addRequest) {
+        return ++count;
+      }
+      return count;
+    };
+  };
+
+  var requestNumber = makeCounnt();
+
+  var requestParams;
 
   calculatorSelect.addEventListener('click', function (e) {
     e.preventDefault();
@@ -72,7 +89,7 @@
       e.target.parentNode.querySelector('.calculator__price-input').value = parseInt((Number(price.value) + Number(e.target.dataset.add)), 10);
       priceChange(price);
       priceInput(price);
-      calcCredit(block, id);
+      requestParams = calcCredit(block, id);
     });
   }
 
@@ -85,7 +102,7 @@
       e.target.parentNode.querySelector('.calcualor__initial_percent').innerHTML = e.target.value + '%';
       var roubles = inputInit.parentNode.querySelector('.calculator__price-currency');
       declination(parseInt(inputInit.value, 10), roubles, 'roubles');
-      calcCredit(block, id);
+      requestParams = calcCredit(block, id);
     });
   }
 
@@ -95,7 +112,7 @@
       input.value = e.target.value;
       var years = input.parentNode.querySelector('.calculator__price-years');
       declination(parseInt(input.value, 10), years, 'years');
-      calcCredit(block, id);
+      requestParams = calcCredit(block, id);
     });
   }
 
@@ -110,7 +127,7 @@
       priceChange(e.target);
       var roubles = e.target.parentNode.querySelector('.calculator__price-currency');
       declination(parseInt(e.target.value, 10), roubles, 'roubles');
-      calcCredit(block, id);
+      requestParams = calcCredit(block, id);
     });
   }
 
@@ -130,7 +147,7 @@
       initialChange(e.target);
       var roubles = e.target.parentNode.querySelector('.calculator__price-currency');
       declination(parseInt(e.target.value, 10), roubles, 'roubles');
-      calcCredit(block, id);
+      requestParams = calcCredit(block, id);
     });
   }
 
@@ -146,13 +163,13 @@
       }
       var years = e.target.parentNode.querySelector('.calculator__price-years');
       declination(parseInt(e.target.value, 10), years, 'years');
-      calcCredit(block, id);
+      requestParams = calcCredit(block, id);
     });
   }
 
   for (var d = 0; d < calculatorCheckbox.length; d++) {
     calculatorCheckbox[d].addEventListener('change', function () {
-      calcCredit(block, id);
+      requestParams = calcCredit(block, id);
     });
   }
 
@@ -311,22 +328,54 @@
       calculatorOffer.classList.add('calculator__offer_active');
     }
 
-    calculatorOfferButton.addEventListener('click', function () {
-      document.getElementById('request-initial').innerHTML = '';
-      document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency').innerHTML = '';
-      calculatorRequest.classList.add('calculator__request_active');
-      document.getElementById('request-goal').innerHTML = paramsBlock.dataset.type;
-      document.getElementById('request-price').parentNode.parentNode.querySelector('.calculator__descr').innerHTML = priceName[creditType];
-      document.getElementById('request-price').innerHTML = price;
-      declination(price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'roubles');
-      if (paramsBlock.querySelector('.calculator__price-input_initial')) {
-        document.getElementById('request-initial').innerHTML = initial;
-        declination(initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'roubles');
-      }
-      document.getElementById('request-term').innerHTML = term;
-      declination(term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
-    });
+    return {
+      'goal': paramsBlock.dataset.type,
+      'creditType': creditType,
+      'price': price,
+      'initial': initial,
+      'term': term
+    };
   };
+
+  calculatorOfferButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.getElementById('request-initial').innerHTML = '';
+    document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency').innerHTML = '';
+    calculatorRequest.classList.add('calculator__request_active');
+    document.getElementById('request-goal').innerHTML = requestParams.goal;
+    document.getElementById('request-number').innerHTML = '000' + requestNumber();
+    document.getElementById('request-price').parentNode.parentNode.querySelector('.calculator__descr').innerHTML = priceName[requestParams.creditType];
+    document.getElementById('request-price').innerHTML = requestParams.price;
+    document.getElementById('request-price').innerHTML = requestParams.price;
+    declination(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'roubles');
+    if (requestParams.initial) {
+      document.getElementById('request-initial').innerHTML = requestParams.initial;
+      declination(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'roubles');
+    }
+    document.getElementById('request-term').innerHTML = requestParams.term;
+    declination(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
+  });
+
+  calculatorForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    addRequest = true;
+    requestNumber();
+    calculatorRequest.classList.remove('calculator__request_active');
+    calculatorOffer.classList.remove('calculator__offer_active');
+    addRequest = false;
+    var request = {
+      'name': document.getElementById('request-name').value,
+      'email': document.getElementById('request-email').value,
+      'tel': document.getElementById('request-tel').value
+    };
+    if (requests.length === 0 && myStorage.getItem('requests')) {
+      for (var l = 0; l < JSON.parse(myStorage.getItem('requests')).length; l++) {
+        requests.push(JSON.parse(myStorage.getItem('requests'))[l]);
+      }
+    }
+    requests.push(request);
+    myStorage.setItem('requests', JSON.stringify(requests));
+  });
 
   var declination = function (value, word, type) {
     var rest = value % 10;

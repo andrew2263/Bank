@@ -1,3 +1,4 @@
+'use strict';
 ymaps.ready(function () {
   var checkboxRussia = document.getElementById('offices-russia');
   var checkboxCIS = document.getElementById('offices-sng');
@@ -175,100 +176,66 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     });
 
-  myMap.geoObjects
-      .add(myPlacemarkSpb)
-      .add(myPlacemarkMsk)
-      .add(myPlacemarkSaratov)
-      .add(myPlacemarkVyatka)
-      .add(myPlacemarkOmsk)
-      .add(myPlacemarkTyumen)
-      .add(myPlacemarkMinsk)
-      .add(myPlacemarkBaku)
-      .add(myPlacemarkTashkent)
-      .add(myPlacemarkAlmaty)
-      .add(myPlacemarkLondon)
-      .add(myPlacemarkParis)
-      .add(myPlacemarkPrague)
-      .add(myPlacemarkRome);
+  var russiaGroup = new ymaps.GeoObjectCollection();
+  russiaGroup.add(myPlacemarkSpb);
+  russiaGroup.add(myPlacemarkMsk);
+  russiaGroup.add(myPlacemarkSaratov);
+  russiaGroup.add(myPlacemarkVyatka);
+  russiaGroup.add(myPlacemarkOmsk);
+  russiaGroup.add(myPlacemarkTyumen);
+
+  var cisGroup = new ymaps.GeoObjectCollection();
+  cisGroup.add(myPlacemarkMinsk);
+  cisGroup.add(myPlacemarkBaku);
+  cisGroup.add(myPlacemarkTashkent);
+  cisGroup.add(myPlacemarkAlmaty);
+
+  var europeGroup = new ymaps.GeoObjectCollection();
+  europeGroup.add(myPlacemarkLondon);
+  europeGroup.add(myPlacemarkParis);
+  europeGroup.add(myPlacemarkPrague);
+  europeGroup.add(myPlacemarkRome);
+
+  myMap.geoObjects.add(russiaGroup);
+  myMap.geoObjects.add(europeGroup);
+  myMap.geoObjects.add(cisGroup);
 
   if (!checkboxRussia.checked) {
-    myMap.geoObjects
-        .remove(myPlacemarkSpb)
-        .remove(myPlacemarkMsk)
-        .remove(myPlacemarkSaratov)
-        .remove(myPlacemarkVyatka)
-        .remove(myPlacemarkOmsk)
-        .remove(myPlacemarkTyumen);
+    myMap.geoObjects.remove(russiaGroup);
   }
 
   if (!checkboxCIS.checked) {
-    myMap.geoObjects
-        .remove(myPlacemarkMinsk)
-        .remove(myPlacemarkBaku)
-        .remove(myPlacemarkTashkent)
-        .remove(myPlacemarkAlmaty);
+    myMap.geoObjects.remove(cisGroup);
   }
 
   if (!checkboxEurope.checked) {
-    myMap.geoObjects
-        .remove(myPlacemarkLondon)
-        .remove(myPlacemarkParis)
-        .remove(myPlacemarkPrague)
-        .remove(myPlacemarkRome);
+    myMap.geoObjects.remove(europeGroup);
   }
 
   checkboxRussia.addEventListener('change', function (e) {
     if (e.target.checked) {
-      myMap.geoObjects
-          .add(myPlacemarkSpb)
-          .add(myPlacemarkMsk)
-          .add(myPlacemarkSaratov)
-          .add(myPlacemarkVyatka)
-          .add(myPlacemarkOmsk)
-          .add(myPlacemarkTyumen);
+      myMap.geoObjects.add(russiaGroup);
     }
     if (!e.target.checked) {
-      myMap.geoObjects
-          .remove(myPlacemarkSpb)
-          .remove(myPlacemarkMsk)
-          .remove(myPlacemarkSaratov)
-          .remove(myPlacemarkVyatka)
-          .remove(myPlacemarkOmsk)
-          .remove(myPlacemarkTyumen);
+      myMap.geoObjects.remove(russiaGroup);
     }
   });
 
   checkboxCIS.addEventListener('change', function (e) {
     if (e.target.checked) {
-      myMap.geoObjects
-          .add(myPlacemarkMinsk)
-          .add(myPlacemarkBaku)
-          .add(myPlacemarkTashkent)
-          .add(myPlacemarkAlmaty);
+      myMap.geoObjects.add(cisGroup);
     }
     if (!e.target.checked) {
-      myMap.geoObjects
-          .remove(myPlacemarkMinsk)
-          .remove(myPlacemarkBaku)
-          .remove(myPlacemarkTashkent)
-          .remove(myPlacemarkAlmaty);
+      myMap.geoObjects.remove(cisGroup);
     }
   });
 
   checkboxEurope.addEventListener('change', function (e) {
     if (e.target.checked) {
-      myMap.geoObjects
-          .add(myPlacemarkLondon)
-          .add(myPlacemarkParis)
-          .add(myPlacemarkPrague)
-          .add(myPlacemarkRome);
+      myMap.geoObjects.add(europeGroup);
     }
     if (!e.target.checked) {
-      myMap.geoObjects
-          .remove(myPlacemarkLondon)
-          .remove(myPlacemarkParis)
-          .remove(myPlacemarkPrague)
-          .remove(myPlacemarkRome);
+      myMap.geoObjects.remove(europeGroup);
     }
   });
 });

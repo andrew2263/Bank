@@ -17,49 +17,55 @@
   });
 
   var isActiveSwiper = false;
-
-  var secondSlider = new Swiper('.tabs__container', {
-    direction: 'horizontal',
-    loop: true,
-    slidesPerView: 1,
-    init: false,
-    pagination: {
-      el: '.tabs__pagination',
-      clickable: true,
-      type: 'bullets'
-    },
-
-    breakpoints: {
-      320: {
-        allowSlidePrev: true,
-        allowSlideNext: true
-      },
-      1200: {
-        allowSlidePrev: false,
-        allowSlideNext: false
-      },
-    },
-  });
+  var tabsPanels = document.querySelectorAll('.tabs__panel');
+  var secondSlider;
 
   document.addEventListener('DOMContentLoaded', function () {
-    if (window.innerWidth < 1200) {
-      secondSlider.init();
+    if (window.innerWidth < 1200 && !isActiveSwiper) {
+      for (var i = 0; i < tabsPanels.length; i++) {
+        tabsPanels[i].classList.add('swiper-slide');
+      }
+      secondSlider = new Swiper('.tabs__container', {
+        direction: 'horizontal',
+        loop: true,
+        slidesPerView: 1,
+        pagination: {
+          el: '.tabs__pagination',
+          clickable: true,
+          type: 'bullets'
+        },
+      });
       isActiveSwiper = true;
     }
   });
 
   window.addEventListener('resize', function () {
     if (window.innerWidth < 1200 && !isActiveSwiper) {
-      secondSlider.init();
+      for (var i = 0; i < tabsPanels.length; i++) {
+        tabsPanels[i].classList.add('swiper-slide');
+      }
+      secondSlider = new Swiper('.tabs__container', {
+        direction: 'horizontal',
+        loop: true,
+        slidesPerView: 1,
+        pagination: {
+          el: '.tabs__pagination',
+          clickable: true,
+          type: 'bullets'
+        },
+      });
       isActiveSwiper = true;
     }
 
-    if (window.innerWidth >= 1200 && isActiveSwiper) {
+    if ((window.innerWidth >= 1200) && isActiveSwiper && (typeof secondSlider !== 'undefined')) {
       secondSlider.destroy(false);
+      secondSlider = undefined;
+      for (var r = 0; r < tabsPanels.length; r++) {
+        tabsPanels[r].classList.remove('swiper-slide');
+      }
       isActiveSwiper = false;
-      var tabsPanels = document.querySelectorAll('.tabs__panel');
-      for (var i = 0; i < tabsPanels.length; i++) {
-        tabsPanels[i].style.width = '100%';
+      for (var t = 0; t < tabsPanels.length; t++) {
+        tabsPanels[t].style.width = '100%';
       }
     }
   });

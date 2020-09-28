@@ -134,7 +134,7 @@
         </ul>
         <div class="swiper-container tabs__container">
           <div class="swiper-wrapper">
-            <div class="swiper-slide tabs__panel tabs__panel_active faded in" id="deposit">
+            <div class="tabs__panel tabs__panel_active faded in" id="deposit">
               <div class="tabs__wrapper tabs__wrapper_text">
                 <p class="tabs__text">
                   Вклады Лига Банка – это выгодная инвестиция в свое будущее
@@ -155,7 +155,7 @@
                 </picture>
               </div>
             </div>
-            <div class="swiper-slide tabs__panel faded" id="credit">
+            <div class="tabs__panel faded" id="credit">
               <div class="tabs__wrapper tabs__wrapper_text">
                 <p class="tabs__text">
                   Лига Банк выдает кредиты под&nbsp;любые&nbsp;цели
@@ -178,7 +178,7 @@
                 </picture>
               </div>
             </div>
-            <div class="swiper-slide tabs__panel faded" id="insurance">
+            <div class="tabs__panel faded" id="insurance">
               <div class="tabs__wrapper tabs__wrapper_text">
                 <p class="tabs__text">
                   Лига Страхование — застрахуем все,&nbsp;что&nbsp;захотите
@@ -465,7 +465,7 @@
                   </div>
                 </div>
               </div>
-              <button type="button" class="calculator__offer-request">Оформить заявку</button>
+              <button type="submit" class="calculator__offer-request">Оформить заявку</button>
             </div>
           </div>
         </div>
@@ -475,7 +475,9 @@
             <div class="calculator__params">
               <div class="calculator__param">
                 <div class="calculator__descr">Номер заявки</div>
-                <div class="calculator__value" id="request-number">№&nbsp;0010</div>
+                <div class="calculator__value">№
+                  <span id="request-number"></span>
+                </div>
               </div>
               <div class="calculator__param">
                 <div class="calculator__descr">Цель кредита</div>
@@ -503,18 +505,18 @@
                 </div>
               </div>
             </div>
-            <form class="calculator__form">
+            <form class="calculator__form" id="calculator-form">
               <input type="text" id="request-name" name="request-name"
                 class="calculator__name" required="required" placeholder="ФИО">
               <label for="request-name" class="visually-hidden"></label>
               <div class="calculator__contacts">
                 <input type="tel" name="request-tel" id="request-tel" class="calculator__contact"
-                  placeholder="Телефон" required="required">
+                  placeholder="Телефон" required="required" pattern="(\+?\d[-]*){7,13}">
                 <label for="request-tel" class="visually-hidden"></label>
                 <input type="email" name="request-email" id="request-email" class="calculator__contact"
                   placeholder="E-mail" required="required">
               </div>
-              <button type="button" class="calculator__submit">Отправить</button>
+              <input type="submit" class="calculator__submit" value="Отправить">
             </form>
           </div>
         </div>
@@ -639,8 +641,8 @@
           </div>
           <a href="#" class="popup__forgot">Забыли пароль?</a>
           <input type="submit" class="popup__login-submit" value="Войти" id="login-submit">
-        </div>
-      </form>
+        </form>
+      </div>
       <div class="popup__thanks">
         <button type="button" class="popup__close popup__close_thanks">
           <span class="popup__close-1"></span>
