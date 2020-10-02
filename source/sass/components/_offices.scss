@@ -1,5 +1,7 @@
 .offices {
+  position: relative;
   padding-bottom: 110px;
+  z-index: 1;
 }
 
 .offices__map-wrapper {
@@ -63,6 +65,10 @@
 @media (max-width: 767px) {
   .offices {
     padding-bottom: 55px;
+  }
+
+  .offices h2 {
+    width: 100%;
   }
 
   .offices__container {

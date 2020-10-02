@@ -18,6 +18,10 @@
 }
 
 @media (max-width: 767px) {
+  .slider {
+    padding-top: 48px;
+  }
+
   .slider__slide {
     height: 226px;
   }
@@ -69,11 +73,11 @@
 
 @media (max-width: 767px) {
   .slider__content_confidence {
-    background-image: url("../img/confidence@320.png");
+    background-image: url("../img/confidence@226.png");
   }
 
   .slider__slide_near {
-    background-image: url("../img/near@320.png");
+    background-image: url("../img/near@226.png");
   }
 
   .slider__heading {

@@ -2,6 +2,8 @@
   padding-top: 60px;
   padding-bottom: 0;
   background-color: transparent;
+  position: relative;
+  z-index: 1;
 }
 
 .tabs__list {
@@ -152,6 +154,8 @@
 }
 
 .tabs__button {
+  display: inline-block;
+  text-align: center;
   width: 198px;
   height: 51px;
   border: none;
@@ -160,7 +164,7 @@
   color: #f6f7ff;
   font-weight: 500;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 51px;
   transition: opacity 0.5s;
 
   &:hover {
@@ -201,7 +205,13 @@
     margin-bottom: 18px;
   }
 
+  .tabs__wrapper_text {
+    position: relative;
+    z-index: 100;
+  }
+
   .tabs__service-list {
+    max-width: 230px;
     margin-bottom: 23px;
   }
 
@@ -222,6 +232,7 @@
     position: absolute;
     top: 98px;
     left: 218px;
+    z-index: 0;
   }
 
   .tabs__button {

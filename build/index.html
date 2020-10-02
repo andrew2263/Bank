@@ -13,15 +13,12 @@
     <div class="container">
       <div class="header__wrapper">
         <div class="header__left">
-          <button type="button" class="header__burger">
+          <input type="checkbox" class="header__burger-checkbox" id="burger">
+          <label for="burger">
             <span></span>
             <span></span>
             <span></span>
-          </button>
-          <button type="button" class="header__close">
-            <span class="header__close-1"></span>
-            <span class="header__close-2"></span>
-          </button>
+          </label>
           <div class="header__logo"><a>ЛИГА Банк</a></div>
           <div class="header__nav-container">
             <div class="header__nav-wrapper">
@@ -66,10 +63,10 @@
             <div class="container slider__inner">
               <h1 class="slider__heading slider__heading_white">Лига Банк</h1>
               <p class="slider__text slider__text_white">Кредиты на любой случай</p>
-              <a href="#calculator" class="slider__link slider__link_white">Рассчитать кредит</a>
+              <a href="#calculator" class="anchor-link slider__link slider__link_white">Рассчитать кредит</a>
               <div class="slider__black-card">
                 <picture>
-                  <source srcset="img/black_card@211.png" media="(max-width: 767px)">
+                  <source srcset="img/black_card@82.png" media="(max-width: 767px)">
                   <source srcset="img/black_card@226.png" media="(max-width: 1199px)">
                   <img src="img/black_card.png" alt="Черная карта">
                 </picture>
@@ -96,7 +93,7 @@
             <div class="container slider__inner">
               <h1 class="slider__heading">Лига Банк</h1>
               <p class="slider__text">Всегда рядом</p>
-              <a href="#offices" class="slider__link slider__link_blue">Найти отделение</a>
+              <a href="#offices" class="anchor-link cslider__link slider__link_blue">Найти отделение</a>
             </div>
           </div>
         </div>
@@ -145,7 +142,7 @@
                   <li class="tabs__service-item">Возможность ежемесячной капитализации или вывод процентов на банковскую карту
                   </li>
                 </ul>
-                <button type="button" class="tabs__button">Узнать подробнее</button>
+                <a href="#" class="tabs__button">Узнать подробнее</a>
               </div>
               <div class="tabs__wrapper tabs__wrapper_img">
                 <picture>
@@ -167,7 +164,7 @@
                 </ul>
                 <p class="tabs__text tabs__text_sub">
                   Рассчитайте ежемесячный платеж и ставку по кредиту, воспользовавшись нашим
-                  <a href="" class="tabs__text-link">кредитным калькулятором</a>
+                  <a href="#calculator" class="anchor-link tabs__text-link">кредитным калькулятором</a>
                 </p>
               </div>
               <div class="tabs__wrapper tabs__wrapper_img">
@@ -188,7 +185,7 @@
                   <li class="tabs__service-item">Страхование жизни и здоровья</li>
                   <li class="tabs__service-item">Страхование недвижимости</li>
                 </ul>
-                <button type="button" class="tabs__button">Узнать подробнее</button>
+                <a href="#" class="tabs__button">Узнать подробнее</a>
               </div>
               <div class="tabs__wrapper tabs__wrapper_img">
                 <picture>
@@ -207,7 +204,7 @@
                   <li class="tabs__service-item">Мобильный банк, который&nbsp;всегда&nbsp;под&nbsp;рукой</li>
                   <li class="tabs__service-item">Приложение Лига-проездной позволит вам&nbsp;оплачивать билеты по всему миру</li>
                 </ul>
-                <button type="button" class="tabs__button">Узнать подробнее</button>
+                <a href="#" class="tabs__button">Узнать подробнее</a>
               </div>
               <div class="tabs__wrapper tabs__wrapper_img">
                 <picture>
@@ -280,7 +277,7 @@
                   </p>
                 </div>
                 <input type="range" id="initial-range-mortgage" class="calculator__initial-range" name="initial-range-mortgage" min="10" step="5" max="100" value="10">
-                <p class="calculator__text-below calcualor__initial_percent">10%</p>
+                <p class="calculator__text-below calcualor__initial-percent">10%</p>
               </div>
               <div class="calculator__term">
                 <p class="calculator__text-above">Срок кредитования</p>
@@ -297,7 +294,7 @@
                   <p class="calculator__text-below">30 лет</p>
                 </div>
               </div>
-              <input type="checkbox" id="calculator-checkbox-mortgage" class="calculator__checkbox" data-sum="470000" checked="">
+              <input type="checkbox" id="calculator-checkbox-mortgage" class="calculator__checkbox" data-sum="470000">
               <label for="calculator-checkbox-mortgage">Использовать материнский капитал</label>
             </div>
             <div class="calculator__credit faded" id="car" data-type="Автомобильное кредитование">
@@ -329,7 +326,7 @@
                   </p>
                 </div>
                 <input type="range" id="initial-range-car" class="calculator__initial-range" name="initial-range-car" min="20" step="5" max="100" value="20">
-                <p class="calculator__text-below calcualor__initial_percent">20%</p>
+                <p class="calculator__text-below calcualor__initial-percent">20%</p>
               </div>
               <div class="calculator__term">
                 <p class="calculator__text-above">Срок кредитования</p>
@@ -416,14 +413,14 @@
                 <div class="calculator__offer-column">
                   <div class="calculator__offer-block">
                     <p class="claculator__offer-price">
-                      <span class="calculator__offer-price_sum">1&nbsp;330&nbsp;000</span>
+                      <span class="calculator__offer-sum">1&nbsp;330&nbsp;000</span>
                       <span class="calculator__offer-currency">рублей</span>
                     </p>
                     <p class="calculator__offer-text calculator__offer-text_credit"></p>
                   </div>
                   <div class="calculator__offer-block">
                     <p class="claculator__offer-price">
-                      <span class="calculator__offer-price_month">27&nbsp;868</span>
+                      <span class="calculator__offer-month">27&nbsp;868</span>
                       <span class="calculator__offer-currency">рублей</span>
                     </p>
                     <p class="calculator__offer-text">Ежемесячный платеж</p>
@@ -432,14 +429,14 @@
                 <div class="calculator__offer-column">
                   <div class="calculator__offer-block">
                     <p class="claculator__offer-price">
-                      <span class="calculator__offer-price_percent">9,40</span>
+                      <span class="calculator__offer-percent">9,40</span>
                       %
                     </p>
                     <p class="calculator__offer-text">Процентная ставка</p>
                   </div>
                   <div class="calculator__offer-block">
                     <p class="claculator__offer-price">
-                      <span class="calculator__offer-price_salary">61&nbsp;929</span>
+                      <span class="calculator__offer-salary">61&nbsp;929</span>
                       <span class="calculator__offer-currency">рублей</span>
                     </p>
                     <p class="calculator__offer-text">Необходимый доход</p>
@@ -547,19 +544,23 @@
       </div>
       <div class="footer__second">
         <div class="footer__phone footer__phone_mobile">
-          <img src="img/mobile_icon.svg" alt="mobile" width="10" height="16">
-          <div class="footer__phone-info">
-            <a href="tel:*0904" class="footer__mobile-phone">*0904</a>
-            <p class="footer__text">Бесплатно для абонентов<br>
-              МТС, Билайн, Мегафон, Теле2</p>
+          <div class="footer__phone-item">
+            <img src="img/mobile_icon.svg" alt="mobile" width="10" height="16">
+            <div class="footer__phone-info">
+              <a href="tel:*0904" class="footer__mobile-phone">*0904</a>
+              <p class="footer__text">Бесплатно для абонентов<br>
+                МТС, Билайн, Мегафон, Теле2</p>
+            </div>
           </div>
         </div>
         <div class="footer__phone footer__phone_st">
-          <img src="img/phone_icon.svg" alt="phone" width="16" height="16">
-          <div class="footer__phone-info">
-            <a href="tel:+78001112233" class="footer__phone-phone">8 800 111 22 33</a>
-            <p class="footer__text">Бесплатно для всех<br>
-              городов России</p>
+          <div class="footer__phone-item">
+            <img src="img/phone_icon.svg" alt="phone" width="16" height="16">
+            <div class="footer__phone-info">
+              <a href="tel:+78001112233" class="footer__phone-phone">8 800 111 22 33</a>
+              <p class="footer__text">Бесплатно для всех<br>
+                городов России</p>
+            </div>
           </div>
         </div>
         <ul class="footer__social">
@@ -637,11 +638,10 @@
   </div>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=81ff3703-94f0-4678-8d2a-740559fd1518" type="text/javascript"></script>
-  <script src="js/slider.js" type="text/javascript"></script>
-  <script src="js/tabs.js" type="text/javascript"></script>
-  <script src="js/burger.js" type="text/javascript"></script>
-  <script src="js/calculator.js" type="text/javascript"></script>
-  <script src="js/popup.js" type="text/javascript"></script>
-  <script src="js/map.js" type="text/javascript"></script>
+  <script src="js/slider-min.js" type="text/javascript"></script>
+  <script src="js/tabs-min.js" type="text/javascript"></script>
+  <script src="js/calculator-min.js" type="text/javascript"></script>
+  <script src="js/popup-min.js" type="text/javascript"></script>
+  <script src="js/map-min.js" type="text/javascript"></script>
 </body>
 </html>

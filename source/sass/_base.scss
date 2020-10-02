@@ -140,3 +140,7 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+input[type="submit"] {
+  -webkit-appearance: none;
+}

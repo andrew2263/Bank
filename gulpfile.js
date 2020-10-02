@@ -15,6 +15,7 @@ var svgstore = require("gulp-svgstore")
 var posthtml = require("gulp-posthtml");
 var include = require("posthtml-include");
 var del = require("del");
+var minify = require("gulp-minify");
 const gulpPlumber = require("gulp-plumber");
 
 gulp.task("css", function () {
@@ -84,11 +85,9 @@ gulp.task("html", function () {
 });
 
 gulp.task("js", function () {
-  return gulp.src("source/js/**",
-  {
-    base: "source"
-  })
-  .pipe(gulp .dest("build"));
+  return gulp.src("source/js/**")
+  .pipe(minify())
+  .pipe(gulp.dest("build/js"));
 });
 
 gulp.task("copy", function () {

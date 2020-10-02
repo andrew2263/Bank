@@ -25,7 +25,7 @@ ymaps.ready(function () {
       // Необходимо указать данный тип макета.
       iconLayout: 'default#image',
       // Своё изображение иконки метки.
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       // Размеры метки.
       iconImageSize: [35, 40],
       // Смещение левого верхнего угла иконки относительно
@@ -39,7 +39,7 @@ ymaps.ready(function () {
       country: 'russia'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     }),
@@ -50,7 +50,7 @@ ymaps.ready(function () {
       country: 'russia'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     }),
@@ -61,7 +61,7 @@ ymaps.ready(function () {
       country: 'russia'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     }),
@@ -72,7 +72,7 @@ ymaps.ready(function () {
       country: 'russia'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     }),
@@ -83,7 +83,7 @@ ymaps.ready(function () {
       country: 'russia'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     }),
@@ -94,7 +94,7 @@ ymaps.ready(function () {
       country: 'CIS'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     }),
@@ -105,7 +105,7 @@ ymaps.ready(function () {
       country: 'CIS'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     }),
@@ -116,7 +116,7 @@ ymaps.ready(function () {
       country: 'CIS'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     }),
@@ -127,7 +127,7 @@ ymaps.ready(function () {
       country: 'CIS'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     }),
@@ -138,7 +138,7 @@ ymaps.ready(function () {
       country: 'europe'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     }),
@@ -149,7 +149,7 @@ ymaps.ready(function () {
       country: 'europe'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     }),
@@ -160,7 +160,7 @@ ymaps.ready(function () {
       country: 'europe'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     }),
@@ -171,7 +171,7 @@ ymaps.ready(function () {
       country: 'europe'
     }, {
       iconLayout: 'default#image',
-      iconImageHref: '../img/location.svg',
+      iconImageHref: 'img/location.svg',
       iconImageSize: [35, 40],
       iconImageOffset: [-18, -40]
     });

@@ -3,6 +3,7 @@
 (function () {
   var calculator = document.querySelector('.calculator');
   var calculatorSelect = calculator.querySelector('.calculator__goal');
+  var calculatorSelectBlock = document.querySelector('.calculator__select');
   var calculatorList = calculator.querySelector('.calculator__list');
   var calculatorInput = calculator.querySelector('.calculator__input');
   var calculatorLinks = calculator.querySelectorAll('.calculator__link');
@@ -79,6 +80,9 @@
       calculatorSelect.innerHTML = e.target.innerHTML;
       calculatorInput.value = e.target.innerHTML;
       calculatorOffer.querySelector('.calculator__offer-text_credit').innerHTML = sumCreditName[href];
+      calculatorSelectBlock.classList.add('calculator__select_active');
+      calculatorOffer.classList.add('calculator__offer_active');
+      requestParams = calcCredit(block, id);
     });
   }
 
@@ -86,10 +90,20 @@
     priceButtons[j].addEventListener('click', function (e) {
       e.preventDefault();
       var price = e.target.parentNode.querySelector('.calculator__price-input');
-      e.target.parentNode.querySelector('.calculator__price-input').value = parseInt((Number(price.value) + Number(e.target.dataset.add)), 10);
-      priceChange(price);
-      priceInput(price);
-      requestParams = calcCredit(block, id);
+      if(!(parseInt((Number(price.value) + Number(e.target.dataset.add)), 10) < price.dataset.min ||
+      parseInt((Number(price.value) + Number(e.target.dataset.add)), 10) > price.dataset.max || 
+      price.classList.contains('calculator__price-input_red'))) {
+        price.value = parseInt((Number(price.value) + Number(e.target.dataset.add)), 10);
+        priceInput(price);
+        requestParams = calcCredit(block, id);
+      }
+      if (price.classList.contains('calculator__price-input_red')) {
+        price.classList.remove('calculator__price-input_red');
+        price.parentNode.parentNode.classList.remove('calculator__price_red')
+        price.value = (price.dataset.max - price.dataset.min) / 2;
+        priceInput(price);
+        requestParams = calcCredit(block, id);
+      }
     });
   }
 
@@ -99,7 +113,7 @@
       var price = e.target.parentNode.parentNode.querySelector('.calculator__price-wrapper').querySelector('.calculator__price-input').value;
       var inputInit = e.target.parentNode.querySelector('.calculator__price-input');
       inputInit.value = parseInt(price * percent, 10);
-      e.target.parentNode.querySelector('.calcualor__initial_percent').innerHTML = e.target.value + '%';
+      e.target.parentNode.querySelector('.calcualor__initial-percent').innerHTML = e.target.value + '%';
       var roubles = inputInit.parentNode.querySelector('.calculator__price-currency');
       declination(parseInt(inputInit.value, 10), roubles, 'roubles');
       requestParams = calcCredit(block, id);
@@ -137,7 +151,7 @@
       e.target.classList.contains('calculator__price-input_red')) {
         e.target.parentNode.parentNode.classList.remove('calculator__price_red');
         e.target.classList.remove('calculator__price-input_red');
-        e.target.value = '';
+        e.target.value = (e.target.dataset.max - e.target.dataset.min) / 2;
       }
     });
   }
@@ -189,8 +203,6 @@
       input.parentNode.parentNode.classList.add('calculator__price_red');
       input.classList.add('calculator__price-input_red');
       input.value = 'Некорректное значение';
-      var roubles = input.parentNode.querySelector('.calculator__price-currency');
-      declination(parseInt(input.value, 10), roubles, 'roubles');
     }
   };
 
@@ -207,10 +219,10 @@
   };
 
   var calcCredit = function (paramsBlock, creditType) {
-    var sumCreditField = calculatorOffer.querySelector('.calculator__offer-price_sum');
-    var payCreditField = calculatorOffer.querySelector('.calculator__offer-price_month');
-    var percentageField = calculatorOffer.querySelector('.calculator__offer-price_percent');
-    var salaryField = calculatorOffer.querySelector('.calculator__offer-price_salary');
+    var sumCreditField = calculatorOffer.querySelector('.calculator__offer-sum');
+    var payCreditField = calculatorOffer.querySelector('.calculator__offer-month');
+    var percentageField = calculatorOffer.querySelector('.calculator__offer-percent');
+    var salaryField = calculatorOffer.querySelector('.calculator__offer-salary');
     var sumCredit = 0;
     var percentage = 0;
     var payCredit = 0;
@@ -339,11 +351,22 @@
 
   calculatorOfferButton.addEventListener('click', function (e) {
     e.preventDefault();
+    var newRequestNumber = requestNumber();
+    var newRequestNumberLength = newRequestNumber.toString().length;
+    var newRequestNumberString = '';
+    if (newRequestNumberLength < 4) {
+      var f = 4 - newRequestNumberLength;
+      while (f !== 0) {
+        newRequestNumberString += '0';
+        f--;
+      }
+    }
+    newRequestNumberString += newRequestNumber.toString();
     document.getElementById('request-initial').innerHTML = '';
     document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency').innerHTML = '';
     calculatorRequest.classList.add('calculator__request_active');
     document.getElementById('request-goal').innerHTML = requestParams.goal;
-    document.getElementById('request-number').innerHTML = '000' + requestNumber();
+    document.getElementById('request-number').innerHTML = newRequestNumberString;
     document.getElementById('request-price').parentNode.parentNode.querySelector('.calculator__descr').innerHTML = priceName[requestParams.creditType];
     document.getElementById('request-price').innerHTML = requestParams.price;
     document.getElementById('request-price').innerHTML = requestParams.price;
@@ -354,6 +377,11 @@
     }
     document.getElementById('request-term').innerHTML = requestParams.term;
     declination(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
+    window.scrollTo({
+      top: calculator.offsetTop + calculatorRequest.offsetTop,
+      left: 0,
+      behavior: 'smooth'
+    });
   });
 
   calculatorForm.addEventListener('submit', function (e) {

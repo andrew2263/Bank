@@ -18,6 +18,7 @@
     popupContainer.classList.add('popup-container_active');
     popupLogin.classList.add('popup__login_active');
     document.querySelector('body').style.overflowY = 'hidden';
+    loginInput.focus();
   });
 
   passwordCheckbox.addEventListener('change', function (e) {
