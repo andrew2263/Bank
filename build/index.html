@@ -23,7 +23,7 @@
           <div class="header__nav-container">
             <div class="header__nav-wrapper">
               <nav class="header__nav">
-                <ul class="header__list">
+                <ul class="list header__list">
                   <li class="header__item">
                     <a href="#services" class="anchor-link header__link">
                       Услуги
@@ -49,20 +49,20 @@
             </div>
           </div>
         </div>
-        <button type="button" class="header__login" aria-label="Войти в Интернет-банк">
+        <button type="button" class="button header__login" aria-label="Войти в Интернет-банк">
           <span class="header__login-text">Войти в Интернет-банк</span>
         </button>
       </div>
     </div>
   </header>
   <main>
-    <section class="slider">
+    <section class="section slider">
       <div class="swiper-container slider__container">
         <div class="swiper-wrapper">
           <div class="swiper-slide slider__slide slider__slide_cards">
             <div class="container slider__inner">
-              <h1 class="slider__heading slider__heading_white">Лига Банк</h1>
-              <p class="slider__text slider__text_white">Кредиты на любой случай</p>
+              <h1>Лига Банк</h1>
+              <p>Кредиты на любой случай</p>
               <a href="#calculator" class="anchor-link slider__link slider__link_white">Рассчитать кредит</a>
               <div class="slider__black-card">
                 <picture>
@@ -82,8 +82,8 @@
           <div class="swiper-slide slider__slide slider__slide_confidence">
             <div class="slider__content_confidence">
               <div class="container slider__inner">
-                <h1 class="slider__heading">Лига Банк</h1>
-                <p class="slider__text slider__text_confidence">
+                <h1>Лига Банк</h1>
+                <p>
                   Ваша уверенность в&nbsp;завтрашнем дне
                 </p>
               </div>
@@ -91,8 +91,8 @@
           </div>
           <div class="swiper-slide slider__slide slider__slide_near">
             <div class="container slider__inner">
-              <h1 class="slider__heading">Лига Банк</h1>
-              <p class="slider__text">Всегда рядом</p>
+              <h1>Лига Банк</h1>
+              <p>Всегда рядом</p>
               <a href="#offices" class="anchor-link cslider__link slider__link_blue">Найти отделение</a>
             </div>
           </div>
@@ -100,10 +100,10 @@
         <div class="swiper-pagination slider__pagination"></div>
       </div>
     </section>
-    <section class="tabs" id="services">
+    <section class="section tabs" id="services">
       <div class="container">
         <h2 class="visually-hidden">Услуги банка</h2>
-        <ul class="tabs__list">
+        <ul class="list tabs__list">
           <li class="tabs__item tabs__item_active">
             <a href="#deposit" class="tabs__link">
               <img src="img/deposit.svg" alt="вклады">
@@ -136,7 +136,7 @@
                 <p class="tabs__text">
                   Вклады Лига Банка – это выгодная инвестиция в свое будущее
                 </p>
-                <ul class="tabs__service-list">
+                <ul class="list tabs__service-list">
                   <li class="tabs__service-item">Проценты по вкладам до 7%</li>
                   <li class="tabs__service-item">Разнообразные условия</li>
                   <li class="tabs__service-item">Возможность ежемесячной капитализации или вывод процентов на банковскую карту
@@ -154,18 +154,20 @@
             </div>
             <div class="tabs__panel faded" id="credit">
               <div class="tabs__wrapper tabs__wrapper_text">
-                <p class="tabs__text">
+                <p>
                   Лига Банк выдает кредиты под&nbsp;любые&nbsp;цели
                 </p>
-                <ul class="tabs__service-list">
+                <ul class="list tabs__service-list">
                   <li class="tabs__service-item">Ипотечный кредит</li>
                   <li class="tabs__service-item">Автокредит</li>
                   <li class="tabs__service-item">Потребительский кредит</li>
                 </ul>
-                <p class="tabs__text tabs__text_sub">
-                  Рассчитайте ежемесячный платеж и ставку по кредиту, воспользовавшись нашим
-                  <a href="#calculator" class="anchor-link tabs__text-link">кредитным калькулятором</a>
-                </p>
+                <div class="tabs__sub">
+                  <p>
+                    Рассчитайте ежемесячный платеж и ставку по кредиту, воспользовавшись нашим
+                    <a href="#calculator" class="anchor-link tabs__text-link">кредитным калькулятором</a>
+                  </p>
+                </div>
               </div>
               <div class="tabs__wrapper tabs__wrapper_img">
                 <picture>
@@ -177,10 +179,10 @@
             </div>
             <div class="tabs__panel faded" id="insurance">
               <div class="tabs__wrapper tabs__wrapper_text">
-                <p class="tabs__text">
+                <p>
                   Лига Страхование — застрахуем все,&nbsp;что&nbsp;захотите
                 </p>
-                <ul class="tabs__service-list">
+                <ul class="list tabs__service-list">
                   <li class="tabs__service-item">Автомобильное страхование</li>
                   <li class="tabs__service-item">Страхование жизни и здоровья</li>
                   <li class="tabs__service-item">Страхование недвижимости</li>
@@ -197,10 +199,10 @@
             </div>
             <div class="swiper-slide tabs__panel faded" id="online-services">
               <div class="tabs__wrapper tabs__wrapper_text">
-                <p class="tabs__text">
+                <p>
                   Лига Банк — это огромное количество онлайн-сервисов для вашего удобства
                 </p>
-                <ul class="tabs__service-list">
+                <ul class="list tabs__service-list">
                   <li class="tabs__service-item">Мобильный банк, который&nbsp;всегда&nbsp;под&nbsp;рукой</li>
                   <li class="tabs__service-item">Приложение Лига-проездной позволит вам&nbsp;оплачивать билеты по всему миру</li>
                 </ul>
@@ -219,231 +221,295 @@
         </div>
       </div>
     </section>
-    <section class="calculator" id="calculator">
+    <section class="section calculator" id="calculator">
       <div class="container">
         <h2>Кредитный калькулятор</h2>
         <div class="container__flex calculator__flex">
           <div class="calculator__wrapper calculator__wrapper_calc">
             <h3>Шаг 1. Цель кредита</h3>
             <div class="calculator__select">
-              <input type="hidden" class="calculator__input" name="credit-goal">
-              <div class="calculator__goal">
+              <input type="hidden" id="calculator-select" name="credit-goal">
+              <button type="button" class="calculator__goal">
                   Выберите цель кредита
-              </div>
-              <ul class="calculator__list">
+              </button>
+              <ul class="list calculator__list">
                 <li class="calculator__item">
-                  <a href="#mortgage" class="calculator__link">
+                  <a href="#mortgage" class="calculator__link" data-sumcredit="Сумма ипотеки">
                     Ипотечное кредитование
                   </a>
                 </li>
                 <li class="calculator__item">
-                  <a href="#car" class="calculator__link">
+                  <a href="#car" class="calculator__link" data-sumcredit="Сумма автокредита">
                     Автомобильное кредитование
                   </a>
                 </li>
                 <li class="calculator__item">
-                  <a href="#consumer" class="calculator__link">
+                  <a href="#consumer" class="calculator__link" data-sumcredit="Сумма кредита">
                     Потребительский кредит
                   </a>
                 </li>
               </ul>
             </div>
-            <div class="calculator__credit faded" id="mortgage" data-type="Ипотека">
+            <div class="calculator__credit faded" id="mortgage" data-type="Ипотека" data-pricename="Стоимость недвижимости">
               <h3>Шаг 2. Введите параметры кредита</h3>
               <div class="calculator__price-wrapper">
-                <p class="calculator__text-above">Стоимость недвижимости</p>
+                <div class="calculator__above">
+                  <p>Стоимость недвижимости</p>
+                </div>
                 <div class="calculator__price calculator__price_range">
-                  <button type="button" class="calculator__price-button calculator__price-button_minus" data-add="-100000">
+                  <button type="button" class="button calculator__price-button calculator__price-button_minus" data-add="-100000">
                     –
                   </button>
-                  <p class="calculator__price-text">
-                    <input type="text" class="calculator__price-input calculator__price-input_price" id="mortgage-price" value="2000000" size="6" maxlength="8" data-min="1200000" data-max="25000000">
+                  <p>
+                    <input type="text" id="mortgage-price" value="2000000" size="6" maxlength="8" data-min="1200000" data-max="25000000">
                     <label for="mortgage-price" class="visually-hidden"></label>
                     <span class="calculator__price-currency">рублей</span>
                   </p>
-                  <button type="button" class="calculator__price-button calculator__price-button_plus" data-add="100000">
+                  <button type="button" class="button calculator__price-button calculator__price-button_plus" data-add="100000">
                     +
                   </button>
                 </div>
-                <p class="calculator__text-below">От 1&nbsp;200&nbsp;000 до 25&nbsp;000&nbsp;000 рублей</p>
+                <div class="calculator__below">
+                  <p>От 1&nbsp;200&nbsp;000 до 25&nbsp;000&nbsp;000 рублей</p>
+                </div>
               </div>
               <div class="calculator__initial">
-                <p class="calculator__text-above">Первоначальный взнос</p>
-                <div class="calculator__price">
-                  <p class="calculator__price-text">
-                    <input type="text" class="calculator__price-input calculator__price-input_initial" id="mortgage-initial" value="200000" size="6" maxlength="8">
+                <div class="calculator__above">
+                  <p>Первоначальный взнос</p>
+                </div>
+                <div class="calculator__price calculator__price_initial">
+                  <p>
+                    <input type="text" id="mortgage-initial" value="200000" size="6" maxlength="8">
                     <label for="mortgage-initial" class="visually-hidden"></label>
                     <span class="calculator__price-currency">рублей</span>
                   </p>
                 </div>
-                <input type="range" id="initial-range-mortgage" class="calculator__initial-range" name="initial-range-mortgage" min="10" step="5" max="100" value="10">
-                <p class="calculator__text-below calcualor__initial-percent">10%</p>
+                <div class="calculator__initial-range">
+                  <input type="range" id="initial-range-mortgage" name="initial-range-mortgage" min="10" step="5" max="100" value="10">
+                  <div class="calculator__below calcualor__initial-percent">
+                    <p>10%</p>
+                  </div>
+                </div>
               </div>
               <div class="calculator__term">
-                <p class="calculator__text-above">Срок кредитования</p>
-                <div class="calculator__price">
-                  <p class="calculator__price-text">
-                    <input type="text" class="calculator__price-input calculator__price-input_term" id="mortgage-term" value="5" maxlength="2">
+                <div class="calculator__above">
+                  <p>Срок кредитования</p>
+                </div>
+                <div class="calculator__price calculator__price_term">
+                  <p>
+                    <input type="text" id="mortgage-term" value="5" maxlength="2">
                     <label for="mortgage-term" class="visually-hidden"></label>
                     <span class="calculator__price-years">лет</span>
                   </p>
                 </div>
-                <input type="range" id="term-range-mortgage" class="calculator__term-range" name="term-range-mortgage" min="5" step="1" max="30" value="5">
-                <div class="calculator__term-years">
-                  <p class="calculator__text-below">5 лет</p>
-                  <p class="calculator__text-below">30 лет</p>
+                <div class="calculator__term-range">
+                  <input type="range" id="term-range-mortgage" name="term-range-mortgage" min="5" step="1" max="30" value="5">
+                  <div class="calculator__term-years calculator__below">
+                    <p>5 лет</p>
+                    <p>30 лет</p>
+                  </div>
                 </div>
               </div>
-              <input type="checkbox" id="calculator-checkbox-mortgage" class="calculator__checkbox" data-sum="470000">
-              <label for="calculator-checkbox-mortgage">Использовать материнский капитал</label>
+              <div class="calculator__checkbox-group">
+                <input type="checkbox" id="calculator-checkbox-mortgage" data-sum="470000">
+                <label for="calculator-checkbox-mortgage">Использовать материнский капитал</label>
+              </div>
             </div>
-            <div class="calculator__credit faded" id="car" data-type="Автомобильное кредитование">
+            <div class="calculator__credit faded" id="car" data-type="Автомобильное кредитование" data-pricename="Стоимость автомобиля">
               <h3>Шаг 2. Введите параметры кредита</h3>
               <div class="calculator__price-wrapper">
-                <p class="calculator__text-above">Стоимость автомобиля</p>
+                <div class="calculator__above">
+                  <p>Стоимость автомобиля</p>
+                </div>
                 <div class="calculator__price calculator__price_range">
-                  <button type="button" class="calculator__price-button calculator__price-button_minus" data-add="-50000">
+                  <button type="button" class="button calculator__price-button calculator__price-button_minus" data-add="-50000">
                     –
                   </button>
-                  <p class="calculator__price-text">
-                    <input type="text" class="calculator__price-input calculator__price-input_price" id="car-price" value="1000000" size="5" maxlength="7" data-min="500000" data-max="5000000">
+                  <p>
+                    <input type="text" id="car-price" value="1000000" size="5" maxlength="7" data-min="500000" data-max="5000000">
                     <label for="car-price" class="visually-hidden"></label>
                     <span class="calculator__price-currency">рублей</span>
                   </p>
-                  <button type="button" class="calculator__price-button calculator__price-button_plus" data-add="50000">
+                  <button type="button" class="button calculator__price-button calculator__price-button_plus" data-add="50000">
                     +
                   </button>
                 </div>
-                <p class="calculator__text-below">От 500&nbsp;000 до 5&nbsp;000&nbsp;000 рублей</p>
+                <div class="calculator__below">
+                  <p>От 500&nbsp;000 до 5&nbsp;000&nbsp;000 рублей</p>
+                </div>
               </div>
               <div class="calculator__initial">
-                <p class="calculator__text-above">Первоначальный взнос</p>
-                <div class="calculator__price">
-                  <p class="calculator__price-text">
-                    <input type="text" class="calculator__price-input calculator__price-input_initial" id="car-initial" value="200000" size="5" maxlength="7">
+                <div class="calculator__above">
+                  <p>Первоначальный взнос</p>
+                </div>
+                <div class="calculator__price calculator__price_initial">
+                  <p>
+                    <input type="text" id="car-initial" value="200000" size="5" maxlength="7">
                     <label for="car-initial" class="visually-hidden"></label>
                     <span class="calculator__price-currency">рублей</span>
                   </p>
                 </div>
-                <input type="range" id="initial-range-car" class="calculator__initial-range" name="initial-range-car" min="20" step="5" max="100" value="20">
-                <p class="calculator__text-below calcualor__initial-percent">20%</p>
+                <div class="calculator__initial-range">
+                  <input type="range" id="initial-range-car" name="initial-range-car" min="20" step="5" max="100" value="20">
+                  <div class="calculator__below calcualor__initial-percent">
+                    <p>20%</p>
+                  </div>
+                </div>
               </div>
               <div class="calculator__term">
-                <p class="calculator__text-above">Срок кредитования</p>
-                <div class="calculator__price">
-                  <p class="calculator__price-text">
-                    <input type="text" class="calculator__price-input calculator__price-input_term
-                      calculator__price-input_term-car" id="car-term" value="1" maxlength="1">
+                <div class="calculator__above">
+                  <p>Срок кредитования</p>
+                </div>
+                <div class="calculator__price calculator__price_term calculator__price_term-car">
+                  <p>
+                    <input type="text" id="car-term" value="1" maxlength="1">
                     <label for="car-term" class="visually-hidden"></label>
                     <span class="calculator__price-years">год</span>
                   </p>
                 </div>
-                <input type="range" id="term-range-car" class="calculator__term-range" name="term-range-car" min="1" step="1" max="5" value="1">
-                <div class="calculator__term-years">
-                  <p class="calculator__text-below">1 год</p>
-                  <p class="calculator__text-below">5 лет</p>
+                <div class="calculator__term-range">
+                  <input type="range" id="term-range-car" name="term-range-car" min="1" step="1" max="5" value="1">
+                  <div class="calculator__term-years calculator__below">
+                    <p>1 год</p>
+                    <p>5 лет</p>
+                  </div>
                 </div>
               </div>
-              <input type="checkbox" id="calculator-checkbox-casco" class="calculator__checkbox calculator__checkbox_casco">
-              <label for="calculator-checkbox-casco">Оформить КАСКО</label>
-              <input type="checkbox" id="calculator-checkbox-lifesafe" class="calculator__checkbox">
-              <label for="calculator-checkbox-lifesafe">Оформить Страхование жизни в нашем банке</label>
+              <div class="calculator__checkbox-group">
+                <input type="checkbox" id="calculator-checkbox-casco">
+                <label for="calculator-checkbox-casco">Оформить КАСКО</label>
+                <input type="checkbox" id="calculator-checkbox-lifesafe">
+                <label for="calculator-checkbox-lifesafe">Оформить Страхование жизни в нашем банке</label>
+              </div>
             </div>
-            <div class="calculator__credit faded" id="consumer" data-type="Потребительский кредит">
+            <div class="calculator__credit faded" id="consumer" data-type="Потребительский кредит" data-pricename="Сумма потребительского кредита">
               <h3>Шаг 2. Введите параметры кредита</h3>
               <div class="calculator__price-wrapper">
-                <p class="calculator__text-above">Сумма потребительского кредита</p>
+                <div class="calculator__above">
+                  <p>Сумма потребительского кредита</p>
+                </div>
                 <div class="calculator__price calculator__price_range">
-                  <button type="button" class="calculator__price-button calculator__price-button_minus" data-add="-50000">
+                  <button type="button" class="button calculator__price-button calculator__price-button_minus" data-add="-50000">
                     –
                   </button>
-                  <p class="calculator__price-text">
-                    <input type="text" class="calculator__price-input calculator__price-input_price" id="consumer-price" value="100000" size="5" maxlength="7" data-min="50000" data-max="3000000">
+                  <p>
+                    <input type="text" id="consumer-price" value="100000" size="5" maxlength="7" data-min="50000" data-max="3000000">
                     <label for="consumer-price" class="visually-hidden"></label>
                     <span class="calculator__price-currency">рублей</span>
                   </p>
-                  <button type="button" class="calculator__price-button calculator__price-button_plus" data-add="50000">
+                  <button type="button" class="button calculator__price-button calculator__price-button_plus" data-add="50000">
                     +
                   </button>
                 </div>
-                <p class="calculator__text-below">От 50&nbsp;000 до 3&nbsp;000&nbsp;000 рублей</p>
+                <div class="calculator__below">
+                  <p>От 50&nbsp;000 до 3&nbsp;000&nbsp;000 рублей</p>
+                </div>
               </div>
               <div class="calculator__term">
-                <p class="calculator__text-above">Срок кредитования</p>
-                <div class="calculator__price">
-                  <p class="calculator__price-text">
-                    <input type="text" class="calculator__price-input calculator__price-input_term
-                      calculator__price-input_term-car" id="consumer-term" value="1" maxlength="1">
+                <div class="calculator__above">
+                  <p>Срок кредитования</p>
+                </div>
+                <div class="calculator__price calculator__price_term">
+                  <p>
+                    <input type="text" id="consumer-term" value="1" maxlength="1">
                     <label for="consumer-term" class="visually-hidden"></label>
                     <span class="calculator__price-years">год</span>
                   </p>
                 </div>
-                <input type="range" id="term-range-consumer" class="calculator__term-range" name="term-range-consumer" min="1" step="1" max="7" value="1">
-                <div class="calculator__term-years">
-                  <p class="calculator__text-below">1 год</p>
-                  <p class="calculator__text-below">7 лет</p>
+                <div class="calculator__term-range">
+                  <input type="range" id="term-range-consumer" name="term-range-consumer" min="1" step="1" max="7" value="1">
+                  <div class="calculator__term-years calculator__below">
+                    <p>1 год</p>
+                    <p>7 лет</p>
+                  </div>
                 </div>
               </div>
-              <input type="checkbox" id="calculator-checkbox-salary" class="calculator__checkbox">
-              <label for="calculator-checkbox-salary">Участник зарплатного проекта нашего банка</label>
+              <div class="calculator__checkbox-group">
+                <input type="checkbox" id="calculator-checkbox-salary">
+                <label for="calculator-checkbox-salary">Участник зарплатного проекта нашего банка</label>
+              </div>
             </div>
           </div>
           <div class="calculator__wrapper">
             <div class="calculator__message calculator__message_mortgage">
-              <p class="calculator__msg-text-main">
-                Наш банк не выдаёт ипотечные кредиты меньше&nbsp;500 000 рублей.
-              </p>
-              <p class="calculator__msg-text-below">
-                Попробуйте использовать другие параметры&nbsp;для&nbsp;расчёта.
-              </p>
+              <div class="calculator__msg-main">
+                <p>
+                  Наш банк не выдаёт ипотечные кредиты меньше&nbsp;500 000 рублей.
+                </p>
+              </div>
+              <div class="calculator__msg-below">
+                <p>
+                  Попробуйте использовать другие параметры&nbsp;для&nbsp;расчёта.
+                </p>
+              </div>
             </div>
             <div class="calculator__message calculator__message_car">
-              <p class="calculator__msg-text-main">
-                Наш банк не выдаёт автокредиты меньше&nbsp;200 000 рублей.
-              </p>
-              <p class="calculator__msg-text-below">
-                Попробуйте использовать другие параметры&nbsp;для&nbsp;расчёта.
-              </p>
+              <div class="calculator__msg-main">
+                <p>
+                  Наш банк не выдаёт автокредиты меньше&nbsp;200 000 рублей.
+                </p>
+              </div>
+              <div class="calculator__msg-below">
+                <p>
+                  Попробуйте использовать другие параметры&nbsp;для&nbsp;расчёта.
+                </p>
+              </div>
             </div>
             <div class="calculator__offer">
-              <h4 class="calculator__offer-heading">
+              <h4>
                 Наше предложение
               </h4>
               <div class="calculator__offer-wrapper">
                 <div class="calculator__offer-column">
                   <div class="calculator__offer-block">
-                    <p class="claculator__offer-price">
-                      <span class="calculator__offer-sum">1&nbsp;330&nbsp;000</span>
-                      <span class="calculator__offer-currency">рублей</span>
-                    </p>
-                    <p class="calculator__offer-text calculator__offer-text_credit"></p>
+                    <div class="calculator__offer-price">
+                      <p>
+                        <span class="calculator__offer-sum">1&nbsp;330&nbsp;000</span>
+                        <span class="calculator__offer-currency">рублей</span>
+                      </p>
+                    </div>
+                    <div class="calculator__offer-text calculator__offer-text_credit">
+                      <p></p>
+                    </div>
                   </div>
                   <div class="calculator__offer-block">
-                    <p class="claculator__offer-price">
-                      <span class="calculator__offer-month">27&nbsp;868</span>
-                      <span class="calculator__offer-currency">рублей</span>
-                    </p>
-                    <p class="calculator__offer-text">Ежемесячный платеж</p>
+                    <div class="calculator__offer-price">
+                      <p>
+                        <span class="calculator__offer-month">27&nbsp;868</span>
+                        <span class="calculator__offer-currency">рублей</span>
+                      </p>
+                    </div>
+                    <div class="calculator__offer-text">
+                      <p>Ежемесячный платеж</p>
+                    </div>
                   </div>
                 </div>
                 <div class="calculator__offer-column">
                   <div class="calculator__offer-block">
-                    <p class="claculator__offer-price">
-                      <span class="calculator__offer-percent">9,40</span>
-                      %
-                    </p>
-                    <p class="calculator__offer-text">Процентная ставка</p>
+                    <div class="calculator__offer-price">
+                      <p>
+                        <span class="calculator__offer-percent">9,40</span>
+                        %
+                      </p>
+                    </div>
+                    <div class="calculator__offer-text">
+                      <p>Процентная ставка</p>
+                    </div>
                   </div>
                   <div class="calculator__offer-block">
-                    <p class="claculator__offer-price">
-                      <span class="calculator__offer-salary">61&nbsp;929</span>
-                      <span class="calculator__offer-currency">рублей</span>
-                    </p>
-                    <p class="calculator__offer-text">Необходимый доход</p>
+                    <div class="calculator__offer-price">
+                      <p>
+                        <span class="calculator__offer-salary">61&nbsp;929</span>
+                        <span class="calculator__offer-currency">рублей</span>
+                      </p>
+                    </div>
+                    <div class="calculator__offer-text">
+                      <p>Необходимый доход</p>
+                    </div>
                   </div>
                 </div>
               </div>
-              <button type="submit" class="calculator__offer-request">Оформить заявку</button>
+              <button type="submit" class="button calculator__offer-request">Оформить заявку</button>
             </div>
           </div>
         </div>
@@ -483,30 +549,30 @@
                 </div>
               </div>
             </div>
-            <form class="calculator__form" id="calculator-form">
-              <input type="text" id="request-name" name="request-name" class="calculator__name" required="required" placeholder="ФИО">
+            <form id="calculator-form">
+              <input type="text" id="request-name" name="request-name" required="required" placeholder="ФИО">
               <label for="request-name" class="visually-hidden"></label>
               <div class="calculator__contacts">
-                <input type="tel" name="request-tel" id="request-tel" class="calculator__contact" placeholder="Телефон" required="required" pattern="(\+?\d[-]*){7,13}">
+                <input type="tel" name="request-tel" id="request-tel" placeholder="Телефон" required="required" pattern="(\+?\d[-]*){7,13}">
                 <label for="request-tel" class="visually-hidden"></label>
-                <input type="email" name="request-email" id="request-email" class="calculator__contact" placeholder="E-mail" required="required">
+                <input type="email" name="request-email" id="request-email" placeholder="E-mail" required="required">
               </div>
-              <input type="submit" class="calculator__submit" value="Отправить">
+              <input type="submit" value="Отправить">
             </form>
           </div>
         </div>
       </div>
     </section>
-    <section class="offices" id="offices">
+    <section class="section offices" id="offices">
       <div class="container offices__container">
         <h2>Отделения Лига Банка</h2>
         <div class="offices__map-wrapper">
           <div class="offices__checkbox-group">
-            <input type="checkbox" id="offices-russia" class="offices__checkbox" checked="">
+            <input type="checkbox" id="offices-russia" checked="">
             <label for="offices-russia">Россия</label>
-            <input type="checkbox" id="offices-sng" class="offices__checkbox" checked="">
+            <input type="checkbox" id="offices-sng" checked="">
             <label for="offices-sng">СНГ</label>
-            <input type="checkbox" id="offices-europe" class="offices__checkbox">
+            <input type="checkbox" id="offices-europe">
             <label for="offices-europe">Европа</label>
           </div>
           <div id="map" class="offices__map"></div>
@@ -524,10 +590,10 @@
           <address class="footer__text footer__address">
             150015, г. Москва, ул. Московская, д. 32
           </address>
-          <p class="footer__text">Генеральная лицензия Банка России №1050</p>
-          <p class="footer__text">© Лига Банк, 2019</p>
+          <p>Генеральная лицензия Банка России №1050</p>
+          <p>© Лига Банк, 2019</p>
         </div>
-        <ul class="footer__list">
+        <ul class="list footer__list">
           <li class="footer__item"><a href="#services" class="anchor-link footer__link">
             Услуги
           </a></li>
@@ -548,7 +614,7 @@
             <img src="img/mobile_icon.svg" alt="mobile" width="10" height="16">
             <div class="footer__phone-info">
               <a href="tel:*0904" class="footer__mobile-phone">*0904</a>
-              <p class="footer__text">Бесплатно для абонентов<br>
+              <p>Бесплатно для абонентов<br>
                 МТС, Билайн, Мегафон, Теле2</p>
             </div>
           </div>
@@ -558,12 +624,12 @@
             <img src="img/phone_icon.svg" alt="phone" width="16" height="16">
             <div class="footer__phone-info">
               <a href="tel:+78001112233" class="footer__phone-phone">8 800 111 22 33</a>
-              <p class="footer__text">Бесплатно для всех<br>
+              <p>Бесплатно для всех<br>
                 городов России</p>
             </div>
           </div>
         </div>
-        <ul class="footer__social">
+        <ul class="list footer__social">
           <li class="footer__social-item">
             <a href="https://facebook.com" class="footer__social-link">
               <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -601,29 +667,35 @@
       <div class="popup__login">
         <div class="popup__login-top">
           <div class="popup__login-logo">
-            <p class="popup__login-name">ЛИГА Банк</p>
-            <p class="popup__login-bank">интернет-банк</p>
+            <div class="popup__login-name">
+              <p>ЛИГА Банк</p>
+            </div>
+            <div class="popup__login-bank">
+              <p>интернет-банк</p>
+            </div>
           </div>
-          <button type="button" class="popup__close">
+          <button type="button" class="button popup__close">
             <span class="popup__close-1"></span>
             <span class="popup__close-2"></span>
           </button>
         </div>
-        <form class="popup__form">
-          <label for="login">Логин</label>
-          <input type="text" id="login" name="login" class="popup__login-login" required="">
+        <form id="popup-form">
+          <div class="popup__login-wrapper">
+            <label for="login">Логин</label>
+            <input type="text" id="login" name="login" required="">
+          </div>
           <label for="password">Пароль</label>
           <div class="popup__password-wrapper">
-            <input type="password" id="password" name="password" class="popup__login-password" required="">
-            <input type="checkbox" class="popup__show-password" id="show-password">
+            <input type="password" id="password" name="password" required="">
+            <input type="checkbox" id="show-password">
             <label for="show-password"></label>
           </div>
           <a href="#" class="popup__forgot">Забыли пароль?</a>
-          <input type="submit" class="popup__login-submit" value="Войти" id="login-submit">
+          <input type="submit" value="Войти" id="login-submit">
         </form>
       </div>
       <div class="popup__thanks">
-        <button type="button" class="popup__close popup__close_thanks">
+        <button type="button" class="button popup__close popup__close_thanks">
           <span class="popup__close-1"></span>
           <span class="popup__close-2"></span>
         </button>
@@ -640,7 +712,7 @@
   <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=81ff3703-94f0-4678-8d2a-740559fd1518" type="text/javascript"></script>
   <script src="js/slider-min.js" type="text/javascript"></script>
   <script src="js/tabs-min.js" type="text/javascript"></script>
-  <script src="js/calculator-min.js" type="text/javascript"></script>
+  <script src="js/calculator.js" type="text/javascript"></script>
   <script src="js/popup-min.js" type="text/javascript"></script>
   <script src="js/map-min.js" type="text/javascript"></script>
 </body>

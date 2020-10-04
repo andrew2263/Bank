@@ -57,12 +57,12 @@
   }
 }
 
-.popup__login-name {
+.popup__login-name p {
   font-size: 20px;
   font-weight: 500;
 }
 
-.popup__login-bank {
+.popup__login-bank p {
   font-size: 12px;
 }
 
@@ -76,6 +76,7 @@
 
 .popup__close-1 {
   display: inline-block;
+  vertical-align: baseline;
   position: absolute;
   top: 7px;
   left: -2px;
@@ -88,6 +89,7 @@
 
 .popup__close-2 {
   display: inline-block;
+  vertical-align: baseline;
   position: absolute;
   top: 7px;
   left: -2px;
@@ -105,8 +107,9 @@
   margin-bottom: 10px;
 }
 
-.popup__login-login,
-.popup__login-password {
+.popup__login-wrapper input,
+.popup__password-wrapper input[type="password"],
+.popup__password-wrapper input[type="text"] {
   width: 100%;
   height: 60px;
   background-color: transparent;
@@ -118,7 +121,7 @@
   padding-right: 20px;
 }
 
-.popup__login-login {
+.popup__login-wrapper input {
   margin-bottom: 30px;
 }
 
@@ -127,13 +130,13 @@
   margin-bottom: 10px;
 }
 
-.popup__show-password {
+.popup__password-wrapper input[type="checkbox"] {
   position: absolute;
   z-index: -1;
   opacity: 0;
 }
 
-.popup__show-password + label {
+.popup__password-wrapper input[type="checkbox"] + label {
   position: absolute;
   top: 24px;
   right: 24px;
@@ -146,7 +149,7 @@
   border-radius: 0;
 }
 
-.popup__show-password:checked + label {
+.popup__password-wrapper input[type="checkbox"]:checked + label {
   background-color: transparent;
   background-image: url("../img/show-password.svg");
 }
@@ -163,7 +166,7 @@
   }
 }
 
-.popup__login-submit {
+.popup__login form input[type="submit"] {
   width: 100%;
   height: 60px;
   background-color: #2c36f2;
@@ -218,16 +221,16 @@
     margin-bottom: 25px;
   }
 
-  .popup__show-password + label {
+  .popup__password-wrapper input[type="checkbox"] + label {
     right: 15px;
   }
 
-  .popup__form {
+  .popup__login form {
     display: flex;
     flex-direction: column;
   }
 
-  .popup__login-submit {
+  .popup__login form input[type="submit"] {
     font-size: 14px;
     height: 51px;
     margin-bottom: 15px;

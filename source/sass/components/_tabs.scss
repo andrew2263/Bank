@@ -102,7 +102,7 @@
   }
 }
 
-.tabs__text {
+.tabs p {
   font-size: 22px;
   line-height: 140%;
   font-weight: 500;
@@ -110,7 +110,7 @@
   margin-bottom: 28px;
 }
 
-.tabs__text_sub {
+.tabs__sub p {
   font-size: 18px;
   line-height: 140%;
   font-weight: normal;
@@ -140,6 +140,7 @@
     top: 0;
     left: 0;
     display: inline-block;
+    vertical-align: baseline;
     width: 13px;
     height: 23px;
     background-image: url("../img/marker.svg");
@@ -155,6 +156,7 @@
 
 .tabs__button {
   display: inline-block;
+  vertical-align: baseline;
   text-align: center;
   width: 198px;
   height: 51px;
@@ -175,13 +177,13 @@
 }
 
 @media (max-width: 1199px) {
-  .tabs__text {
+  .tabs p {
     font-size: 18px;
     margin-bottom: 24px;
     max-width: 340px;
   }
 
-  .tabs__text_sub {
+  .tabs__sub p {
     margin-bottom: 0;
   }
 
@@ -200,7 +202,7 @@
 }
 
 @media (max-width: 767px) {
-  .tabs__text {
+  .tabs p {
     font-size: 16px;
     margin-bottom: 18px;
   }

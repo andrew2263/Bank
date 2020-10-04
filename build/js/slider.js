@@ -57,16 +57,12 @@
       isActiveSwiper = true;
     }
 
-    if ((window.innerWidth >= 1200) && isActiveSwiper && (typeof secondSlider !== 'undefined')) {
+    if ((window.innerWidth >= 1200) && isActiveSwiper && (typeof secondSlider !== null)) {
       secondSlider.destroy(false);
-      secondSlider = undefined;
       for (var r = 0; r < tabsPanels.length; r++) {
         tabsPanels[r].classList.remove('swiper-slide');
       }
       isActiveSwiper = false;
-      for (var t = 0; t < tabsPanels.length; t++) {
-        tabsPanels[t].style.width = '100%';
-      }
     }
   });
 })();

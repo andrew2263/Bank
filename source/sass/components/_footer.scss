@@ -29,6 +29,7 @@
   &::before {
     content: "";
     display: inline-block;
+    vertical-align: baseline;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -39,7 +40,8 @@
   }
 }
 
-.footer__text {
+.footer p,
+.footer address {
   font-size: 12px;
   line-height: 140%;
   font-style: normal;

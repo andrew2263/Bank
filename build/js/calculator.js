@@ -5,37 +5,48 @@
   var calculatorSelect = calculator.querySelector('.calculator__goal');
   var calculatorSelectBlock = document.querySelector('.calculator__select');
   var calculatorList = calculator.querySelector('.calculator__list');
-  var calculatorInput = calculator.querySelector('.calculator__input');
+  var calculatorInput = calculator.querySelector('#calculator-select');
   var calculatorLinks = calculator.querySelectorAll('.calculator__link');
   var calculatorCredits = calculator.querySelectorAll('.calculator__credit');
   var priceButtons = calculator.querySelectorAll('.calculator__price-button');
-  var initRanges = calculator.querySelectorAll('.calculator__initial-range');
-  var termRanges = calculator.querySelectorAll('.calculator__term-range');
-  var calculatorInputPrice = calculator.querySelectorAll('.calculator__price-input_price');
-  var calculatorInputInitial = calculator.querySelectorAll('.calculator__price-input_initial');
-  var calculatorInputTerm = calculator.querySelectorAll('.calculator__price-input_term');
+  var initRangesBlock = calculator.querySelectorAll('.calculator__initial-range');
+  var termRangesBlock = calculator.querySelectorAll('.calculator__term-range');
+  var calculatorPrice = calculator.querySelectorAll('.calculator__price_range');
+  var calculatorInitial = calculator.querySelectorAll('.calculator__price_initial');
+  var calculatorTerm = calculator.querySelectorAll('.calculator__price_term');
   var calculatorOffer = calculator.querySelector('.calculator__offer');
   var calculatorOfferButton = calculator.querySelector('.calculator__offer-request');
   var calculatorRequest = calculator.querySelector('.calculator__request');
-  var calculatorCheckbox = calculator.querySelectorAll('.calculator__checkbox');
+  var calculatorCheckboxGroup = calculator.querySelectorAll('.calculator__checkbox-group');
   var block;
   var id;
   var addRequest = false;
-  var calculatorForm = calculator.querySelector('.calculator__form');
+  var calculatorForm = calculator.querySelector('#calculator-form');
   var myStorage = localStorage;
+  var calculatorInputPrice = [];
+  var calculatorInputInitial = [];
+  var calculatorInputTerm = [];
+  var initRanges = [];
+  var termRanges = [];
+  var calculatorCheckbox = [];
   var requests = [];
 
-  var sumCreditName = {
-    'mortgage': 'Сумма ипотеки',
-    'car': 'Сумма автокредита',
-    'consumer': 'Сумма кредита'
+  var findInput = function (block, collection) {
+    for (var i = 0; i < block.length; i++) {
+      var inputs = block[i].querySelectorAll('input');
+      for (var j = 0; j < inputs.length; j++) {
+        collection.push(inputs[j]);
+      }
+    }
+    return collection;
   };
 
-  var priceName = {
-    'mortgage': 'Стоимость недвижимости',
-    'car': 'Стоимость автомобиля',
-    'consumer': 'Сумма потребительского кредита'
-  };
+  calculatorInputPrice = findInput(calculatorPrice, calculatorInputPrice);
+  calculatorInputInitial = findInput(calculatorInitial, calculatorInputInitial);
+  calculatorInputTerm = findInput(calculatorTerm, calculatorInputTerm);
+  initRanges = findInput(initRangesBlock, initRanges);
+  termRanges = findInput(termRangesBlock, termRanges);
+  calculatorCheckbox = findInput(calculatorCheckboxGroup, calculatorCheckbox);
 
   var makeCounnt = function () {
     var count = 1;
@@ -79,30 +90,30 @@
       calculatorList.classList.remove('calculator__list_expanded');
       calculatorSelect.innerHTML = e.target.innerHTML;
       calculatorInput.value = e.target.innerHTML;
-      calculatorOffer.querySelector('.calculator__offer-text_credit').innerHTML = sumCreditName[href];
+      calculatorOffer.querySelector('.calculator__offer-text_credit').querySelector('p').innerHTML = e.target.dataset.sumcredit;
       calculatorSelectBlock.classList.add('calculator__select_active');
       calculatorOffer.classList.add('calculator__offer_active');
-      requestParams = calcCredit(block, id);
+      requestParams = calculateCredit(block, id);
     });
   }
 
   for (var j = 0; j < priceButtons.length; j++) {
     priceButtons[j].addEventListener('click', function (e) {
       e.preventDefault();
-      var price = e.target.parentNode.querySelector('.calculator__price-input');
+      var price = e.target.parentNode.querySelector('input');
       if(!(parseInt((Number(price.value) + Number(e.target.dataset.add)), 10) < price.dataset.min ||
       parseInt((Number(price.value) + Number(e.target.dataset.add)), 10) > price.dataset.max || 
       price.classList.contains('calculator__price-input_red'))) {
         price.value = parseInt((Number(price.value) + Number(e.target.dataset.add)), 10);
         priceInput(price);
-        requestParams = calcCredit(block, id);
+        requestParams = calculateCredit(block, id);
       }
       if (price.classList.contains('calculator__price-input_red')) {
         price.classList.remove('calculator__price-input_red');
         price.parentNode.parentNode.classList.remove('calculator__price_red')
         price.value = (price.dataset.max - price.dataset.min) / 2;
         priceInput(price);
-        requestParams = calcCredit(block, id);
+        requestParams = calculateCredit(block, id);
       }
     });
   }
@@ -110,23 +121,23 @@
   for (var k = 0; k < initRanges.length; k++) {
     initRanges[k].addEventListener('input', function (e) {
       var percent = (Number(e.target.value) / 100);
-      var price = e.target.parentNode.parentNode.querySelector('.calculator__price-wrapper').querySelector('.calculator__price-input').value;
-      var inputInit = e.target.parentNode.querySelector('.calculator__price-input');
+      var price = e.target.parentNode.parentNode.parentNode.querySelector('.calculator__price-wrapper').querySelector('input').value;
+      var inputInit = e.target.parentNode.parentNode.querySelector('.calculator__price_initial').querySelector('input');
       inputInit.value = parseInt(price * percent, 10);
-      e.target.parentNode.querySelector('.calcualor__initial-percent').innerHTML = e.target.value + '%';
+      e.target.parentNode.querySelector('.calcualor__initial-percent').querySelector('p').innerHTML = e.target.value + '%';
       var roubles = inputInit.parentNode.querySelector('.calculator__price-currency');
-      declination(parseInt(inputInit.value, 10), roubles, 'roubles');
-      requestParams = calcCredit(block, id);
+      decline(parseInt(inputInit.value, 10), roubles, 'roubles');
+      requestParams = calculateCredit(block, id);
     });
   }
 
   for (var n = 0; n < termRanges.length; n++) {
     termRanges[n].addEventListener('input', function (e) {
-      var input = e.target.parentNode.querySelector('.calculator__price-input');
+      var input = e.target.parentNode.parentNode.querySelector('.calculator__price_term').querySelector('input');
       input.value = e.target.value;
       var years = input.parentNode.querySelector('.calculator__price-years');
-      declination(parseInt(input.value, 10), years, 'years');
-      requestParams = calcCredit(block, id);
+      decline(parseInt(input.value, 10), years, 'years');
+      requestParams = calculateCredit(block, id);
     });
   }
 
@@ -134,24 +145,20 @@
     calculatorInputPrice[m].addEventListener('input', function (e) {
       priceInput(e.target);
     });
-  }
-
-  for (var x = 0; x < calculatorInputPrice.length; x++) {
-    calculatorInputPrice[x].addEventListener('change', function (e) {
+    calculatorInputPrice[m].addEventListener('change', function (e) {
       priceChange(e.target);
       var roubles = e.target.parentNode.querySelector('.calculator__price-currency');
-      declination(parseInt(e.target.value, 10), roubles, 'roubles');
-      requestParams = calcCredit(block, id);
+      decline(parseInt(e.target.value, 10), roubles, 'roubles');
+      requestParams = calculateCredit(block, id);
     });
-  }
-
-  for (var a = 0; a < calculatorInputPrice.length; a++) {
-    calculatorInputPrice[a].addEventListener('focus', function (e) {
+    calculatorInputPrice[m].addEventListener('focus', function (e) {
       if (e.target.parentNode.parentNode.classList.contains('calculator__price_red') &&
       e.target.classList.contains('calculator__price-input_red')) {
         e.target.parentNode.parentNode.classList.remove('calculator__price_red');
         e.target.classList.remove('calculator__price-input_red');
         e.target.value = (e.target.dataset.max - e.target.dataset.min) / 2;
+        priceInput(e.target);
+        requestParams = calculateCredit(block, id);
       }
     });
   }
@@ -160,15 +167,15 @@
     calculatorInputInitial[b].addEventListener('change', function (e) {
       initialChange(e.target);
       var roubles = e.target.parentNode.querySelector('.calculator__price-currency');
-      declination(parseInt(e.target.value, 10), roubles, 'roubles');
-      requestParams = calcCredit(block, id);
+      decline(parseInt(e.target.value, 10), roubles, 'roubles');
+      requestParams = calculateCredit(block, id);
     });
   }
 
   for (var c = 0; c < calculatorInputTerm.length; c++) {
     calculatorInputTerm[c].addEventListener('change', function (e) {
-      var min = parseInt(e.target.parentNode.parentNode.parentNode.querySelector('.calculator__term-range').min, 10);
-      var max = parseInt(e.target.parentNode.parentNode.parentNode.querySelector('.calculator__term-range').max, 10);
+      var min = parseInt(e.target.parentNode.parentNode.parentNode.querySelector('.calculator__term-range').querySelector('input').min, 10);
+      var max = parseInt(e.target.parentNode.parentNode.parentNode.querySelector('.calculator__term-range').querySelector('input').max, 10);
       if (parseInt(e.target.value, 10) < min) {
         e.target.value = min;
       }
@@ -176,24 +183,24 @@
         e.target.value = max;
       }
       var years = e.target.parentNode.querySelector('.calculator__price-years');
-      declination(parseInt(e.target.value, 10), years, 'years');
-      requestParams = calcCredit(block, id);
+      decline(parseInt(e.target.value, 10), years, 'years');
+      requestParams = calculateCredit(block, id);
     });
   }
 
   for (var d = 0; d < calculatorCheckbox.length; d++) {
     calculatorCheckbox[d].addEventListener('change', function () {
-      requestParams = calcCredit(block, id);
+      requestParams = calculateCredit(block, id);
     });
   }
 
   var priceInput = function (input) {
-    if (input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price-input_initial')) {
-      var initial = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price-input_initial');
-      var percent = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').value;
+    if (input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_initial')) {
+      var initial = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_initial').querySelector('input');
+      var percent = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').value;
       initial.value = parseInt((Number(input.value) * Number(percent / 100)), 10);
       var roubles = initial.parentNode.querySelector('.calculator__price-currency');
-      declination(parseInt(initial.value, 10), roubles, 'roubles');
+      decline(parseInt(initial.value, 10), roubles, 'roubles');
     }
   };
 
@@ -207,9 +214,9 @@
   };
 
   var initialChange = function (input) {
-    var minPercent = parseInt(input.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').min, 10);
-    var maxPercent = parseInt(input.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').max, 10);
-    var price = parseInt(input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price-input_price').value, 10);
+    var minPercent = parseInt(input.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').min, 10);
+    var maxPercent = parseInt(input.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').max, 10);
+    var price = parseInt(input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_range').querySelector('input').value, 10);
     if (parseInt(input.value, 10) < parseInt((price * minPercent / 100), 10)) {
       input.value = parseInt((price * minPercent / 100), 10);
     }
@@ -218,7 +225,7 @@
     }
   };
 
-  var calcCredit = function (paramsBlock, creditType) {
+  var calculateCredit = function (paramsBlock, creditType) {
     var sumCreditField = calculatorOffer.querySelector('.calculator__offer-sum');
     var payCreditField = calculatorOffer.querySelector('.calculator__offer-month');
     var percentageField = calculatorOffer.querySelector('.calculator__offer-percent');
@@ -229,11 +236,11 @@
     var salary = 0;
     var casco = document.getElementById('calculator-checkbox-casco');
     var insurance = document.getElementById('calculator-checkbox-lifesafe');
-    var price = parseInt(paramsBlock.querySelector('.calculator__price-input_price').value, 10);
-    if (paramsBlock.querySelector('.calculator__price-input_initial')) {
-      var initial = parseInt(paramsBlock.querySelector('.calculator__price-input_initial').value, 10);
+    var price = parseInt(paramsBlock.querySelector('.calculator__price_range').querySelector('input').value, 10);
+    if (paramsBlock.querySelector('.calculator__price_initial')) {
+      var initial = parseInt(paramsBlock.querySelector('.calculator__price_initial').querySelector('input').value, 10);
     }
-    var term = parseInt(paramsBlock.querySelector('.calculator__price-input_term').value, 10);
+    var term = parseInt(paramsBlock.querySelector('.calculator__price_term').querySelector('input').value, 10);
 
     calculatorOffer.classList.remove('calculator__offer_active');
     calculatorRequest.classList.remove('calculator__request_active');
@@ -246,10 +253,10 @@
         if (document.getElementById('calculator-checkbox-mortgage').checked) {
           sumCredit -= document.getElementById('calculator-checkbox-mortgage').dataset.sum;
         }
-        if (parseInt(paramsBlock.querySelector('.calculator__initial-range').value, 10) < 15) {
+        if (parseInt(paramsBlock.querySelector('.calculator__initial-range').querySelector('input').value, 10) < 15) {
           percentage = 9.4;
         }
-        if (parseInt(paramsBlock.querySelector('.calculator__initial-range').value, 10) >= 15) {
+        if (parseInt(paramsBlock.querySelector('.calculator__initial-range').querySelector('input').value, 10) >= 15) {
           percentage = 8.5;
         }
         break;
@@ -334,14 +341,15 @@
       percentageField.innerHTML = percentage;
       salaryField.innerHTML = salary;
 
-      declination(payCredit, payCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
-      declination(sumCredit, sumCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
-      declination(salary, salaryField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+      decline(payCredit, payCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+      decline(sumCredit, sumCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+      decline(salary, salaryField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
       calculatorOffer.classList.add('calculator__offer_active');
     }
 
     return {
       'goal': paramsBlock.dataset.type,
+      'priceName': paramsBlock.dataset.pricename,
       'creditType': creditType,
       'price': price,
       'initial': initial,
@@ -367,16 +375,16 @@
     calculatorRequest.classList.add('calculator__request_active');
     document.getElementById('request-goal').innerHTML = requestParams.goal;
     document.getElementById('request-number').innerHTML = newRequestNumberString;
-    document.getElementById('request-price').parentNode.parentNode.querySelector('.calculator__descr').innerHTML = priceName[requestParams.creditType];
+    document.getElementById('request-price').parentNode.parentNode.querySelector('.calculator__descr').innerHTML = requestParams.priceName;
     document.getElementById('request-price').innerHTML = requestParams.price;
     document.getElementById('request-price').innerHTML = requestParams.price;
-    declination(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'roubles');
+    decline(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'roubles');
     if (requestParams.initial) {
       document.getElementById('request-initial').innerHTML = requestParams.initial;
-      declination(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'roubles');
+      decline(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'roubles');
     }
     document.getElementById('request-term').innerHTML = requestParams.term;
-    declination(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
+    decline(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
     window.scrollTo({
       top: calculator.offsetTop + calculatorRequest.offsetTop,
       left: 0,
@@ -405,45 +413,55 @@
     myStorage.setItem('requests', JSON.stringify(requests));
   });
 
-  var declination = function (value, word, type) {
+  //функция для определения падежа существительного в зависимости от числа
+  //например: 1 рубль, 2 рубля, 5 рублей; 1 год, 2 года, 6 лет и т.д.
+  //аргументы: value - число, word - поле, куда будет записано слово, type - год или рубль
+  //type может принимать значения 'roubles' или 'years'
+
+  var decline = function (value, word, type) {
+    //падеж существительного определяется в зависимости от остатка от деления числа на 10
     var rest = value % 10;
+    //т.к. 11, 12, 13, 14 - рублЕЙ, дополнительно проверяем остаток от деления числа на 100
     var restH = value % 100;
     var way;
     switch (rest) {
       case 1:
         if (restH !== 11) {
-          way = 'a';
+          way = 'a'; //если остаток от деления числа на 100 не 11, то склонение "рубль"
         }
         if (restH === 11) {
-          way = 'c';
+          way = 'c'; // если остаток от деления на 100 === 11, то склонение "рублей"
         }
         break;
       case 2:
       case 3:
       case 4:
         if (restH !== 12 && restH !== 13 && restH !== 14) {
-          way = 'b';
+          way = 'b'; //то же самое, если остаток от деления на 100 не 12, не 13 и не 14, то склонение "рубля"
         }
         if (restH === 12 || restH === 13 || restH === 14) {
-          way = 'c';
+          way = 'c'; //если 12, 13, 14 - склонение "рублей"
         }
         break;
       default:
-        way = 'c';
+        way = 'c'; //по умолчанию склонение "рублей"
     }
 
+    //объект с вариантами склонения слова "рубль"
     var waysRoubles = {
       'a': 'рубль',
       'b': 'рубля',
       'c': 'рублей'
     };
 
+    //объект с вариантами склонения слова "год"
     var waysYears = {
       'a': 'год',
       'b': 'года',
       'c': 'лет'
     };
 
+    //указываем в поле word существительное в соответствующем падеже
     switch (type) {
       case 'roubles':
         word.innerHTML = waysRoubles[way];

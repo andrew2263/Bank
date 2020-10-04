@@ -3,12 +3,12 @@
   var tabsLinks = document.querySelectorAll('.tabs__link');
   var tabsItems = document.querySelectorAll('.tabs__item');
   var anchorLinks = document.querySelectorAll('.anchor-link');
+  var tabsPanels = document.querySelectorAll('.tabs__panel');
 
   for (var i = 0; i < tabsLinks.length; i++) {
     tabsLinks[i].addEventListener('click', function (e) {
       e.preventDefault();
       var hrefElement = document.querySelector(e.target.getAttribute('href'));
-      var tabsPanels = document.querySelectorAll('.tabs__panel');
       for (var j = 0; j < tabsPanels.length; j++) {
         tabsPanels[j].classList.remove('tabs__panel_active');
         tabsPanels[j].classList.remove('in');

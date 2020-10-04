@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-  var calculatorForm = document.querySelector('.calculator__form');
+  var calculatorForm = document.querySelector('#calculator-form');
   var popupContainer = document.querySelector('.popup-container');
   var popupClose = document.querySelectorAll('.popup__close');
   var popupThanks = document.querySelector('.popup__thanks');
@@ -9,7 +9,7 @@
   var loginInput = document.getElementById('login');
   var passwordInput = document.getElementById('password');
   var passwordCheckbox = document.getElementById('show-password');
-  var passwordForm = document.querySelector('.popup__form');
+  var passwordForm = document.querySelector('#popup-form');
   var myStorage = localStorage;
   var passwords = [];
 

@@ -11,12 +11,7 @@ ymaps.ready(function () {
       searchControlProvider: 'yandex#search'
     }),
 
-    // Создаём макет содержимого.
-    MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
-        '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
-    ),
-
-    myPlacemarkSpb = new ymaps.Placemark([59.939847, 30.360286], {
+  placemarkSpb = new ymaps.Placemark([59.939847, 30.360286], {
       hintContent: 'Собственный значок метки',
       balloonContent: 'ул. Восстания, 28',
       country: 'russia'
@@ -33,7 +28,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkMsk = new ymaps.Placemark([55.762502, 37.644414], {
+    placemarkMsk = new ymaps.Placemark([55.762502, 37.644414], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'Москва, Чистопрудный бульвар, 11с2',
       country: 'russia'
@@ -44,7 +39,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkSaratov = new ymaps.Placemark([51.535730, 46.032415], {
+    placemarkSaratov = new ymaps.Placemark([51.535730, 46.032415], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'Саратов, ул. имени А.М. Горького, 57',
       country: 'russia'
@@ -55,7 +50,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkVyatka = new ymaps.Placemark([58.593955, 49.659345], {
+    placemarkVyatka = new ymaps.Placemark([58.593955, 49.659345], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'Вятка, ул. Воровского, 75А',
       country: 'russia'
@@ -66,7 +61,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkTyumen = new ymaps.Placemark([57.154068, 65.538855], {
+    placemarkTyumen = new ymaps.Placemark([57.154068, 65.538855], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'Тюмень, ул. Республики, 45',
       country: 'russia'
@@ -77,7 +72,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkOmsk = new ymaps.Placemark([54.994011, 73.373045], {
+    placemarkOmsk = new ymaps.Placemark([54.994011, 73.373045], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'Омск, ул. Герцена, 18',
       country: 'russia'
@@ -88,7 +83,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkBaku = new ymaps.Placemark([40.382056, 49.848270], {
+    placemarkBaku = new ymaps.Placemark([40.382056, 49.848270], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'Баку, ул. Шамиля Азизбекова, 211',
       country: 'CIS'
@@ -99,7 +94,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkAlmaty = new ymaps.Placemark([43.242384, 76.940417], {
+    placemarkAlmaty = new ymaps.Placemark([43.242384, 76.940417], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'Алматы, проспект Абая, 51',
       country: 'CIS'
@@ -110,7 +105,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkTashkent = new ymaps.Placemark([41.308374, 69.270771], {
+    placemarkTashkent = new ymaps.Placemark([41.308374, 69.270771], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'Ташкент, ул. Ислама Каримова, 15',
       country: 'CIS'
@@ -121,7 +116,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkMinsk = new ymaps.Placemark([53.902236, 27.549848], {
+    placemarkMinsk = new ymaps.Placemark([53.902236, 27.549848], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'Минск, ул. Немига, 5',
       country: 'CIS'
@@ -132,7 +127,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkLondon = new ymaps.Placemark([51.500926, -0.107995], {
+    placemarkLondon = new ymaps.Placemark([51.500926, -0.107995], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'London, Waterloo Road, 157',
       country: 'europe'
@@ -143,7 +138,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkRome = new ymaps.Placemark([41.910252, 12.497210], {
+    placemarkRome = new ymaps.Placemark([41.910252, 12.497210], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'Rome, Via Sicilia, 184',
       country: 'europe'
@@ -154,7 +149,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkPrague = new ymaps.Placemark([50.084299, 14.427518], {
+    placemarkPrague = new ymaps.Placemark([50.084299, 14.427518], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'Prague, Panská, 890/7',
       country: 'europe'
@@ -165,7 +160,7 @@ ymaps.ready(function () {
       iconImageOffset: [-18, -40]
     }),
 
-    myPlacemarkParis = new ymaps.Placemark([48.877903, 2.351655], {
+    placemarkParis = new ymaps.Placemark([48.877903, 2.351655], {
       hintContent: 'Собственный значок метки с контентом',
       balloonContent: 'Paris, Rue la Fayette',
       country: 'europe'
@@ -177,24 +172,24 @@ ymaps.ready(function () {
     });
 
   var russiaGroup = new ymaps.GeoObjectCollection();
-  russiaGroup.add(myPlacemarkSpb);
-  russiaGroup.add(myPlacemarkMsk);
-  russiaGroup.add(myPlacemarkSaratov);
-  russiaGroup.add(myPlacemarkVyatka);
-  russiaGroup.add(myPlacemarkOmsk);
-  russiaGroup.add(myPlacemarkTyumen);
+  russiaGroup.add(placemarkSpb);
+  russiaGroup.add(placemarkMsk);
+  russiaGroup.add(placemarkSaratov);
+  russiaGroup.add(placemarkVyatka);
+  russiaGroup.add(placemarkOmsk);
+  russiaGroup.add(placemarkTyumen);
 
   var cisGroup = new ymaps.GeoObjectCollection();
-  cisGroup.add(myPlacemarkMinsk);
-  cisGroup.add(myPlacemarkBaku);
-  cisGroup.add(myPlacemarkTashkent);
-  cisGroup.add(myPlacemarkAlmaty);
+  cisGroup.add(placemarkMinsk);
+  cisGroup.add(placemarkBaku);
+  cisGroup.add(placemarkTashkent);
+  cisGroup.add(placemarkAlmaty);
 
   var europeGroup = new ymaps.GeoObjectCollection();
-  europeGroup.add(myPlacemarkLondon);
-  europeGroup.add(myPlacemarkParis);
-  europeGroup.add(myPlacemarkPrague);
-  europeGroup.add(myPlacemarkRome);
+  europeGroup.add(placemarkLondon);
+  europeGroup.add(placemarkParis);
+  europeGroup.add(placemarkPrague);
+  europeGroup.add(placemarkRome);
 
   myMap.geoObjects.add(russiaGroup);
   myMap.geoObjects.add(europeGroup);
@@ -213,29 +208,23 @@ ymaps.ready(function () {
   }
 
   checkboxRussia.addEventListener('change', function (e) {
-    if (e.target.checked) {
-      myMap.geoObjects.add(russiaGroup);
-    }
-    if (!e.target.checked) {
-      myMap.geoObjects.remove(russiaGroup);
-    }
+    addRemoveGroup(e.target, myMap, russiaGroup);
   });
 
   checkboxCIS.addEventListener('change', function (e) {
-    if (e.target.checked) {
-      myMap.geoObjects.add(cisGroup);
-    }
-    if (!e.target.checked) {
-      myMap.geoObjects.remove(cisGroup);
-    }
+    addRemoveGroup(e.target, myMap, cisGroup);
   });
 
   checkboxEurope.addEventListener('change', function (e) {
-    if (e.target.checked) {
-      myMap.geoObjects.add(europeGroup);
-    }
-    if (!e.target.checked) {
-      myMap.geoObjects.remove(europeGroup);
-    }
+    addRemoveGroup(e.target, myMap, europeGroup);
   });
+
+  var addRemoveGroup = function (checkbox, map, groupName) {
+    if (checkbox.checked) {
+      map.geoObjects.add(groupName);
+    }
+    if (!checkbox.checked) {
+      map.geoObjects.remove(groupName);
+    }
+  };
 });
