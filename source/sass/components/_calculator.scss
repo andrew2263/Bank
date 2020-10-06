@@ -302,7 +302,7 @@
     }
 
     &:focus {
-      outline: #b5b5b5 solid 2px; 
+      outline: #b5b5b5 solid 2px;
     }
   }
 
@@ -432,6 +432,10 @@ input[type="range"] {
   font-weight: 500;
   font-size: 22px;
   margin-bottom: 5px;
+}
+
+.calculator__offer-price p span {
+  font-weight: 500;
 }
 
 .calculator__offer-text p {

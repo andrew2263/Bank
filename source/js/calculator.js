@@ -59,142 +59,9 @@
   };
 
   var requestNumber = makeCounnt();
-
   var requestParams;
 
-  calculatorSelect.addEventListener('click', function (e) {
-    e.preventDefault();
-    calculatorSelect.classList.toggle('calculator__goal_expanded');
-    calculatorList.classList.toggle('calculator__list_expanded');
-  });
-
-  for (var i = 0; i < calculatorLinks.length; i++) {
-    calculatorLinks[i].addEventListener('click', function (e) {
-      e.preventDefault();
-      calculatorOffer.classList.remove('calculator__offer_active');
-      calculatorRequest.classList.remove('calculator__request_active');
-      calculator.querySelector('.calculator__message_mortgage').classList.remove('calculator__message_active');
-      calculator.querySelector('.calculator__message_car').classList.remove('calculator__message_active');
-      for (var j = 0; j < calculatorCredits.length; j++) {
-        calculatorCredits[j].classList.remove('calculator__credit_active');
-        calculatorCredits[j].classList.remove('in');
-      }
-      var href = e.target.getAttribute('href').slice(1);
-      block = document.getElementById(href);
-      id = href;
-      block.classList.add('calculator__credit_active');
-      setTimeout(function () {
-        block.classList.add('in');
-      }, 150);
-      calculatorSelect.classList.remove('calculator__goal_expanded');
-      calculatorList.classList.remove('calculator__list_expanded');
-      calculatorSelect.innerHTML = e.target.innerHTML;
-      calculatorInput.value = e.target.innerHTML;
-      calculatorOffer.querySelector('.calculator__offer-text_credit').querySelector('p').innerHTML = e.target.dataset.sumcredit;
-      calculatorSelectBlock.classList.add('calculator__select_active');
-      calculatorOffer.classList.add('calculator__offer_active');
-      requestParams = calculateCredit(block, id);
-    });
-  }
-
-  for (var j = 0; j < priceButtons.length; j++) {
-    priceButtons[j].addEventListener('click', function (e) {
-      e.preventDefault();
-      var price = e.target.parentNode.querySelector('input');
-      if(!(parseInt((Number(price.value) + Number(e.target.dataset.add)), 10) < price.dataset.min ||
-      parseInt((Number(price.value) + Number(e.target.dataset.add)), 10) > price.dataset.max || 
-      price.classList.contains('calculator__price-input_red'))) {
-        price.value = parseInt((Number(price.value) + Number(e.target.dataset.add)), 10);
-        priceInput(price);
-        requestParams = calculateCredit(block, id);
-      }
-      if (price.classList.contains('calculator__price-input_red')) {
-        price.classList.remove('calculator__price-input_red');
-        price.parentNode.parentNode.classList.remove('calculator__price_red')
-        price.value = (price.dataset.max - price.dataset.min) / 2;
-        priceInput(price);
-        requestParams = calculateCredit(block, id);
-      }
-    });
-  }
-
-  for (var k = 0; k < initRanges.length; k++) {
-    initRanges[k].addEventListener('input', function (e) {
-      var percent = (Number(e.target.value) / 100);
-      var price = e.target.parentNode.parentNode.parentNode.querySelector('.calculator__price-wrapper').querySelector('input').value;
-      var inputInit = e.target.parentNode.parentNode.querySelector('.calculator__price_initial').querySelector('input');
-      inputInit.value = parseInt(price * percent, 10);
-      e.target.parentNode.querySelector('.calcualor__initial-percent').querySelector('p').innerHTML = e.target.value + '%';
-      var roubles = inputInit.parentNode.querySelector('.calculator__price-currency');
-      decline(parseInt(inputInit.value, 10), roubles, 'roubles');
-      requestParams = calculateCredit(block, id);
-    });
-  }
-
-  for (var n = 0; n < termRanges.length; n++) {
-    termRanges[n].addEventListener('input', function (e) {
-      var input = e.target.parentNode.parentNode.querySelector('.calculator__price_term').querySelector('input');
-      input.value = e.target.value;
-      var years = input.parentNode.querySelector('.calculator__price-years');
-      decline(parseInt(input.value, 10), years, 'years');
-      requestParams = calculateCredit(block, id);
-    });
-  }
-
-  for (var m = 0; m < calculatorInputPrice.length; m++) {
-    calculatorInputPrice[m].addEventListener('input', function (e) {
-      priceInput(e.target);
-    });
-    calculatorInputPrice[m].addEventListener('change', function (e) {
-      priceChange(e.target);
-      var roubles = e.target.parentNode.querySelector('.calculator__price-currency');
-      decline(parseInt(e.target.value, 10), roubles, 'roubles');
-      requestParams = calculateCredit(block, id);
-    });
-    calculatorInputPrice[m].addEventListener('focus', function (e) {
-      if (e.target.parentNode.parentNode.classList.contains('calculator__price_red') &&
-      e.target.classList.contains('calculator__price-input_red')) {
-        e.target.parentNode.parentNode.classList.remove('calculator__price_red');
-        e.target.classList.remove('calculator__price-input_red');
-        e.target.value = (e.target.dataset.max - e.target.dataset.min) / 2;
-        priceInput(e.target);
-        requestParams = calculateCredit(block, id);
-      }
-    });
-  }
-
-  for (var b = 0; b < calculatorInputInitial.length; b++) {
-    calculatorInputInitial[b].addEventListener('change', function (e) {
-      initialChange(e.target);
-      var roubles = e.target.parentNode.querySelector('.calculator__price-currency');
-      decline(parseInt(e.target.value, 10), roubles, 'roubles');
-      requestParams = calculateCredit(block, id);
-    });
-  }
-
-  for (var c = 0; c < calculatorInputTerm.length; c++) {
-    calculatorInputTerm[c].addEventListener('change', function (e) {
-      var min = parseInt(e.target.parentNode.parentNode.parentNode.querySelector('.calculator__term-range').querySelector('input').min, 10);
-      var max = parseInt(e.target.parentNode.parentNode.parentNode.querySelector('.calculator__term-range').querySelector('input').max, 10);
-      if (parseInt(e.target.value, 10) < min) {
-        e.target.value = min;
-      }
-      if (parseInt(e.target.value, 10) > max) {
-        e.target.value = max;
-      }
-      var years = e.target.parentNode.querySelector('.calculator__price-years');
-      decline(parseInt(e.target.value, 10), years, 'years');
-      requestParams = calculateCredit(block, id);
-    });
-  }
-
-  for (var d = 0; d < calculatorCheckbox.length; d++) {
-    calculatorCheckbox[d].addEventListener('change', function () {
-      requestParams = calculateCredit(block, id);
-    });
-  }
-
-  var priceInput = function (input) {
+  var onInputPrice = function (input) {
     if (input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_initial')) {
       var initial = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_initial').querySelector('input');
       var percent = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').value;
@@ -204,16 +71,19 @@
     }
   };
 
-  var priceChange = function (input) {
-    var value = parseInt(input.value, 10);
-    if ((value < parseInt(input.dataset.min, 10)) || (value > parseInt(input.dataset.max, 10))) {
-      input.parentNode.parentNode.classList.add('calculator__price_red');
-      input.classList.add('calculator__price-input_red');
-      input.value = 'Некорректное значение';
+  var onChangePrice = function (inputPrice) {
+    var value = parseInt(inputPrice.value, 10);
+    if ((value < parseInt(inputPrice.dataset.min, 10)) || (value > parseInt(inputPrice.dataset.max, 10))) {
+      inputPrice.parentNode.parentNode.classList.add('calculator__price_red');
+      inputPrice.classList.add('calculator__price-input_red');
+      inputPrice.value = 'Некорректное значение';
     }
+    var roubles = inputPrice.parentNode.querySelector('.calculator__price-currency');
+    decline(parseInt(inputPrice.value, 10), roubles, 'roubles');
+    requestParams = calculateCredit(block, id);
   };
 
-  var initialChange = function (input) {
+  var onChangeInitial = function (input) {
     var minPercent = parseInt(input.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').min, 10);
     var maxPercent = parseInt(input.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').max, 10);
     var price = parseInt(input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_range').querySelector('input').value, 10);
@@ -223,6 +93,100 @@
     if (parseInt(input.value, 10) > parseInt((price * maxPercent / 100), 10)) {
       input.value = parseInt((price * maxPercent / 100), 10);
     }
+  };
+
+  var onClickCalculatorLink = function (calculatorLink) {
+    calculatorOffer.classList.remove('calculator__offer_active');
+    calculatorRequest.classList.remove('calculator__request_active');
+    calculator.querySelector('.calculator__message_mortgage').classList.remove('calculator__message_active');
+    calculator.querySelector('.calculator__message_car').classList.remove('calculator__message_active');
+    for (var j = 0; j < calculatorCredits.length; j++) {
+      calculatorCredits[j].classList.remove('calculator__credit_active');
+      calculatorCredits[j].classList.remove('in');
+    }
+    var href = calculatorLink.getAttribute('href').slice(1);
+    block = document.getElementById(href);
+    id = href;
+    block.classList.add('calculator__credit_active');
+    setTimeout(function () {
+      block.classList.add('in');
+    }, 150);
+    calculatorSelect.classList.remove('calculator__goal_expanded');
+    calculatorList.classList.remove('calculator__list_expanded');
+    calculatorSelect.innerHTML = calculatorLink.innerHTML;
+    calculatorInput.value = calculatorLink.innerHTML;
+    calculatorOffer.querySelector('.calculator__offer-text_credit').querySelector('p').innerHTML = calculatorLink.dataset.sumcredit;
+    calculatorSelectBlock.classList.add('calculator__select_active');
+    calculatorOffer.classList.add('calculator__offer_active');
+    requestParams = calculateCredit(block, id);
+  };
+  
+  var onClickPriceButton = function (priceButton) {
+    var price = priceButton.parentNode.querySelector('input');
+    if(!(parseInt((Number(price.value) + Number(priceButton.dataset.add)), 10) < price.dataset.min ||
+    parseInt((Number(price.value) + Number(priceButton.dataset.add)), 10) > price.dataset.max ||
+    price.classList.contains('calculator__price-input_red'))) {
+      price.value = parseInt((Number(price.value) + Number(priceButton.dataset.add)), 10);
+      onInputPrice(price);
+      requestParams = calculateCredit(block, id);
+    }
+    if (price.classList.contains('calculator__price-input_red')) {
+      price.classList.remove('calculator__price-input_red');
+      price.parentNode.parentNode.classList.remove('calculator__price_red')
+      price.value = (price.dataset.max - price.dataset.min) / 2;
+      onInputPrice(price);
+      requestParams = calculateCredit(block, id);
+    }
+  };
+
+  var onInputInitRange = function (initRange) {
+    var percent = (Number(initRange.value) / 100);
+    var price = initRange.parentNode.parentNode.parentNode.querySelector('.calculator__price-wrapper').querySelector('input').value;
+    var inputInit = initRange.parentNode.parentNode.querySelector('.calculator__price_initial').querySelector('input');
+    inputInit.value = parseInt(price * percent, 10);
+    initRange.parentNode.querySelector('.calcualor__initial-percent').querySelector('p').innerHTML = initRange.value + '%';
+    var roubles = inputInit.parentNode.querySelector('.calculator__price-currency');
+    decline(parseInt(inputInit.value, 10), roubles, 'roubles');
+    requestParams = calculateCredit(block, id);
+  };
+
+  var onInputTermRange = function (termRange) {
+    var input = termRange.parentNode.parentNode.querySelector('.calculator__price_term').querySelector('input');
+    input.value = termRange.value;
+    var years = input.parentNode.querySelector('.calculator__price-years');
+    decline(parseInt(input.value, 10), years, 'years');
+    requestParams = calculateCredit(block, id);
+  };
+
+  var onFocusInputPrice = function (inputPrice) {
+    if (inputPrice.parentNode.parentNode.classList.contains('calculator__price_red') &&
+    inputPrice.classList.contains('calculator__price-input_red')) {
+      inputPrice.parentNode.parentNode.classList.remove('calculator__price_red');
+      inputPrice.classList.remove('calculator__price-input_red');
+      inputPrice.value = (inputPrice.dataset.max - inputPrice.dataset.min) / 2;
+      onInputPrice(inputPrice);
+      requestParams = calculateCredit(block, id);
+    }
+  };
+
+  var onInputInitial = function (inputInitial) {
+    var roubles = inputInitial.parentNode.querySelector('.calculator__price-currency');
+    decline(parseInt(inputInitial.value, 10), roubles, 'roubles');
+    requestParams = calculateCredit(block, id);
+  };
+
+  var onInputTerm = function (inputTerm) {
+    var min = parseInt(inputTerm.parentNode.parentNode.parentNode.querySelector('.calculator__term-range').querySelector('input').min, 10);
+    var max = parseInt(inputTerm.parentNode.parentNode.parentNode.querySelector('.calculator__term-range').querySelector('input').max, 10);
+    if (parseInt(inputTerm.value, 10) < min) {
+      inputTerm.value = min;
+    }
+    if (parseInt(inputTerm.value, 10) > max) {
+      inputTerm.value = max;
+    }
+    var years = inputTerm.parentNode.querySelector('.calculator__price-years');
+    decline(parseInt(inputTerm.value, 10), years, 'years');
+    requestParams = calculateCredit(block, id);
   };
 
   var calculateCredit = function (paramsBlock, creditType) {
@@ -357,63 +321,7 @@
     };
   };
 
-  calculatorOfferButton.addEventListener('click', function (e) {
-    e.preventDefault();
-    var newRequestNumber = requestNumber();
-    var newRequestNumberLength = newRequestNumber.toString().length;
-    var newRequestNumberString = '';
-    if (newRequestNumberLength < 4) {
-      var f = 4 - newRequestNumberLength;
-      while (f !== 0) {
-        newRequestNumberString += '0';
-        f--;
-      }
-    }
-    newRequestNumberString += newRequestNumber.toString();
-    document.getElementById('request-initial').innerHTML = '';
-    document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency').innerHTML = '';
-    calculatorRequest.classList.add('calculator__request_active');
-    document.getElementById('request-goal').innerHTML = requestParams.goal;
-    document.getElementById('request-number').innerHTML = newRequestNumberString;
-    document.getElementById('request-price').parentNode.parentNode.querySelector('.calculator__descr').innerHTML = requestParams.priceName;
-    document.getElementById('request-price').innerHTML = requestParams.price;
-    document.getElementById('request-price').innerHTML = requestParams.price;
-    decline(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'roubles');
-    if (requestParams.initial) {
-      document.getElementById('request-initial').innerHTML = requestParams.initial;
-      decline(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'roubles');
-    }
-    document.getElementById('request-term').innerHTML = requestParams.term;
-    decline(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
-    window.scrollTo({
-      top: calculator.offsetTop + calculatorRequest.offsetTop,
-      left: 0,
-      behavior: 'smooth'
-    });
-  });
-
-  calculatorForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    addRequest = true;
-    requestNumber();
-    calculatorRequest.classList.remove('calculator__request_active');
-    calculatorOffer.classList.remove('calculator__offer_active');
-    addRequest = false;
-    var request = {
-      'name': document.getElementById('request-name').value,
-      'email': document.getElementById('request-email').value,
-      'tel': document.getElementById('request-tel').value
-    };
-    if (requests.length === 0 && myStorage.getItem('requests')) {
-      for (var l = 0; l < JSON.parse(myStorage.getItem('requests')).length; l++) {
-        requests.push(JSON.parse(myStorage.getItem('requests'))[l]);
-      }
-    }
-    requests.push(request);
-    myStorage.setItem('requests', JSON.stringify(requests));
-  });
-
-  //функция для определения падежа существительного в зависимости от числа
+  //decline — функция для определения падежа существительного в зависимости от числа
   //например: 1 рубль, 2 рубля, 5 рублей; 1 год, 2 года, 6 лет и т.д.
   //аргументы: value - число, word - поле, куда будет записано слово, type - год или рубль
   //type может принимать значения 'roubles' или 'years'
@@ -471,4 +379,123 @@
         break;
     }
   };
+
+  calculatorSelect.addEventListener('click', function (e) {
+    e.preventDefault();
+    calculatorSelect.classList.toggle('calculator__goal_expanded');
+    calculatorList.classList.toggle('calculator__list_expanded');
+  });
+
+  for (var i = 0; i < calculatorLinks.length; i++) {
+    calculatorLinks[i].addEventListener('click', function (e) {
+      e.preventDefault();
+      onClickCalculatorLink(e.target);
+    });
+  }
+
+  for (var j = 0; j < priceButtons.length; j++) {
+    priceButtons[j].addEventListener('click', function (e) {
+      e.preventDefault();
+      onClickPriceButton(e.target);
+    });
+  }
+
+  for (var k = 0; k < initRanges.length; k++) {
+    initRanges[k].addEventListener('input', function (e) {
+      onInputInitRange(e.target);
+    });
+  }
+
+  for (var n = 0; n < termRanges.length; n++) {
+    termRanges[n].addEventListener('input', function (e) {
+      onInputTermRange(e.target);
+    });
+  }
+
+  for (var m = 0; m < calculatorInputPrice.length; m++) {
+    calculatorInputPrice[m].addEventListener('input', function (e) {
+      onInputPrice(e.target);
+    });
+    calculatorInputPrice[m].addEventListener('change', function (e) {
+      onChangePrice(e.target);
+    });
+    calculatorInputPrice[m].addEventListener('focus', function (e) {
+      onFocusInputPrice(e.target);
+    });
+  }
+
+  for (var b = 0; b < calculatorInputInitial.length; b++) {
+    calculatorInputInitial[b].addEventListener('change', function (e) {
+      onChangeInitial(e.target);
+      onInputInitial(e.target);
+    });
+  }
+
+  for (var c = 0; c < calculatorInputTerm.length; c++) {
+    calculatorInputTerm[c].addEventListener('change', function (e) {
+      onInputTerm(e.target);
+    });
+  }
+
+  for (var d = 0; d < calculatorCheckbox.length; d++) {
+    calculatorCheckbox[d].addEventListener('change', function () {
+      requestParams = calculateCredit(block, id);
+    });
+  }
+
+  calculatorOfferButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    var newRequestNumber = requestNumber();
+    var newRequestNumberLength = newRequestNumber.toString().length;
+    var newRequestNumberString = '';
+    if (newRequestNumberLength < 4) {
+      var f = 4 - newRequestNumberLength;
+      while (f !== 0) {
+        newRequestNumberString += '0';
+        f--;
+      }
+    }
+    newRequestNumberString += newRequestNumber.toString();
+    document.getElementById('request-initial').innerHTML = '';
+    document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency').innerHTML = '';
+    calculatorRequest.classList.add('calculator__request_active');
+    document.getElementById('request-goal').innerHTML = requestParams.goal;
+    document.getElementById('request-number').innerHTML = newRequestNumberString;
+    document.getElementById('request-price').parentNode.parentNode.querySelector('.calculator__descr').innerHTML = requestParams.priceName;
+    document.getElementById('request-price').innerHTML = requestParams.price;
+    document.getElementById('request-price').innerHTML = requestParams.price;
+    decline(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'roubles');
+    if (requestParams.initial) {
+      document.getElementById('request-initial').innerHTML = requestParams.initial;
+      decline(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'roubles');
+    }
+    document.getElementById('request-term').innerHTML = requestParams.term;
+    decline(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
+    window.scrollTo({
+      top: calculator.offsetTop + calculatorRequest.offsetTop,
+      left: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  calculatorForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    addRequest = true;
+    requestNumber();
+    calculatorRequest.classList.remove('calculator__request_active');
+    calculatorOffer.classList.remove('calculator__offer_active');
+    addRequest = false;
+    var request = {
+      'name': document.getElementById('request-name').value,
+      'email': document.getElementById('request-email').value,
+      'tel': document.getElementById('request-tel').value
+    };
+    if (requests.length === 0 && myStorage.getItem('requests')) {
+      for (var l = 0; l < JSON.parse(myStorage.getItem('requests')).length; l++) {
+        requests.push(JSON.parse(myStorage.getItem('requests'))[l]);
+      }
+    }
+    requests.push(request);
+    myStorage.setItem('requests', JSON.stringify(requests));
+  });
 })();
