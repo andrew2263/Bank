@@ -872,6 +872,7 @@ ymaps.ready(function () {
 
 (function () {
   var firstSlider = new Swiper('.slider__container', {
+    init: false,
     direction: 'horizontal',
     loop: true,
     slidesPerView: 1,
@@ -885,6 +886,7 @@ ymaps.ready(function () {
       disableOnInteraction: false
     },
   });
+  firstSlider.init();
 
   var isActiveSwiper = false;
   var tabsPanels = document.querySelectorAll('.tabs__panel');
