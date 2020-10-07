@@ -111,6 +111,7 @@
 }
 
 .tabs__sub p {
+  max-width: 400px;
   font-size: 18px;
   line-height: 140%;
   font-weight: normal;
@@ -180,10 +181,11 @@
   .tabs p {
     font-size: 18px;
     margin-bottom: 24px;
-    max-width: 340px;
+    max-width: 355px;
   }
 
   .tabs__sub p {
+    max-width: 355px;
     margin-bottom: 0;
   }
 
@@ -205,6 +207,10 @@
   .tabs p {
     font-size: 16px;
     margin-bottom: 18px;
+  }
+
+  .tabs__sub p {
+    font-size: 14px;
   }
 
   .tabs__wrapper_text {

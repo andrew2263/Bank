@@ -79,10 +79,12 @@
               </div>
               <div class="slider__white-card">
                 <picture>
-                  <source type="image/webp" srcset="img/white_card@226.webp" media="(max-width: 1199px)">
-                  <source type="image/png" srcset="img/white_card@226.png" media="(max-width: 1199px)">
-                  <source type="image/webp" srcset="img/white_card.webp" media="(min-width: 1200px)">
-                  <img src="img/white_card.png" alt="Белая карта">
+                  <!-- 1x: width 226px, height: 142px; 2x: width: 452px, height: 283px -->
+                  <source type="image/webp" srcset="img/white_card@226.webp 1x, img/white_card@226@2x.webp 2x" media="(max-width: 1199px)">
+                  <source type="image/png" srcset="img/white_card@226.png 1x, img/white_card@226@2x.png 2x" media="(max-width: 1199px)">
+                  <!-- 1x: width 289px, height: 182px; 2x: width: 578px, height: 363px -->
+                  <source type="image/webp" srcset="img/white_card.webp 1x, img/white_card@2x.webp 2x" media="(min-width: 1200px)">
+                  <img src="img/white_card.png" srcset="img/white_card@2x.png 2x" alt="Белая карта">
                 </picture>
               </div>
             </div>
@@ -114,25 +116,25 @@
         <ul class="list tabs__list">
           <li class="tabs__item tabs__item_active">
             <a href="#deposit" class="tabs__link">
-              <img src="img/deposit.svg" alt="вклады">
+              <img src="img/deposit.svg" alt="вклады" width="34" height="33">
               Вклады
             </a>
           </li>
           <li class="tabs__item">
             <a href="#credit" class="tabs__link">
-              <img src="img/credit.svg" alt="кредиты">
+              <img src="img/credit.svg" alt="кредиты" width="34" height="30">
               Кредиты
             </a>
           </li>
           <li class="tabs__item">
             <a href="#insurance" class="tabs__link">
-              <img src="img/insurance.svg" alt="страхование">
+              <img src="img/insurance.svg" alt="страхование" width="28" height="34">
               Страхование
             </a>
           </li>
           <li class="tabs__item">
             <a href="#online-services" class="tabs__link">
-              <img src="img/online_services.svg" alt="онлайн">
+              <img src="img/online_services.svg" alt="онлайн" width="20" height="34">
               Онлайн-сервисы
             </a>
           </li>
@@ -154,9 +156,15 @@
               </div>
               <div class="tabs__wrapper tabs__wrapper_img">
                 <picture>
-                  <source srcset="img/piggybank@87.jpg" media="(max-width: 767px)">
-                  <source srcset="img/piggybank@289.jpg" media="(max-width: 1199px)">
-                  <img src="img/piggybank.jpg" alt="копилка">
+                  <!-- 1x: width 87px, height: 113px; 2x: width: 174px, height: 226px -->
+                  <source type="image/webp" srcset="img/piggybank@87.webp 1x, img/piggybank@87@2x.webp 2x," media="(max-width: 767px)">
+                  <source type="image/jpg" srcset="img/piggybank@87.jpg 1x, img/piggybank@87@2x.jpg 2x," media="(max-width: 767px)">
+                  <!-- 1x: width 289px, height: 260px; 2x: width: 578px, height: 520px -->
+                  <source type="image/webp" srcset="img/piggybank@289.webp 1x, img/piggybank@289@2x.webp 2x" media="(max-width: 1199px)">
+                  <source type="image/jpg" srcset="img/piggybank@289.jpg 1x, img/piggybank@289@2x.jpg 2x" media="(max-width: 1199px)">
+                  <!-- 1x: width 440px, height: 290px; 2x: width: 880px, height: 580px -->
+                  <source type="image/webp" srcset="img/piggybank.webp 1x, img/piggybank@2x.webp 2x" media="(min-width: 1200px)">
+                  <img src="img/piggybank.jpg" srcset="img/piggybank@2x.jpg" alt="копилка">
                 </picture>
               </div>
             </div>
@@ -172,16 +180,22 @@
                 </ul>
                 <div class="tabs__sub">
                   <p>
-                    Рассчитайте ежемесячный платеж и ставку по кредиту, воспользовавшись нашим
+                    Рассчитайте ежемесячный платеж и&nbsp;ставку&nbsp;по&nbsp;кредиту, воспользовавшись нашим
                     <a href="#calculator" class="anchor-link tabs__text-link">кредитным калькулятором</a>
                   </p>
                 </div>
               </div>
               <div class="tabs__wrapper tabs__wrapper_img">
                 <picture>
-                  <source srcset="img/car_money@87.png" media="(max-width: 767px)">
-                  <source srcset="img/car_money@289.png" media="(max-width: 1199px)">
-                  <img src="img/car_money.png" alt="автомобиль">
+                  <!-- 1x: width 87px, height: 113px; 2x: width: 174px, height: 226px -->
+                  <source type="image/webp" srcset="img/car_money@87.webp 1x, img/car_money@87@2x.webp 2x," media="(max-width: 767px)">
+                  <source type="image/png" srcset="img/car_money@87.png 1x, img/car_money@87@2x.png 2x," media="(max-width: 767px)">
+                  <!-- 1x: width 289px, height: 260px; 2x: width: 578px, height: 520px -->
+                  <source type="image/webp" srcset="img/car_money@289.webp 1x, img/car_money@289@2x.webp 2x" media="(max-width: 1199px)">
+                  <source type="image/png" srcset="img/car_money@289.png 1x, img/car_money@289@2x.png 2x" media="(max-width: 1199px)">
+                  <!-- 1x: width 440px, height: 290px; 2x: width: 880px, height: 580px -->
+                  <source type="image/webp" srcset="img/car_money.webp 1x, img/car_money@2x.webp 2x" media="(min-width: 1200px)">
+                  <img src="img/car_money.png" srcset="img/car_money@2x.png 2x" alt="автомобиль">
                 </picture>
               </div>
             </div>
@@ -199,16 +213,22 @@
               </div>
               <div class="tabs__wrapper tabs__wrapper_img">
                 <picture>
-                  <source srcset="img/lock@87.png" media="(max-width: 767px)">
-                  <source srcset="img/lock@289.png" media="(max-width: 1199px)">
-                  <img src="img/lock.png" alt="страхование">
+                  <!-- 1x: width 87px, height: 113px; 2x: width: 174px, height: 226px -->
+                  <source type="image/webp" srcset="img/lock@87.webp 1x, img/lock@87@2x.webp 2x" media="(max-width: 767px)">
+                  <source type="image/png" srcset="img/lock@87.png 1x, img/lock@87@2x.png 2x" media="(max-width: 767px)">
+                  <!-- 1x: width 289px, height: 260px; 2x: width: 578px, height: 520px -->
+                  <source type="image/webp" srcset="img/lock@289.webp 1x, img/lock@289@2x.webp 2x" media="(max-width: 1199px)">
+                  <source type="image/png" srcset="img/lock@289.png 1x, img/lock@289@2x.png 2x" media="(max-width: 1199px)">
+                  <!-- 1x: width 440px, height: 290px; 2x: width: 880px, height: 580px -->
+                  <source type="image/webp" srcset="img/lock.webp 1x, img/lock@2x.webp 2x" media="(min-width: 1200px)">
+                  <img src="img/lock.png" srcset="img/lock@2x.png 2x" alt="страхование">
                 </picture>
               </div>
             </div>
             <div class="swiper-slide tabs__panel faded" id="online-services">
               <div class="tabs__wrapper tabs__wrapper_text">
                 <p>
-                  Лига Банк — это огромное количество онлайн-сервисов для вашего удобства
+                  Лига Банк — это огромное количество онлайн-сервисов для&nbsp;вашего&nbsp;удобства
                 </p>
                 <ul class="list tabs__service-list">
                   <li class="tabs__service-item">Мобильный банк, который&nbsp;всегда&nbsp;под&nbsp;рукой</li>
@@ -218,9 +238,15 @@
               </div>
               <div class="tabs__wrapper tabs__wrapper_img">
                 <picture>
-                  <source srcset="img/phone@87.png" media="(max-width: 767px)">
-                  <source srcset="img/phone@289.png" media="(max-width: 1199px)">
-                  <img src="img/phone.png" alt="телефон">
+                  <!-- 1x: width 87px, height: 113px; 2x: width: 174px, height: 226px -->
+                  <source type="image/webp" srcset="img/phone@87.webp 1x, img/phone@87@2x.webp 2x" media="(max-width: 767px)">
+                  <source type="image/png" srcset="img/phone@87.png 1x, img/phone@87@2x.png 2x" media="(max-width: 767px)">
+                  <!-- 1x: width 289px, height: 260px; 2x: width: 578px, height: 520px -->
+                  <source type="image/webp" srcset="img/phone@289.webp 1x, img/phone@289@2x.webp 2x" media="(max-width: 1199px)">
+                  <source type="image/png" srcset="img/phone@289.png 1x, img/phone@289@2x.png 2x" media="(max-width: 1199px)">
+                  <!-- 1x: width 440px, height: 290px; 2x: width: 880px, height: 580px -->
+                  <source type="image/webp" srcset="img/phone.webp 1x, img/phone@2x.webp 2x" media="(min-width: 1200px">
+                  <img src="img/phone.png" srcset="img/phone@2x.png 2x" alt="телефон">
                 </picture>
               </div>
             </div>
@@ -758,14 +784,6 @@
     </div>
   </div>
   <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=81ff3703-94f0-4678-8d2a-740559fd1518" type="text/javascript"></script>
-  <!--script src="js/swiper-bundle-min.js"></script>
-  <script src="js/slider-min.js" type="text/javascript"></script>
-  <script src="js/tabs-min.js" type="text/javascript"></script>
-  <script src="js/viewCalc-min.js" type="text/javascript"></script>
-  <script src="js/calculator-min.js" type="text/javascript"></script>
-  <script src="js/calculateCreditParams-min.js"></script>
-  <script src="js/popup-min.js" type="text/javascript"></script>
-  <script src="js/map-min.js" type="text/javascript"></script-->
   <script src="js/vendor.js"></script>
   <script src="js/main.js"></script>
 </body>
