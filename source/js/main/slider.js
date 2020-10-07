@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  new Swiper('.slider__container', {
+  var firstSlider = new Swiper('.slider__container', {
     direction: 'horizontal',
     loop: true,
     slidesPerView: 1,

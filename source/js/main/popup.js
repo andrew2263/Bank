@@ -17,7 +17,7 @@
     e.preventDefault();
     popupContainer.classList.add('popup-container_active');
     popupLogin.classList.add('popup__login_active');
-    document.querySelector('body').style.overflowY = 'hidden';
+    document.querySelector('body').classList.add('body-hidden');
     loginInput.focus();
   });
 
@@ -62,7 +62,7 @@
     e.preventDefault();
     popupContainer.classList.add('popup-container_active');
     popupThanks.classList.add('popup__thanks_active');
-    document.querySelector('body').style.overflowY = 'hidden';
+    document.querySelector('body').classList.add('body-hidden');
     var inputs = e.target.querySelectorAll('input');
     for (var i = 0; i < inputs.length; i++) {
       if (inputs[i].type !== 'submit') {
@@ -102,7 +102,7 @@
     popupContainer.classList.remove('popup-container_active');
     popupLogin.classList.remove('popup__login_active');
     popupThanks.classList.remove('popup__thanks_active');
-    document.querySelector('body').style.overflowY = 'auto';
+    document.querySelector('body').classList.remove('body-hidden');
     passwordInput.value = '';
     loginInput.value = '';
     passwordCheckbox.checked = false;

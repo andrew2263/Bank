@@ -40,17 +40,31 @@
 }
 
 .slider__content_confidence {
-  background-image: url("../img/confidence.png");
+  background-image: url("../img/confidence.webp");
   background-position-x: center;
   background-repeat: no-repeat;
   height: 100%;
+  background-size: 1366px auto;
 }
 
 .slider__slide_near {
-  background-image: url("../img/near.png");
+  background-image: url("../img/near.webp");
   background-color: #e6f1fe;
   background-position-x: center;
   background-repeat: no-repeat;
+  background-size: 1366px auto;
+}
+
+@media (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+  .slider__content_confidence {
+    background-image: url("../img/confidence@2x.webp");
+    background-size: 1366px auto;
+  }
+
+  .slider__slide_near {
+    background-image: url("../img/near@2x.webp");
+    background-size: 1366px auto;
+  }
 }
 
 .slider__slide h1 {
@@ -59,11 +73,25 @@
 
 @media (max-width: 1199px) {
   .slider__content_confidence {
-    background-image: url("../img/confidence@300.png");
+    background-image: url("../img/confidence@300.webp");
+    background-size: 768px auto;
   }
 
   .slider__slide_near {
-    background-image: url("../img/near@300.png");
+    background-image: url("../img/near@300.webp");
+    background-size: 768px auto;
+  }
+
+  @media (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+    .slider__content_confidence {
+      background-image: url("../img/confidence@300@2x.webp");
+      background-size: 768px auto;
+    }
+
+    .slider__slide_near {
+      background-image: url("../img/near@300@2x.webp");
+      background-size: 768px auto;
+    }
   }
 
   .slider__slide h1 {
@@ -73,11 +101,25 @@
 
 @media (max-width: 767px) {
   .slider__content_confidence {
-    background-image: url("../img/confidence@226.png");
+    background-image: url("../img/confidence@226.webp");
+    background-size: 497px auto;
   }
 
   .slider__slide_near {
-    background-image: url("../img/near@226.png");
+    background-image: url("../img/near@226.webp");
+    background-size: 462px auto;
+  }
+
+  @media (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+    .slider__content_confidence {
+      background-image: url("../img/confidence@226@2x.webp");
+      background-size: 497px auto;
+    }
+
+    .slider__slide_near {
+      background-image: url("../img/near@226@2x.webp");
+      background-size: 462px auto;
+    }
   }
 
   .slider__slide h1 {

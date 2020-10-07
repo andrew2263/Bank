@@ -11,6 +11,10 @@ body {
   color: #1f1e25;
 }
 
+.body-hidden {
+  overflow-y: hidden;
+}
+
 .section h1 {
   font-size: 54px;
   line-height: 54px;
@@ -132,15 +136,18 @@ img {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
+  /* stylelint-disable-next-line */
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* Firefox */
 input[type="number"] {
+  /* stylelint-disable-next-line */
   -moz-appearance: textfield;
 }
 
 input[type="submit"] {
+  /* stylelint-disable-next-line */
   -webkit-appearance: none;
 }

@@ -48,7 +48,7 @@
   termRanges = findInput(termRangesBlock, termRanges);
   calculatorCheckbox = findInput(calculatorCheckboxGroup, calculatorCheckbox);
 
-  var makeCounnt = function () {
+  var makeCount = function () {
     var count = 1;
     return function () {
       if (addRequest) {
@@ -58,7 +58,7 @@
     };
   };
 
-  var requestNumber = makeCounnt();
+  var requestNumber = makeCount();
   var requestParams;
 
   var onInputPrice = function (input) {
@@ -307,14 +307,14 @@
     }
 
     // объект с вариантами склонения слова "рубль"
-    var waysRoubles = {
+    var WAYS_ROUBLES = {
       'a': 'рубль',
       'b': 'рубля',
       'c': 'рублей'
     };
 
     // объект с вариантами склонения слова "год"
-    var waysYears = {
+    var WAYS_YEARS = {
       'a': 'год',
       'b': 'года',
       'c': 'лет'
@@ -323,10 +323,10 @@
     // указываем в поле word существительное в соответствующем падеже
     switch (type) {
       case 'roubles':
-        word.innerHTML = waysRoubles[way];
+        word.innerHTML = WAYS_ROUBLES[way];
         break;
       case 'years':
-        word.innerHTML = waysYears[way];
+        word.innerHTML = WAYS_YEARS[way];
         break;
     }
   };

@@ -326,6 +326,7 @@
 
 input[type="range"] {
   margin: 7px 0 14px;
+  /* stylelint-disable-next-line */
   -webkit-appearance: none;
   width: 100%;
   cursor: pointer;
@@ -373,6 +374,7 @@ input[type="range"] {
     background-color: #2c36f2;
     cursor: pointer;
     margin-top: -7px;
+    /* stylelint-disable-next-line */
     -webkit-appearance: none;
   }
 
