@@ -11,7 +11,7 @@ ymaps.ready(function () {
       searchControlProvider: 'yandex#search'
     }),
 
-  placemarkSpb = new ymaps.Placemark([59.939847, 30.360286], {
+    placemarkSpb = new ymaps.Placemark([59.939847, 30.360286], {
       hintContent: 'Собственный значок метки',
       balloonContent: 'ул. Восстания, 28',
       country: 'russia'

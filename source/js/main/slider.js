@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var firstSlider = new Swiper('.slider__container', {
+  new Swiper('.slider__container', {
     direction: 'horizontal',
     loop: true,
     slidesPerView: 1,
@@ -57,7 +57,7 @@
       isActiveSwiper = true;
     }
 
-    if ((window.innerWidth >= 1200) && isActiveSwiper && (typeof secondSlider !== null)) {
+    if ((window.innerWidth >= 1200) && isActiveSwiper) {
       secondSlider.destroy(false);
       for (var r = 0; r < tabsPanels.length; r++) {
         tabsPanels[r].classList.remove('swiper-slide');

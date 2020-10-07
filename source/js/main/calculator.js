@@ -31,9 +31,9 @@
   var calculatorCheckbox = [];
   var requests = [];
 
-  var findInput = function (block, collection) {
-    for (var i = 0; i < block.length; i++) {
-      var inputs = block[i].querySelectorAll('input');
+  var findInput = function (wrapper, collection) {
+    for (var i = 0; i < wrapper.length; i++) {
+      var inputs = wrapper[i].querySelectorAll('input');
       for (var j = 0; j < inputs.length; j++) {
         collection.push(inputs[j]);
       }
@@ -120,10 +120,10 @@
     calculatorOffer.classList.add('calculator__offer_active');
     requestParams = calculateCredit(block, id);
   };
-  
+
   var onClickPriceButton = function (priceButton) {
     var price = priceButton.parentNode.querySelector('input');
-    if(!(parseInt((Number(price.value) + Number(priceButton.dataset.add)), 10) < price.dataset.min ||
+    if (!(parseInt((Number(price.value) + Number(priceButton.dataset.add)), 10) < price.dataset.min ||
     parseInt((Number(price.value) + Number(priceButton.dataset.add)), 10) > price.dataset.max ||
     price.classList.contains('calculator__price-input_red'))) {
       price.value = parseInt((Number(price.value) + Number(priceButton.dataset.add)), 10);
@@ -132,7 +132,7 @@
     }
     if (price.classList.contains('calculator__price-input_red')) {
       price.classList.remove('calculator__price-input_red');
-      price.parentNode.parentNode.classList.remove('calculator__price_red')
+      price.parentNode.parentNode.classList.remove('calculator__price_red');
       price.value = (price.dataset.max - price.dataset.min) / 2;
       onInputPrice(price);
       requestParams = calculateCredit(block, id);
@@ -144,7 +144,7 @@
     var price = initRange.parentNode.parentNode.parentNode.querySelector('.calculator__price-wrapper').querySelector('input').value;
     var inputInit = initRange.parentNode.parentNode.querySelector('.calculator__price_initial').querySelector('input');
     inputInit.value = parseInt(price * percent, 10);
-    initRange.parentNode.querySelector('.calcualor__initial-percent').querySelector('p').innerHTML = initRange.value + '%';
+    initRange.parentNode.querySelector('.calculator__initial-percent').querySelector('p').innerHTML = initRange.value + '%';
     var roubles = inputInit.parentNode.querySelector('.calculator__price-currency');
     decline(parseInt(inputInit.value, 10), roubles, 'roubles');
     requestParams = calculateCredit(block, id);
@@ -190,16 +190,10 @@
   };
 
   var calculateCredit = function (paramsBlock, creditType) {
-    var sumCreditField = calculatorOffer.querySelector('.calculator__offer-sum');
-    var payCreditField = calculatorOffer.querySelector('.calculator__offer-month');
-    var percentageField = calculatorOffer.querySelector('.calculator__offer-percent');
-    var salaryField = calculatorOffer.querySelector('.calculator__offer-salary');
-    var sumCredit = 0;
-    var percentage = 0;
-    var payCredit = 0;
-    var salary = 0;
-    var casco = document.getElementById('calculator-checkbox-casco');
-    var insurance = document.getElementById('calculator-checkbox-lifesafe');
+    var sumCreditField = document.querySelector('.calculator__offer-sum');
+    var payCreditField = document.querySelector('.calculator__offer-month');
+    var percentageField = document.querySelector('.calculator__offer-percent');
+    var salaryField = document.querySelector('.calculator__offer-salary');
     var price = parseInt(paramsBlock.querySelector('.calculator__price_range').querySelector('input').value, 10);
     if (paramsBlock.querySelector('.calculator__price_initial')) {
       var initial = parseInt(paramsBlock.querySelector('.calculator__price_initial').querySelector('input').value, 10);
@@ -211,65 +205,21 @@
     calculator.querySelector('.calculator__message_mortgage').classList.remove('calculator__message_active');
     calculator.querySelector('.calculator__message_car').classList.remove('calculator__message_active');
 
-    switch (creditType) {
-      case 'mortgage':
-        sumCredit = price - initial;
-        if (document.getElementById('calculator-checkbox-mortgage').checked) {
-          sumCredit -= document.getElementById('calculator-checkbox-mortgage').dataset.sum;
-        }
-        if (parseInt(paramsBlock.querySelector('.calculator__initial-range').querySelector('input').value, 10) < 15) {
-          percentage = 9.4;
-        }
-        if (parseInt(paramsBlock.querySelector('.calculator__initial-range').querySelector('input').value, 10) >= 15) {
-          percentage = 8.5;
-        }
-        break;
-      case 'car':
-        sumCredit = price - initial;
-        if (!casco.checked && !insurance.checked) {
-          if (price < 2000000) {
-            percentage = 16;
-          }
-          if (price >= 2000000) {
-            percentage = 15;
-          }
-        }
-        if ((casco.checked && !insurance.checked) || (!casco.checked && insurance.checked)) {
-          percentage = 8.5;
-        }
-        if (casco.checked && insurance.checked) {
-          percentage = 3.5;
-        }
-        break;
-      case 'consumer':
-        sumCredit = price;
-        if (price < 750000) {
-          percentage = 15;
-        }
-        if (price >= 750000 && price < 2000000) {
-          percentage = 12.5;
-        }
-        if (price >= 2000000) {
-          percentage = 9.5;
-        }
-        if (document.getElementById('calculator-checkbox-salary').checked) {
-          percentage -= 0.5;
-        }
-        break;
-      default:
-        sumCredit = price;
-    }
+    var calcOfferParams = {};
+    var calcSum = window.calculateCreditParams.calculateSumCredit(price, initial, creditType);
+    calcOfferParams.sumCredit = calcSum.sumCredit;
+    calcOfferParams.percentage = calcSum.percentage;
 
     var isSumCredit = false;
 
     switch (creditType) {
       case 'mortgage':
-        if (sumCredit >= 500000) {
+        if (calcOfferParams.sumCredit >= 500000) {
           isSumCredit = true;
         }
         break;
       case 'car':
-        if (sumCredit >= 200000) {
+        if (calcOfferParams.sumCredit >= 200000) {
           isSumCredit = true;
         }
         break;
@@ -293,21 +243,22 @@
       }
     }
 
-    var percentageMonth = (percentage / 100) / 12;
-    var termMonth = term * 12;
-
-    payCredit = parseInt((sumCredit * (percentageMonth + (percentageMonth / (Math.pow((1 + percentageMonth), termMonth) - 1)))), 10);
-    salary = parseInt((payCredit / 0.45), 10);
+    calcOfferParams.payCredit =
+      window.calculateCreditParams.calculatePayCredit(calcOfferParams.percentage,
+          calcOfferParams.sumCredit,
+          term);
+    calcOfferParams.salary =
+      window.calculateCreditParams.calculateSalary(calcOfferParams.payCredit);
+    calcOfferParams.payCreditField = payCreditField;
+    calcOfferParams.sumCreditField = sumCreditField;
+    calcOfferParams.percentageField = percentageField;
+    calcOfferParams.salaryField = salaryField;
 
     if (isSumCredit) {
-      payCreditField.innerHTML = payCredit;
-      sumCreditField.innerHTML = sumCredit;
-      percentageField.innerHTML = percentage;
-      salaryField.innerHTML = salary;
-
-      decline(payCredit, payCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
-      decline(sumCredit, sumCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
-      decline(salary, salaryField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+      window.viewCalc.renderCalcOffer(calcOfferParams);
+      decline(calcOfferParams.payCredit, payCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+      decline(calcOfferParams.sumCredit, sumCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+      decline(calcOfferParams.salary, salaryField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
       calculatorOffer.classList.add('calculator__offer_active');
     }
 
@@ -321,21 +272,21 @@
     };
   };
 
-  //decline — функция для определения падежа существительного в зависимости от числа
-  //например: 1 рубль, 2 рубля, 5 рублей; 1 год, 2 года, 6 лет и т.д.
-  //аргументы: value - число, word - поле, куда будет записано слово, type - год или рубль
-  //type может принимать значения 'roubles' или 'years'
+  // decline — функция для определения падежа существительного в зависимости от числа
+  // например: 1 рубль, 2 рубля, 5 рублей; 1 год, 2 года, 6 лет и т.д.
+  // аргументы: value - число, word - поле, куда будет записано слово, type - год или рубль
+  // type может принимать значения 'roubles' или 'years'
 
   var decline = function (value, word, type) {
-    //падеж существительного определяется в зависимости от остатка от деления числа на 10
+    // падеж существительного определяется в зависимости от остатка от деления числа на 10
     var rest = value % 10;
-    //т.к. 11, 12, 13, 14 - рублЕЙ, дополнительно проверяем остаток от деления числа на 100
+    // т.к. 11, 12, 13, 14 - рублЕЙ, дополнительно проверяем остаток от деления числа на 100
     var restH = value % 100;
     var way;
     switch (rest) {
       case 1:
         if (restH !== 11) {
-          way = 'a'; //если остаток от деления числа на 100 не 11, то склонение "рубль"
+          way = 'a'; // если остаток от деления числа на 100 не 11, то склонение "рубль"
         }
         if (restH === 11) {
           way = 'c'; // если остаток от деления на 100 === 11, то склонение "рублей"
@@ -345,31 +296,31 @@
       case 3:
       case 4:
         if (restH !== 12 && restH !== 13 && restH !== 14) {
-          way = 'b'; //то же самое, если остаток от деления на 100 не 12, не 13 и не 14, то склонение "рубля"
+          way = 'b'; // то же самое, если остаток от деления на 100 не 12, не 13 и не 14, то склонение "рубля"
         }
         if (restH === 12 || restH === 13 || restH === 14) {
-          way = 'c'; //если 12, 13, 14 - склонение "рублей"
+          way = 'c'; // если 12, 13, 14 - склонение "рублей"
         }
         break;
       default:
-        way = 'c'; //по умолчанию склонение "рублей"
+        way = 'c'; // по умолчанию склонение "рублей"
     }
 
-    //объект с вариантами склонения слова "рубль"
+    // объект с вариантами склонения слова "рубль"
     var waysRoubles = {
       'a': 'рубль',
       'b': 'рубля',
       'c': 'рублей'
     };
 
-    //объект с вариантами склонения слова "год"
+    // объект с вариантами склонения слова "год"
     var waysYears = {
       'a': 'год',
       'b': 'года',
       'c': 'лет'
     };
 
-    //указываем в поле word существительное в соответствующем падеже
+    // указываем в поле word существительное в соответствующем падеже
     switch (type) {
       case 'roubles':
         word.innerHTML = waysRoubles[way];
@@ -456,20 +407,13 @@
       }
     }
     newRequestNumberString += newRequestNumber.toString();
-    document.getElementById('request-initial').innerHTML = '';
-    document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency').innerHTML = '';
     calculatorRequest.classList.add('calculator__request_active');
-    document.getElementById('request-goal').innerHTML = requestParams.goal;
-    document.getElementById('request-number').innerHTML = newRequestNumberString;
-    document.getElementById('request-price').parentNode.parentNode.querySelector('.calculator__descr').innerHTML = requestParams.priceName;
-    document.getElementById('request-price').innerHTML = requestParams.price;
-    document.getElementById('request-price').innerHTML = requestParams.price;
+    requestParams.requestNumber = newRequestNumberString;
+    window.viewCalc.renderFormalizationRequest(requestParams);
     decline(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'roubles');
     if (requestParams.initial) {
-      document.getElementById('request-initial').innerHTML = requestParams.initial;
       decline(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'roubles');
     }
-    document.getElementById('request-term').innerHTML = requestParams.term;
     decline(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
     window.scrollTo({
       top: calculator.offsetTop + calculatorRequest.offsetTop,
