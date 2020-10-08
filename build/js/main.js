@@ -154,9 +154,12 @@
 
   var onChangePrice = function (inputPrice) {
     var value = parseInt(inputPrice.value, 10);
-    if ((value < parseInt(inputPrice.dataset.min, 10)) || (value > parseInt(inputPrice.dataset.max, 10))) {
+    if ((value < parseInt(inputPrice.dataset.min, 10)) || (value > parseInt(inputPrice.dataset.max, 10)) ||
+      !Number(value)) {
       inputPrice.parentNode.parentNode.classList.add('calculator__price_red');
       inputPrice.value = 'Некорректное значение';
+      inputPrice.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_initial').classList.add('calculator__price_red');
+      inputPrice.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_initial').querySelector('input').value = 'Некорректное значение';
     }
     var roubles = inputPrice.parentNode.querySelector('.calculator__price-currency');
     decline(parseInt(inputPrice.value, 10), roubles, 'roubles');
@@ -172,6 +175,12 @@
     }
     if (parseInt(input.value, 10) > parseInt((price * maxPercent / 100), 10)) {
       input.value = parseInt((price * maxPercent / 100), 10);
+    }
+    if (!Number(input.value)) {
+      input.parentNode.parentNode.classList.add('calculator__price_red');
+      input.value = 'Некорректное значение';
+      input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_range').classList.add('calculator__price_red');
+      input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_range').querySelector('input').value = 'Некорректное значение';
     }
   };
 
@@ -241,10 +250,18 @@
     inputPrice.value = deleteSpaces(inputPrice.value);
     if (inputPrice.parentNode.parentNode.classList.contains('calculator__price_red')) {
       inputPrice.parentNode.parentNode.classList.remove('calculator__price_red');
+      inputPrice.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_initial').classList.remove('calculator__price_red');
       inputPrice.value = (inputPrice.dataset.max - inputPrice.dataset.min) / 2;
       onInputPrice(inputPrice);
       requestParams = calculateCredit(block, id);
     }
+  };
+
+  var onFocusInitial = function (inputInitial) {
+    inputInitial.value = deleteSpaces(inputInitial.value);
+    var inputPrice = inputInitial.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_range').querySelector('input');
+    onFocusInputPrice(inputPrice);
+    inputPrice.value = setSpaces(inputPrice.value);
   };
 
   var onInputInitial = function (inputInitial) {
@@ -262,10 +279,25 @@
     if (parseInt(inputTerm.value, 10) > max) {
       inputTerm.value = max;
     }
+    if (!Number(inputTerm.value)) {
+      inputTerm.parentNode.parentNode.classList.add('calculator__price_red');
+      inputTerm.value = 'Некорректное значение';
+    }
     var years = inputTerm.parentNode.querySelector('.calculator__price-years');
     decline(parseInt(inputTerm.value, 10), years, 'years');
     requestParams = calculateCredit(block, id);
   };
+
+  var onFocusInputTerm = function (inputTerm) {
+    if (inputTerm.parentNode.parentNode.classList.contains('calculator__price_red')) {
+      inputTerm.parentNode.parentNode.classList.remove('calculator__price_red');
+      var min = parseInt(inputTerm.parentNode.parentNode.parentNode.querySelector('.calculator__term-range').querySelector('input').min, 10);
+      inputTerm.value = min;
+    }
+    var years = inputTerm.parentNode.querySelector('.calculator__price-years');
+    decline(parseInt(inputTerm.value, 10), years, 'years');
+    requestParams = calculateCredit(block, id);
+  }
 
   var setSpaces = function (str) {
     return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -287,8 +319,9 @@
     var percentageField = document.querySelector('.calculator__offer-percent');
     var salaryField = document.querySelector('.calculator__offer-salary');
     var price = parseInt(deleteSpaces(paramsBlock.querySelector('.calculator__price_range').querySelector('input').value), 10);
+    var initial = '';
     if (paramsBlock.querySelector('.calculator__price_initial')) {
-      var initial = parseInt(deleteSpaces(paramsBlock.querySelector('.calculator__price_initial').querySelector('input').value), 10);
+      initial = parseInt(deleteSpaces(paramsBlock.querySelector('.calculator__price_initial').querySelector('input').value), 10);
     }
     var term = parseInt(paramsBlock.querySelector('.calculator__price_term').querySelector('input').value, 10);
 
@@ -299,19 +332,19 @@
 
     var calcOfferParams = {};
     var calcSum = window.calculateCreditParams.calculateSumCredit(price, initial, creditType);
-    calcOfferParams.sumCredit = calcSum.sumCredit;
+    calcOfferParams.sumCredit = setSpaces(calcSum.sumCredit);
     calcOfferParams.percentage = calcSum.percentage;
 
     var isSumCredit = false;
 
     switch (creditType) {
       case 'mortgage':
-        if (calcOfferParams.sumCredit >= 500000) {
+        if (deleteSpaces(calcOfferParams.sumCredit) >= 500000) {
           isSumCredit = true;
         }
         break;
       case 'car':
-        if (calcOfferParams.sumCredit >= 200000) {
+        if (deleteSpaces(calcOfferParams.sumCredit) >= 200000) {
           isSumCredit = true;
         }
         break;
@@ -336,11 +369,13 @@
     }
 
     calcOfferParams.payCredit =
-      window.calculateCreditParams.calculatePayCredit(calcOfferParams.percentage,
-          calcOfferParams.sumCredit,
-          term);
+      setSpaces(window.calculateCreditParams.calculatePayCredit(
+          calcOfferParams.percentage,
+          deleteSpaces(calcOfferParams.sumCredit),
+          term));
     calcOfferParams.salary =
-      window.calculateCreditParams.calculateSalary(calcOfferParams.payCredit);
+      setSpaces(window.calculateCreditParams.calculateSalary(
+        deleteSpaces(calcOfferParams.payCredit)));
     calcOfferParams.payCreditField = payCreditField;
     calcOfferParams.sumCreditField = sumCreditField;
     calcOfferParams.percentageField = percentageField;
@@ -348,9 +383,9 @@
 
     if (isSumCredit) {
       window.viewCalc.renderCalcOffer(calcOfferParams);
-      decline(calcOfferParams.payCredit, payCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
-      decline(calcOfferParams.sumCredit, sumCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
-      decline(calcOfferParams.salary, salaryField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+      decline(deleteSpaces(calcOfferParams.payCredit), payCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+      decline(deleteSpaces(calcOfferParams.sumCredit), sumCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+      decline(deleteSpaces(calcOfferParams.salary), salaryField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
       calculatorOffer.classList.add('calculator__offer_active');
     }
 
@@ -358,8 +393,8 @@
       'goal': paramsBlock.dataset.type,
       'priceName': paramsBlock.dataset.pricename,
       'creditType': creditType,
-      'price': price,
-      'initial': initial,
+      'price': setSpaces(price),
+      'initial': setSpaces(initial),
       'term': term
     };
   };
@@ -476,7 +511,7 @@
       onInputInitial(e.target);
     });
     calculatorInputInitial[b].addEventListener('focus', function (e) {
-      e.target.value = deleteSpaces(e.target.value);
+      onFocusInitial(e.target);
     });
     calculatorInputInitial[b].addEventListener('blur', function (e) {
       e.target.value = setSpaces(e.target.value);
@@ -486,6 +521,9 @@
   for (var c = 0; c < calculatorInputTerm.length; c++) {
     calculatorInputTerm[c].addEventListener('change', function (e) {
       onInputTerm(e.target);
+    });
+    calculatorInputTerm[c].addEventListener('focus', function (e) {
+      onFocusInputTerm(e.target);
     });
   }
 
@@ -511,9 +549,9 @@
     calculatorRequest.classList.add('calculator__request_active');
     requestParams.requestNumber = newRequestNumberString;
     window.viewCalc.renderFormalizationRequest(requestParams);
-    decline(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'roubles');
+    decline(deleteSpaces(requestParams.price), document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'roubles');
     if (requestParams.initial) {
-      decline(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'roubles');
+      decline(deleteSpaces(requestParams.initial), document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'roubles');
     }
     decline(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
     window.scrollTo({
