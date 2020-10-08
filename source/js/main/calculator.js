@@ -65,9 +65,9 @@
     if (input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_initial')) {
       var initial = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_initial').querySelector('input');
       var percent = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').value;
-      initial.value = parseInt((Number(input.value) * Number(percent / 100)), 10);
+      initial.value = setSpaces(parseInt(Number(deleteSpaces(input.value)) * Number(percent / 100)), 10);
       var roubles = initial.parentNode.querySelector('.calculator__price-currency');
-      decline(parseInt(initial.value, 10), roubles, 'roubles');
+      decline(parseInt(deleteSpaces(initial.value), 10), roubles, 'roubles');
     }
   };
 
@@ -75,7 +75,6 @@
     var value = parseInt(inputPrice.value, 10);
     if ((value < parseInt(inputPrice.dataset.min, 10)) || (value > parseInt(inputPrice.dataset.max, 10))) {
       inputPrice.parentNode.parentNode.classList.add('calculator__price_red');
-      inputPrice.classList.add('calculator__price-input_red');
       inputPrice.value = 'Некорректное значение';
     }
     var roubles = inputPrice.parentNode.querySelector('.calculator__price-currency');
@@ -86,7 +85,7 @@
   var onChangeInitial = function (input) {
     var minPercent = parseInt(input.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').min, 10);
     var maxPercent = parseInt(input.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').max, 10);
-    var price = parseInt(input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_range').querySelector('input').value, 10);
+    var price = parseInt(deleteSpaces(input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_range').querySelector('input').value), 10);
     if (parseInt(input.value, 10) < parseInt((price * minPercent / 100), 10)) {
       input.value = parseInt((price * minPercent / 100), 10);
     }
@@ -123,17 +122,16 @@
 
   var onClickPriceButton = function (priceButton) {
     var price = priceButton.parentNode.querySelector('input');
-    if (!(parseInt((Number(price.value) + Number(priceButton.dataset.add)), 10) < price.dataset.min ||
-    parseInt((Number(price.value) + Number(priceButton.dataset.add)), 10) > price.dataset.max ||
-    price.classList.contains('calculator__price-input_red'))) {
-      price.value = parseInt((Number(price.value) + Number(priceButton.dataset.add)), 10);
+    if (!(parseInt((Number(deleteSpaces(price.value)) + Number(priceButton.dataset.add)), 10) < price.dataset.min ||
+    parseInt((Number(deleteSpaces(price.value)) + Number(priceButton.dataset.add)), 10) > price.dataset.max ||
+    price.parentNode.parentNode.classList.contains('calculator__price_red'))) {
+      price.value = setSpaces(parseInt((Number(deleteSpaces(price.value)) + Number(priceButton.dataset.add)), 10));
       onInputPrice(price);
       requestParams = calculateCredit(block, id);
     }
-    if (price.classList.contains('calculator__price-input_red')) {
-      price.classList.remove('calculator__price-input_red');
+    if (price.parentNode.parentNode.classList.contains('calculator__price_red')) {
       price.parentNode.parentNode.classList.remove('calculator__price_red');
-      price.value = (price.dataset.max - price.dataset.min) / 2;
+      price.value = setSpaces((price.dataset.max - price.dataset.min) / 2);
       onInputPrice(price);
       requestParams = calculateCredit(block, id);
     }
@@ -141,12 +139,12 @@
 
   var onInputInitRange = function (initRange) {
     var percent = (Number(initRange.value) / 100);
-    var price = initRange.parentNode.parentNode.parentNode.querySelector('.calculator__price-wrapper').querySelector('input').value;
+    var price = deleteSpaces(initRange.parentNode.parentNode.parentNode.querySelector('.calculator__price-wrapper').querySelector('input').value);
     var inputInit = initRange.parentNode.parentNode.querySelector('.calculator__price_initial').querySelector('input');
-    inputInit.value = parseInt(price * percent, 10);
+    inputInit.value = setSpaces(parseInt(price * percent, 10));
     initRange.parentNode.querySelector('.calculator__initial-percent').querySelector('p').innerHTML = initRange.value + '%';
     var roubles = inputInit.parentNode.querySelector('.calculator__price-currency');
-    decline(parseInt(inputInit.value, 10), roubles, 'roubles');
+    decline(parseInt(deleteSpaces(inputInit.value), 10), roubles, 'roubles');
     requestParams = calculateCredit(block, id);
   };
 
@@ -159,10 +157,9 @@
   };
 
   var onFocusInputPrice = function (inputPrice) {
-    if (inputPrice.parentNode.parentNode.classList.contains('calculator__price_red') &&
-    inputPrice.classList.contains('calculator__price-input_red')) {
+    inputPrice.value = deleteSpaces(inputPrice.value);
+    if (inputPrice.parentNode.parentNode.classList.contains('calculator__price_red')) {
       inputPrice.parentNode.parentNode.classList.remove('calculator__price_red');
-      inputPrice.classList.remove('calculator__price-input_red');
       inputPrice.value = (inputPrice.dataset.max - inputPrice.dataset.min) / 2;
       onInputPrice(inputPrice);
       requestParams = calculateCredit(block, id);
@@ -171,7 +168,7 @@
 
   var onInputInitial = function (inputInitial) {
     var roubles = inputInitial.parentNode.querySelector('.calculator__price-currency');
-    decline(parseInt(inputInitial.value, 10), roubles, 'roubles');
+    decline(parseInt(deleteSpaces(inputInitial.value), 10), roubles, 'roubles');
     requestParams = calculateCredit(block, id);
   };
 
@@ -189,14 +186,28 @@
     requestParams = calculateCredit(block, id);
   };
 
+  var setSpaces = function (str) {
+    return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  };
+
+  var deleteSpaces = function (str) {
+    var strArr = str.split('');
+    for (var i = 0; i < strArr.length; i++) {
+      if (strArr[i] === ' ') {
+        strArr.splice(i, 1);
+      }
+    }
+    return strArr.join("");
+  };
+
   var calculateCredit = function (paramsBlock, creditType) {
     var sumCreditField = document.querySelector('.calculator__offer-sum');
     var payCreditField = document.querySelector('.calculator__offer-month');
     var percentageField = document.querySelector('.calculator__offer-percent');
     var salaryField = document.querySelector('.calculator__offer-salary');
-    var price = parseInt(paramsBlock.querySelector('.calculator__price_range').querySelector('input').value, 10);
+    var price = parseInt(deleteSpaces(paramsBlock.querySelector('.calculator__price_range').querySelector('input').value), 10);
     if (paramsBlock.querySelector('.calculator__price_initial')) {
-      var initial = parseInt(paramsBlock.querySelector('.calculator__price_initial').querySelector('input').value, 10);
+      var initial = parseInt(deleteSpaces(paramsBlock.querySelector('.calculator__price_initial').querySelector('input').value), 10);
     }
     var term = parseInt(paramsBlock.querySelector('.calculator__price_term').querySelector('input').value, 10);
 
@@ -373,12 +384,21 @@
     calculatorInputPrice[m].addEventListener('focus', function (e) {
       onFocusInputPrice(e.target);
     });
+    calculatorInputPrice[m].addEventListener('blur', function (e) {
+      e.target.value = setSpaces(e.target.value);
+    });
   }
 
   for (var b = 0; b < calculatorInputInitial.length; b++) {
     calculatorInputInitial[b].addEventListener('change', function (e) {
       onChangeInitial(e.target);
       onInputInitial(e.target);
+    });
+    calculatorInputInitial[b].addEventListener('focus', function (e) {
+      e.target.value = deleteSpaces(e.target.value);
+    });
+    calculatorInputInitial[b].addEventListener('blur', function (e) {
+      e.target.value = setSpaces(e.target.value);
     });
   }
 

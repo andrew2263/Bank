@@ -239,6 +239,7 @@
 
 .calculator__price input {
   border: none;
+  width: 100px;
   text-align: right;
   background-color: transparent;
   font-size: inherit;
@@ -250,7 +251,7 @@
   }
 }
 
-.calculator__price-input_red {
+.calculator__price_red input {
   color: #ff0000;
   width: 200px;
 }
