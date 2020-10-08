@@ -14,6 +14,7 @@
 }
 
 .header__wrapper {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -25,6 +26,13 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+}
+
+@media (max-width: 767px) {
+  .header__left {
+    position: absolute;
+    left: 15px;
+  }
 }
 
 .header__burger-checkbox {
@@ -247,6 +255,10 @@
 }
 
 @media (max-width: 767px) {
+  .header__container {
+    width: 100%;
+  }
+
   .header__list {
     flex-direction: column;
     max-width: auto;
@@ -260,5 +272,10 @@
     &:last-child {
       margin-bottom: 0;
     }
+  }
+
+  .header__login {
+    position: absolute;
+    right: 15px;
   }
 }

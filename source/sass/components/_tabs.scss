@@ -64,25 +64,34 @@
 
 .tabs__panel {
   position: relative;
+  width: 100%;
   display: none;
+}
+
+.tabs__content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   background-color: #f6f7ff;
   border-radius: 0 4px 4px 4px;
   padding: 0 135px 0 70px;
   width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 
 @media (max-width: 1199px) {
   .tabs__panel {
-    display: flex;
+    display: block;
+    background-color: #f6f7ff;
+  }
+
+  .tabs__content {
     padding: 0;
   }
 }
 
 .tabs__panel_active {
-  display: flex;
+  display: block;
 }
 
 .tabs__wrapper_text {
