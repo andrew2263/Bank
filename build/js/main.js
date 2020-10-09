@@ -220,10 +220,8 @@
       requestParams = calculateCredit(block, id);
     }
     if (price.parentNode.parentNode.classList.contains('calculator__price_red')) {
-      price.parentNode.parentNode.classList.remove('calculator__price_red');
-      price.value = setSpaces((price.dataset.max - price.dataset.min) / 2);
-      onInputPrice(price);
-      requestParams = calculateCredit(block, id);
+      onFocusInputPrice(price);
+      price.value = setSpaces(price.value);
     }
   };
 

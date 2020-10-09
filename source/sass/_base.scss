@@ -100,7 +100,8 @@ body {
 
 @media (max-width: 767px) {
   .container {
-    width: 290px;
+    width: 80%;
+    min-width: 290px;
   }
 }
 

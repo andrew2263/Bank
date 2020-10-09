@@ -497,11 +497,6 @@ input[type="range"] {
     margin-bottom: 25px;
   }
 
-  .calculator__offer-wrapper {
-    flex-direction: column;
-    margin-bottom: 30px;
-  }
-
   .claculator__offer-price p {
     font-size: 18px;
     margin-bottom: 5px;
@@ -509,7 +504,7 @@ input[type="range"] {
 
   .calculator__offer-block {
     margin-bottom: 15px;
-    margin-right: 0;
+    margin-right: 40px;
   }
 
   .calculator__offer-column {
@@ -523,6 +518,18 @@ input[type="range"] {
   .calculator__offer-request {
     width: 100%;
     font-size: 14px;
+  }
+}
+
+@media (max-width: 530px) {
+  .calculator__offer-wrapper {
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+
+  .calculator__offer-block {
+    margin-bottom: 15px;
+    margin-right: 0;
   }
 }
 

@@ -66,17 +66,27 @@
   position: relative;
   display: none;
   background-color: #f6f7ff;
+  width: 100%;
+}
+
+.tabs__content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f6f7ff;
   border-radius: 0 4px 4px 4px;
   padding: 0 135px 0 70px;
   width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 
 @media (max-width: 1199px) {
   .tabs__panel {
-    display: flex;
+    display: block;
+    background-color: #f6f7ff;
+  }
+
+  .tabs__content {
     padding: 0;
   }
 }
@@ -207,19 +217,25 @@
   .tabs p {
     font-size: 16px;
     margin-bottom: 18px;
+    width: 100%;
+    max-width: none;
   }
 
   .tabs__sub p {
     font-size: 14px;
+    max-width: none;
+    width: 80%;
+    min-width: 290px;
   }
 
   .tabs__wrapper_text {
     position: relative;
     z-index: 100;
+    width: 100%;
   }
 
   .tabs__service-list {
-    max-width: 230px;
+    max-width: 85%;
     margin-bottom: 23px;
   }
 
@@ -239,7 +255,8 @@
   .tabs__wrapper_img {
     position: absolute;
     top: 98px;
-    left: 218px;
+    //left: 218px;
+    right: -10px;
     z-index: 0;
   }
 
