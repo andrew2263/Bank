@@ -65,7 +65,7 @@
     if (input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_initial')) {
       var initial = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__price_initial').querySelector('input');
       var percent = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').value;
-      initial.value = setSpaces(parseInt(Number(deleteSpaces(input.value)) * Number(percent / 100)), 10);
+      initial.value = setSpaces(parseInt(Number(deleteSpaces(input.value)) * Number(percent / 100), 10));
       var roubles = initial.parentNode.querySelector('.calculator__price-currency');
       decline(parseInt(deleteSpaces(initial.value), 10), roubles, 'roubles');
     }
@@ -214,7 +214,7 @@
     var years = inputTerm.parentNode.querySelector('.calculator__price-years');
     decline(parseInt(inputTerm.value, 10), years, 'years');
     requestParams = calculateCredit(block, id);
-  }
+  };
 
   var setSpaces = function (str) {
     return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -227,7 +227,7 @@
         strArr.splice(i, 1);
       }
     }
-    return strArr.join("");
+    return strArr.join('');
   };
 
   var calculateCredit = function (paramsBlock, creditType) {
@@ -292,7 +292,7 @@
           term));
     calcOfferParams.salary =
       setSpaces(window.calculateCreditParams.calculateSalary(
-        deleteSpaces(calcOfferParams.payCredit)));
+          deleteSpaces(calcOfferParams.payCredit)));
     calcOfferParams.payCreditField = payCreditField;
     calcOfferParams.sumCreditField = sumCreditField;
     calcOfferParams.percentageField = percentageField;
