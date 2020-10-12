@@ -86,7 +86,7 @@ gulp.task("html", function () {
 });
 
 gulp.task("js-main", function () {
-  return gulp.src("source/js/main/*.js")
+  return gulp.src(["source/js/main/helper.js", "source/js/main/*.js"])
     .pipe(concat("main.js"))
     .pipe(minify())
     .pipe(gulp.dest("build/js"));

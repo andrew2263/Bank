@@ -1,6 +1,93 @@
 'use strict';
 
 (function () {
+  function findInput(wrapper, collection) {
+    for (var i = 0; i < wrapper.length; i++) {
+      var inputs = wrapper[i].querySelectorAll('input');
+      for (var j = 0; j < inputs.length; j++) {
+        collection.push(inputs[j]);
+      }
+    }
+    return collection;
+  }
+  // decline — функция для определения падежа существительного в зависимости от числа
+  // например: 1 рубль, 2 рубля, 5 рублей; 1 год, 2 года, 6 лет и т.д.
+  // аргументы: value - число, word - поле, куда будет записано слово, type - год или рубль
+  // type может принимать значения 'roubles' или 'years'
+  function decline(value, word, type) {
+    // падеж существительного определяется в зависимости от остатка от деления числа на 10
+    var rest = value % 10;
+    // т.к. 11, 12, 13, 14 - рублЕЙ, дополнительно проверяем остаток от деления числа на 100
+    var restH = value % 100;
+    var way;
+    switch (rest) {
+      case 1:
+        if (restH !== 11) {
+          way = 'a'; // если остаток от деления числа на 100 не 11, то склонение "рубль"
+        }
+        if (restH === 11) {
+          way = 'c'; // если остаток от деления на 100 === 11, то склонение "рублей"
+        }
+        break;
+      case 2:
+      case 3:
+      case 4:
+        if (restH !== 12 && restH !== 13 && restH !== 14) {
+          way = 'b'; // то же самое, если остаток от деления на 100 не 12, не 13 и не 14, то склонение "рубля"
+        }
+        if (restH === 12 || restH === 13 || restH === 14) {
+          way = 'c'; // если 12, 13, 14 - склонение "рублей"
+        }
+        break;
+      default:
+        way = 'c'; // по умолчанию склонение "рублей"
+    }
+
+    // объект с вариантами склонения слова "рубль"
+    var WAYS_ROUBLES = {
+      'a': 'рубль',
+      'b': 'рубля',
+      'c': 'рублей'
+    };
+
+    // объект с вариантами склонения слова "год"
+    var WAYS_YEARS = {
+      'a': 'год',
+      'b': 'года',
+      'c': 'лет'
+    };
+
+    // указываем в поле word существительное в соответствующем падеже
+    switch (type) {
+      case 'roubles':
+        word.innerHTML = WAYS_ROUBLES[way];
+        break;
+      case 'years':
+        word.innerHTML = WAYS_YEARS[way];
+        break;
+    }
+  }
+
+  function makeCount() {
+    var count = 1;
+    return function (bool) {
+      if (bool) {
+        return ++count;
+      }
+      return count;
+    };
+  }
+
+  window.helper = {
+    findInput: findInput,
+    decline: decline,
+    makeCount: makeCount
+  };
+})();
+
+'use strict';
+
+(function () {
   function calculateSumCredit(price, initial, creditType) {
     var sumCredit = 0;
     var percentage = 0;
@@ -112,34 +199,14 @@
   var calculatorCheckbox = [];
   var requests = [];
 
-  var findInput = function (wrapper, collection) {
-    for (var i = 0; i < wrapper.length; i++) {
-      var inputs = wrapper[i].querySelectorAll('input');
-      for (var j = 0; j < inputs.length; j++) {
-        collection.push(inputs[j]);
-      }
-    }
-    return collection;
-  };
+  calculatorInputPrice = window.helper.findInput(calculatorPrice, calculatorInputPrice);
+  calculatorInputInitial = window.helper.findInput(calculatorInitial, calculatorInputInitial);
+  calculatorInputTerm = window.helper.findInput(calculatorTerm, calculatorInputTerm);
+  initRanges = window.helper.findInput(initRangesBlock, initRanges);
+  termRanges = window.helper.findInput(termRangesBlock, termRanges);
+  calculatorCheckbox = window.helper.findInput(calculatorCheckboxGroup, calculatorCheckbox);
 
-  calculatorInputPrice = findInput(calculatorPrice, calculatorInputPrice);
-  calculatorInputInitial = findInput(calculatorInitial, calculatorInputInitial);
-  calculatorInputTerm = findInput(calculatorTerm, calculatorInputTerm);
-  initRanges = findInput(initRangesBlock, initRanges);
-  termRanges = findInput(termRangesBlock, termRanges);
-  calculatorCheckbox = findInput(calculatorCheckboxGroup, calculatorCheckbox);
-
-  var makeCount = function () {
-    var count = 1;
-    return function () {
-      if (addRequest) {
-        return ++count;
-      }
-      return count;
-    };
-  };
-
-  var requestNumber = makeCount();
+  var requestNumber = window.helper.makeCount();
   var requestParams;
 
   var onInputPrice = function (input) {
@@ -148,7 +215,7 @@
       var percent = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').value;
       initial.value = parseInt((Number(input.value) * Number(percent / 100)), 10);
       var roubles = initial.parentNode.querySelector('.calculator__price-currency');
-      decline(parseInt(initial.value, 10), roubles, 'roubles');
+      window.helper.decline(parseInt(initial.value, 10), roubles, 'roubles');
     }
   };
 
@@ -160,7 +227,7 @@
       inputPrice.value = 'Некорректное значение';
     }
     var roubles = inputPrice.parentNode.querySelector('.calculator__price-currency');
-    decline(parseInt(inputPrice.value, 10), roubles, 'roubles');
+    window.helper.decline(parseInt(inputPrice.value, 10), roubles, 'roubles');
     requestParams = calculateCredit(block, id);
   };
 
@@ -227,7 +294,7 @@
     inputInit.value = parseInt(price * percent, 10);
     initRange.parentNode.querySelector('.calculator__initial-percent').querySelector('p').innerHTML = initRange.value + '%';
     var roubles = inputInit.parentNode.querySelector('.calculator__price-currency');
-    decline(parseInt(inputInit.value, 10), roubles, 'roubles');
+    window.helper.decline(parseInt(inputInit.value, 10), roubles, 'roubles');
     requestParams = calculateCredit(block, id);
   };
 
@@ -235,7 +302,7 @@
     var input = termRange.parentNode.parentNode.querySelector('.calculator__price_term').querySelector('input');
     input.value = termRange.value;
     var years = input.parentNode.querySelector('.calculator__price-years');
-    decline(parseInt(input.value, 10), years, 'years');
+    window.helper.decline(parseInt(input.value, 10), years, 'years');
     requestParams = calculateCredit(block, id);
   };
 
@@ -252,7 +319,7 @@
 
   var onInputInitial = function (inputInitial) {
     var roubles = inputInitial.parentNode.querySelector('.calculator__price-currency');
-    decline(parseInt(inputInitial.value, 10), roubles, 'roubles');
+    window.helper.decline(parseInt(inputInitial.value, 10), roubles, 'roubles');
     requestParams = calculateCredit(block, id);
   };
 
@@ -266,7 +333,7 @@
       inputTerm.value = max;
     }
     var years = inputTerm.parentNode.querySelector('.calculator__price-years');
-    decline(parseInt(inputTerm.value, 10), years, 'years');
+    window.helper.decline(parseInt(inputTerm.value, 10), years, 'years');
     requestParams = calculateCredit(block, id);
   };
 
@@ -337,9 +404,9 @@
 
     if (isSumCredit) {
       window.viewCalc.renderCalcOffer(calcOfferParams);
-      decline(calcOfferParams.payCredit, payCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
-      decline(calcOfferParams.sumCredit, sumCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
-      decline(calcOfferParams.salary, salaryField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+      window.helper.decline(calcOfferParams.payCredit, payCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+      window.helper.decline(calcOfferParams.sumCredit, sumCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+      window.helper.decline(calcOfferParams.salary, salaryField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
       calculatorOffer.classList.add('calculator__offer_active');
     }
 
@@ -351,65 +418,6 @@
       'initial': initial,
       'term': term
     };
-  };
-
-  // decline — функция для определения падежа существительного в зависимости от числа
-  // например: 1 рубль, 2 рубля, 5 рублей; 1 год, 2 года, 6 лет и т.д.
-  // аргументы: value - число, word - поле, куда будет записано слово, type - год или рубль
-  // type может принимать значения 'roubles' или 'years'
-
-  var decline = function (value, word, type) {
-    // падеж существительного определяется в зависимости от остатка от деления числа на 10
-    var rest = value % 10;
-    // т.к. 11, 12, 13, 14 - рублЕЙ, дополнительно проверяем остаток от деления числа на 100
-    var restH = value % 100;
-    var way;
-    switch (rest) {
-      case 1:
-        if (restH !== 11) {
-          way = 'a'; // если остаток от деления числа на 100 не 11, то склонение "рубль"
-        }
-        if (restH === 11) {
-          way = 'c'; // если остаток от деления на 100 === 11, то склонение "рублей"
-        }
-        break;
-      case 2:
-      case 3:
-      case 4:
-        if (restH !== 12 && restH !== 13 && restH !== 14) {
-          way = 'b'; // то же самое, если остаток от деления на 100 не 12, не 13 и не 14, то склонение "рубля"
-        }
-        if (restH === 12 || restH === 13 || restH === 14) {
-          way = 'c'; // если 12, 13, 14 - склонение "рублей"
-        }
-        break;
-      default:
-        way = 'c'; // по умолчанию склонение "рублей"
-    }
-
-    // объект с вариантами склонения слова "рубль"
-    var WAYS_ROUBLES = {
-      'a': 'рубль',
-      'b': 'рубля',
-      'c': 'рублей'
-    };
-
-    // объект с вариантами склонения слова "год"
-    var WAYS_YEARS = {
-      'a': 'год',
-      'b': 'года',
-      'c': 'лет'
-    };
-
-    // указываем в поле word существительное в соответствующем падеже
-    switch (type) {
-      case 'roubles':
-        word.innerHTML = WAYS_ROUBLES[way];
-        break;
-      case 'years':
-        word.innerHTML = WAYS_YEARS[way];
-        break;
-    }
   };
 
   calculatorSelect.addEventListener('click', function (e) {
@@ -477,7 +485,7 @@
 
   calculatorOfferButton.addEventListener('click', function (e) {
     e.preventDefault();
-    var newRequestNumber = requestNumber();
+    var newRequestNumber = requestNumber(addRequest);
     var newRequestNumberLength = newRequestNumber.toString().length;
     var newRequestNumberString = '';
     if (newRequestNumberLength < 4) {
@@ -491,11 +499,11 @@
     calculatorRequest.classList.add('calculator__request_active');
     requestParams.requestNumber = newRequestNumberString;
     window.viewCalc.renderFormalizationRequest(requestParams);
-    decline(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'roubles');
+    window.helper.decline(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'roubles');
     if (requestParams.initial) {
-      decline(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'roubles');
+      window.helper.decline(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'roubles');
     }
-    decline(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
+    window.helper.decline(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
     window.scrollTo({
       top: calculator.offsetTop + calculatorRequest.offsetTop,
       left: 0,
@@ -506,7 +514,7 @@
   calculatorForm.addEventListener('submit', function (e) {
     e.preventDefault();
     addRequest = true;
-    requestNumber();
+    requestNumber(addRequest);
     calculatorRequest.classList.remove('calculator__request_active');
     calculatorOffer.classList.remove('calculator__offer_active');
     addRequest = false;
