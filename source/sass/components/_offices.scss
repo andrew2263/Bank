@@ -35,7 +35,7 @@
       width: 16px;
       height: 16px;
       margin-right: 10px;
-      border: 1px solid #2c36f2;
+      border: 1px solid $dark-blue;
       border-radius: 2px;
       background-repeat: no-repeat;
       background-position: center center;
@@ -47,7 +47,7 @@
   }
 
   &:checked + label::before {
-    background-color: #2c36f2;
+    background-color: $dark-blue;
     background-image: url("../img/checkbox.svg");
   }
 }
