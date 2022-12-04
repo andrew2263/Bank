@@ -171,6 +171,39 @@ ymaps.ready(function () {
     iconImageOffset: [-18, -40]
   });
 
+  var placemarkParis = new ymaps.Placemark([48.887903, 2.371655], {
+    hintContent: 'Собственный значок метки с контентом',
+    balloonContent: 'Paris',
+    country: 'europe'
+  }, {
+    iconLayout: 'default#image',
+    iconImageHref: 'img/location.svg',
+    iconImageSize: [35, 40],
+    iconImageOffset: [-18, -40]
+  });
+
+  var placemarkParis = new ymaps.Placemark([46.887903, 2.871655], {
+    hintContent: 'Собственный значок метки с контентом',
+    balloonContent: 'Paris',
+    country: 'europe'
+  }, {
+    iconLayout: 'default#image',
+    iconImageHref: 'img/location.svg',
+    iconImageSize: [35, 40],
+    iconImageOffset: [-18, -40]
+  });
+
+  var placemarkParis = new ymaps.Placemark([49.887903, 2.571655], {
+    hintContent: 'Собственный значок метки с контентом',
+    balloonContent: 'Paris',
+    country: 'europe'
+  }, {
+    iconLayout: 'default#image',
+    iconImageHref: 'img/location.svg',
+    iconImageSize: [35, 40],
+    iconImageOffset: [-18, -40]
+  });
+
   var russiaGroup = new ymaps.GeoObjectCollection();
   russiaGroup.add(placemarkSpb);
   russiaGroup.add(placemarkMsk);
