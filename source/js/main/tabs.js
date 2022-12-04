@@ -6,7 +6,7 @@ const tabsPanels = document.querySelectorAll('.tabs__panel');
 for (var i = 0; i < tabsLinks.length; i++) {
   tabsLinks[i].addEventListener('click', (e) => {
     e.preventDefault();
-    let hrefElement = document.querySelector(e.target.getAttribute('href'));
+    let hrefElement = document.querySelector(e.target.parentNode.getAttribute('href'));
     for (var j = 0; j < tabsPanels.length; j++) {
       tabsPanels[j].classList.remove('tabs__panel_active');
       tabsPanels[j].classList.remove('in');
@@ -18,7 +18,7 @@ for (var i = 0; i < tabsLinks.length; i++) {
     for (var k = 0; k < tabsItems.length; k++) {
       tabsItems[k].classList.remove('tabs__item_active');
     }
-    e.target.parentNode.classList.add('tabs__item_active');
+    e.target.parentNode.parentNode.classList.add('tabs__item_active');
   });
 }
 

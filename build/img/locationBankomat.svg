@@ -13,7 +13,7 @@
    fill="none"
    version="1.1"
    id="svg16"
-   sodipodi:docname="location.svg"
+   sodipodi:docname="locationBankomat.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <metadata
      id="metadata22">
@@ -23,6 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -43,7 +44,7 @@
      showgrid="false"
      inkscape:zoom="31.786133"
      inkscape:cx="12.888514"
-     inkscape:cy="20.072146"
+     inkscape:cy="22.588967"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -52,7 +53,7 @@
      d="M30.8744 29.2842L18.5 41L6.12556 29.2842C3.67816 26.967 2.01147 24.0148 1.33625 20.8008C0.661026 17.5869 1.0076 14.2555 2.33214 11.228C3.65668 8.20049 5.89969 5.61285 8.77755 3.79229C11.6554 1.97172 15.0388 1 18.5 1C21.9612 1 25.3446 1.97172 28.2225 3.79229C31.1003 5.61285 33.3433 8.20049 34.6679 11.228C35.9924 14.2555 36.339 17.5869 35.6637 20.8008C34.9885 24.0148 33.3218 26.967 30.8744 29.2842Z"
      fill="#2C36F2"
      id="path2"
-     style="fill:#9f25c8;fill-opacity:1" />
+     style="fill:#6580e3;fill-opacity:1" />
   <path
      d="M19.5179 10.2308H17.8214L10.3564 22.4884H12.562L13.5799 20.7373L19.5179 10.2308Z"
      fill="#2C36F2"
