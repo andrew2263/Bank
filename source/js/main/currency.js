@@ -1,17 +1,29 @@
-var myHeaders = new Headers();
+const myHeaders = new Headers();
 const BUY = 0.985;
 const SELL = 1.015;
 myHeaders.append("apikey", "tzJZhovsv9IlRpzzzZAuKFrDbMdEBM8m");
 
-var requestOptions = {
+const usdMdl = document.querySelector('#usd-mdl');
+const eurMdl = document.querySelector('#eur-mdl');
+const ronMdl = document.querySelector('#ron-mdl');
+const uahMdl = document.querySelector('#uah-mdl');
+
+const mdlUsd = document.querySelector('#mdl-usd');
+const mdlEur = document.querySelector('#mdl-eur');
+const mdlRon = document.querySelector('#mdl-ron');
+const mdlUah = document.querySelector('#mdl-uah');
+
+const requestOptions = {
   method: 'GET',
   redirect: 'follow',
   headers: myHeaders
 };
 
-const buyCurrency = (currencyRate, trType) => {
+const buyCurrency = (currencyRate, trType, element) => {
   let price = (currencyRate * trType).toFixed(2);
-  console.log(price)
+  //console.log(element.textContent);
+  //element.textContent(price);
+  element.textContent = price;
 }
 
 const getCurrencyRate = (currency, onSuccess, onError) => {
@@ -23,7 +35,6 @@ const getCurrencyRate = (currency, onSuccess, onError) => {
       throw new Error(`${response.status} ${response.statusText}`);
     })
     .then((result) => {
-      console.log(JSON.parse(result).result)
       return JSON.parse(result).result;
     })
     .then((data) => {
@@ -35,27 +46,21 @@ const getCurrencyRate = (currency, onSuccess, onError) => {
 };
 
 getCurrencyRate('EUR', (data) => {
-  buyCurrency(data, BUY);
-  buyCurrency(data, SELL);
+  buyCurrency(data, BUY, eurMdl);
+  buyCurrency(data, SELL, mdlEur);
 }, alert);
 
 getCurrencyRate('USD', (data) => {
-  buyCurrency(data, BUY);
-  buyCurrency(data, SELL);
+  buyCurrency(data, BUY, usdMdl);
+  buyCurrency(data, SELL, mdlUsd);
 }, alert);
 
 getCurrencyRate('RON', (data) => {
-  buyCurrency(data, BUY);
-  buyCurrency(data, SELL);
+  buyCurrency(data, BUY, ronMdl);
+  buyCurrency(data, SELL, mdlRon);
 }, alert);
 
 getCurrencyRate('UAH', (data) => {
-  buyCurrency(data, BUY);
-  buyCurrency(data, SELL);
+  buyCurrency(data, BUY, uahMdl);
+  buyCurrency(data, SELL, mdlUah);
 }, alert);
-
-getCurrencyRate('RUB', (data) => {
-  buyCurrency(data, BUY);
-  buyCurrency(data, SELL);
-}, alert);
-
