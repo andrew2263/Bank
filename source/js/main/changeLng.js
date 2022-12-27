@@ -12,10 +12,6 @@ langSel.addEventListener('click', (e) => {
   langList.classList.toggle('header__lang-list_expanded');
 });
 
-for (let i = 0; i < langButtons.length; i++) {
-
-}
-
 langButtons.forEach((lngButton) => {
   lngButton.addEventListener('click', (e) => {
     e.preventDefault();
@@ -25,8 +21,6 @@ langButtons.forEach((lngButton) => {
 
 const onClickLngButton = (button) => {
   changeURLLanguage(button);
-  /*langSel.value = button.value;
-  langSel.textContent = button.value.toUpperCase();*/
 };
 
 const changeURLLanguage = (select) => {
@@ -46,12 +40,10 @@ const changeLanguage = (select) => {
   select.value = hash;
   select.textContent = hash.toUpperCase();
   for (let key in langArr) {
-    //console.log(document.querySelector(`.lang__${ key }`));
     let elements = document.querySelectorAll(`.lang__${ key }`);
     elements.forEach((element) => {
       element.textContent = langArr[key][hash];
     });
-    //document.querySelector(`.lang__${ key }`).textContent = langArr[key][hash];
   }
 };
 

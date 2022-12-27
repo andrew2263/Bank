@@ -306,27 +306,27 @@
               </button>
               <ul class="list calculator__list">
                 <li class="calculator__item">
-                  <a href="#mortgage" class="calculator__link lang__calculator-mortgage" data-sumcredit="Сумма ипотеки">
+                  <a href="#mortgage" class="calculator__link lang__calculator-mortgage" data-sumcredit="lang__sum-mortgage">
                     Ипотечное кредитование
                   </a>
                 </li>
                 <li class="calculator__item">
-                  <a href="#car" class="calculator__link lang__calculator-auto" data-sumcredit="Сумма автокредита">
+                  <a href="#car" class="calculator__link lang__calculator-auto" data-sumcredit="lang__sum-auto">
                     Автомобильное кредитование
                   </a>
                 </li>
                 <li class="calculator__item">
-                  <a href="#consumer" class="calculator__link lang__consumer" data-sumcredit="Сумма кредита">
+                  <a href="#consumer" class="calculator__link lang__consumer" data-sumcredit="lang__sum-credit">
                     Потребительский кредит
                   </a>
                 </li>
               </ul>
             </div>
-            <div class="calculator__credit faded" id="mortgage" data-type="Ипотека" data-pricename="Стоимость недвижимости">
+            <div class="calculator__credit faded" id="mortgage" data-type="mortgage" data-pricename="calculator-price-re">
               <h3 class="lang__calculator-params">Шаг 2. Введите параметры кредита</h3>
               <div class="calculator__price-wrapper">
                 <div class="calculator__above">
-                  <p class="lang__calculator-ptice-re">Стоимость недвижимости</p>
+                  <p class="lang__calculator-price-re">Стоимость недвижимости</p>
                 </div>
                 <div class="calculator__price calculator__price_range">
                   <button type="button" class="button calculator__price-button calculator__price-button_minus"
@@ -392,8 +392,8 @@
                 <label for="calculator-checkbox-mortgage" class="lang__calculator-bonus">Использовать материнский капитал</label>
               </div>
             </div>
-            <div class="calculator__credit faded" id="car" data-type="Автомобильное кредитование"
-              data-pricename="Стоимость автомобиля">
+            <div class="calculator__credit faded" id="car" data-type="calculator-auto"
+              data-pricename="calculator-price-auto">
               <h3><span class="lang__calculator-step">Шаг</span> 2. <span class="lang__calculator-params">Введите параметры кредита</span></h3>
               <div class="calculator__price-wrapper">
                 <div class="calculator__above">
@@ -465,8 +465,8 @@
                 <label for="calculator-checkbox-lifesafe" class="lang__calculator-lifesafe">Оформить Страхование жизни в нашем банке</label>
               </div>
             </div>
-            <div class="calculator__credit faded" id="consumer" data-type="Потребительский кредит"
-            data-pricename="Сумма потребительского кредита">
+            <div class="calculator__credit faded" id="consumer" data-type="consumer"
+            data-pricename="sum-consumer">
               <h3 class="lang__calculator-params">Шаг 2. Введите параметры кредита</h3>
               <div class="calculator__price-wrapper">
                 <div class="calculator__above">
@@ -480,7 +480,7 @@
                     <input type="text" id="consumer-price" value="30000" size="5" maxlength="7"
                       data-min="15000" data-max="1000000">
                     <label for="consumer-price" class="visually-hidden"></label>
-                    <span class="calculator__price-currency lang__calculator-currency">евро</span>
+                    <span class="calculator__price-currency lang__calculator-currency">лет</span>
                   </p>
                   <button type="button" class="button calculator__price-button calculator__price-button_plus" data-add="15000">
                     +
@@ -498,7 +498,7 @@
                   <p>
                     <input type="text" id="consumer-term" value="1" maxlength="1">
                     <label for="consumer-term" class="visually-hidden"></label>
-                    <span class="calculator__price-years">год</span>
+                    <span class="calculator__price-years lang__calculator-year">год</span>
                   </p>
                 </div>
                 <div class="calculator__term-range">
@@ -617,14 +617,14 @@
                 <div class="calculator__descr"></div>
                 <div class="calculator__value">
                   <span id="request-price"></span>
-                  <span class="calculator__request-currency lang__calculator-currency">евро</span>
+                  <span class="calculator__request-currency lang__calculator-currency">леев</span>
                 </div>
               </div>
               <div class="calculator__param">
                 <div class="calculator__descr lang__calculator-inititial">Первоначальный взнос</div>
                 <div class="calculator__value">
                   <span id="request-initial"></span>
-                  <span class="calculator__request-currency lang__calculator-currency">евро</span>
+                  <span class="calculator__request-currency lang__calculator-currency">леев</span>
                 </div>
               </div>
               <div class="calculator__param">
@@ -646,7 +646,7 @@
                 <input type="email" name="request-email" id="request-email"
                   placeholder="E-mail" required="required">
               </div>
-              <input type="submit" value="Отправить">
+              <button type="submit" class="calculator-form__submit lang__submit">Отправить</button>
             </form>
           </div>
         </div>

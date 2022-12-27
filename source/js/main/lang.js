@@ -99,6 +99,11 @@ export const langArr = {
     "ru": "NIKA bank выдает кредиты под\u00A0любые\u00A0цели",
     "ro": "Banca NIKA emite credite pentru orice scop"
   },
+  "mortgage": {
+    "en": "Mortgage",
+    "ru": "Ипотека",
+    "ro": "Ipoteca"
+  },
   "serv-mortgage": {
     "en": "Mortgage",
     "ru": "Ипотечный кредит",
@@ -194,7 +199,7 @@ export const langArr = {
     "ru": "Введите параметры кредита",
     "ro": "Introduceți parametrii creditului"
   },
-  "calculator-ptice-re": {
+  "calculator-price-re": {
     "en": "Real estate value",
     "ru": "Стоимость недвижимости",
     "ro": "Valoarea imobiliara"
@@ -248,6 +253,21 @@ export const langArr = {
     "en": "Cosnumer loan amount",
     "ru": "Сумма потребительского кредита",
     "ro": "Suma creditului de consum"
+  },
+  "sum-mortgage": {
+    "en": "Morgage amount",
+    "ru": "Сумма ипотеки",
+    "ro": "Suma ipotecarului"
+  },
+  "sum-auto": {
+    "en": "Car loan amount",
+    "ru": "Сумма автокредита",
+    "ro": "Suma creditului auto"
+  },
+  "sum-credit": {
+    "en": "Loan amount",
+    "ru": "Сумма кредита",
+    "ro": "Suma creditului"
   },
   "calculator-salary": {
     "en": "I have salary card in NIKA Bank",
@@ -409,4 +429,19 @@ export const langArr = {
     "ru": "Отделения",
     "ro": "Sucursalele"
   },
+  "submit": {
+    "en": "Submit",
+    "ru": "Отправить",
+    "ro": "Trimite"
+  },
+  "request-name": {
+    "en": "Name, Surname",
+    "ru": "ФИО",
+    "ro": "Prenumele, Numele"
+  },
+  "request-tel": {
+    "en": "Phone number",
+    "ru": "Телефон",
+    "ro": "Numărul de telefon"
+  }
 };

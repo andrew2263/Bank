@@ -2,6 +2,22 @@ import { findInput, makeCount, decline } from './helper.js';
 import { calculateSumCredit, calculatePayCredit, calculateSalary } from './calculateCreditParams.js';
 import { renderCalcOffer, renderFormalizationRequest } from './viewCalc.js';
 import { popupContainer, popupThanks, myStorage } from './popup.js';
+import { langArr } from "./lang.js";
+
+const getLng = () => {
+  const allLang = ['ru', 'ro', 'en'];
+  let hash = window.location.hash;
+  if (!window.location.hash) {
+    hash = "#ru";
+  }
+  hash = hash.slice(1);
+  if (!allLang.includes(hash)) {
+  hash = "ru";
+  }
+  return hash;
+};
+
+const lang = getLng();
 
 const calculator = document.querySelector('.calculator');
 const calculatorSelect = calculator.querySelector('.calculator__goal');
@@ -48,7 +64,7 @@ const onInputPrice = (input) => {
     let percent = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').value;
     initial.value = parseInt((Number(input.value) * Number(percent / 100)), 10);
     let roubles = initial.parentNode.querySelector('.calculator__price-currency');
-    decline(parseInt(initial.value, 10), roubles, 'money');
+    decline(parseInt(initial.value, 10), roubles, 'money', lang);
   }
 };
 
@@ -60,7 +76,7 @@ const onChangePrice = (inputPrice) => {
     inputPrice.value = 'Некорректное значение';
   }
   let roubles = inputPrice.parentNode.querySelector('.calculator__price-currency');
-  decline(parseInt(inputPrice.value, 10), roubles, 'money');
+  decline(parseInt(inputPrice.value, 10), roubles, 'money', lang);
   requestParams = calculateCredit(block, id);
 };
 
@@ -77,6 +93,7 @@ const onChangeInitial = (input) => {
 };
 
 const onClickCalculatorLink = (calculatorLink) => {
+  const textCreditInfo = calculatorOffer.querySelector('.calculator__offer-text_credit').querySelector('p');
   calculatorOffer.classList.remove('calculator__offer_active');
   calculatorRequest.classList.remove('calculator__request_active');
   calculator.querySelector('.calculator__message_mortgage').classList.remove('calculator__message_active');
@@ -96,7 +113,8 @@ const onClickCalculatorLink = (calculatorLink) => {
   calculatorList.classList.remove('calculator__list_expanded');
   calculatorSelect.innerHTML = calculatorLink.innerHTML;
   calculatorInput.value = calculatorLink.innerHTML;
-  calculatorOffer.querySelector('.calculator__offer-text_credit').querySelector('p').innerHTML = calculatorLink.dataset.sumcredit;
+  textCreditInfo.classList.add(calculatorLink.dataset.sumcredit);
+  textCreditInfo.textContent = langArr[calculatorLink.dataset.sumcredit.replace('lang__', '')][lang];
   calculatorSelectBlock.classList.add('calculator__select_active');
   calculatorOffer.classList.add('calculator__offer_active');
   requestParams = calculateCredit(block, id);
@@ -127,7 +145,7 @@ const onInputInitRange = (initRange) => {
   inputInit.value = parseInt(price * percent, 10);
   initRange.parentNode.querySelector('.calculator__initial-percent').querySelector('p').innerHTML = initRange.value + '%';
   let roubles = inputInit.parentNode.querySelector('.calculator__price-currency');
-  decline(parseInt(inputInit.value, 10), roubles, 'money');
+  decline(parseInt(inputInit.value, 10), roubles, 'money', lang);
   requestParams = calculateCredit(block, id);
 };
 
@@ -135,7 +153,7 @@ const onInputTermRange = (termRange) => {
   let input = termRange.parentNode.parentNode.querySelector('.calculator__price_term').querySelector('input');
   input.value = termRange.value;
   let years = input.parentNode.querySelector('.calculator__price-years');
-  decline(parseInt(input.value, 10), years, 'years');
+  decline(parseInt(input.value, 10), years, 'years', lang);
   requestParams = calculateCredit(block, id);
 };
 
@@ -152,7 +170,7 @@ const onFocusInputPrice = (inputPrice) => {
 
 const onInputInitial = (inputInitial) => {
   let roubles = inputInitial.parentNode.querySelector('.calculator__price-currency');
-  decline(parseInt(inputInitial.value, 10), roubles, 'money');
+  decline(parseInt(inputInitial.value, 10), roubles, 'money', lang);
   requestParams = calculateCredit(block, id);
 };
 
@@ -166,7 +184,7 @@ const onInputTerm = (inputTerm) => {
     inputTerm.value = max;
   }
   let years = inputTerm.parentNode.querySelector('.calculator__price-years');
-  decline(parseInt(inputTerm.value, 10), years, 'years');
+  decline(parseInt(inputTerm.value, 10), years, 'years', lang);
   requestParams = calculateCredit(block, id);
 };
 
@@ -238,15 +256,18 @@ const calculateCredit = (paramsBlock, creditType) => {
 
   if (isSumCredit) {
     renderCalcOffer(calcOfferParams);
-    decline(calcOfferParams.payCredit, payCreditField.parentNode.querySelector('.calculator__offer-currency'), 'money');
-    decline(calcOfferParams.sumCredit, sumCreditField.parentNode.querySelector('.calculator__offer-currency'), 'money');
-    decline(calcOfferParams.salary, salaryField.parentNode.querySelector('.calculator__offer-currency'), 'money');
+    decline(calcOfferParams.payCredit, payCreditField.parentNode.querySelector('.calculator__offer-currency'), 'money', lang);
+    decline(calcOfferParams.sumCredit, sumCreditField.parentNode.querySelector('.calculator__offer-currency'), 'money', lang);
+    decline(calcOfferParams.salary, salaryField.parentNode.querySelector('.calculator__offer-currency'), 'money', lang);
     calculatorOffer.classList.add('calculator__offer_active');
   }
 
+  //console.log(langArr[paramsBlock.dataset.type][lang]);
+  //console.log(langArr[paramsBlock.dataset.pricename][lang]);
+
   return {
-    'goal': paramsBlock.dataset.type,
-    'priceName': paramsBlock.dataset.pricename,
+    'goal': langArr[paramsBlock.dataset.type][lang],
+    'priceName': langArr[paramsBlock.dataset.pricename][lang],
     'creditType': creditType,
     'price': price,
     'initial': initial,
@@ -331,13 +352,15 @@ calculatorOfferButton.addEventListener('click', (e) => {
   }
   newRequestNumberString += newRequestNumber.toString();
   calculatorRequest.classList.add('calculator__request_active');
+  calculatorRequest.querySelector('#request-name').placeholder = langArr['request-name'][lang];
+  calculatorRequest.querySelector('#request-tel').placeholder = langArr['request-tel'][lang];
   requestParams.requestNumber = newRequestNumberString;
   renderFormalizationRequest(requestParams);
-  decline(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'money');
+  decline(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'money', lang);
   if (requestParams.initial) {
-    decline(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'money');
+    decline(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'money', lang);
   }
-  decline(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
+  decline(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years', lang);
   window.scrollTo({
     top: calculator.offsetTop + calculatorRequest.offsetTop,
     left: 0,

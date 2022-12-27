@@ -11,12 +11,16 @@ const findInput = (wrapper, collection) => {
 // например: 1 рубль, 2 рубля, 5 рублей; 1 год, 2 года, 6 лет и т.д.
 // аргументы: value - число, word - поле, куда будет записано слово, type - год или рубль
 // type может принимать значения 'roubles' или 'years'
-const decline = (value, word, type) => {
+const decline = (value, word, type, lang) => {
+  if (!lang) {
+    lang = "ru";
+  }
   // падеж существительного определяется в зависимости от остатка от деления числа на 10
   let rest = value % 10;
   // т.к. 11, 12, 13, 14 - рублЕЙ, дополнительно проверяем остаток от деления числа на 100
   let restH = value % 100;
   let way;
+
   switch (rest) {
     case 1:
       if (restH !== 11) {
@@ -41,29 +45,52 @@ const decline = (value, word, type) => {
   }
 
   // объект с вариантами склонения слова "лей"
-  let WAYS_ROUBLES = {
-    'a': 'лей',
-    'b': 'лея',
-    'c': 'леев'
+  let WAYS_MDL = {
+    "ru": {
+      "a": "лей",
+      "b": "лея",
+      "c": "леев"
+    },
+    "en": {
+      "a": "MDL",
+      "b": "MDL",
+      "c": "MDL"
+    },
+    "ro": {
+      "a": "MDL",
+      "b": "MDL",
+      "c": "MDL"
+    }
   };
 
-  // объект с вариантами склонения слова "год"
   let WAYS_YEARS = {
-    'a': 'год',
-    'b': 'года',
-    'c': 'лет'
+    "ru": {
+      "a": "год",
+      "b": "года",
+      "c": "лет"
+    },
+    "en": {
+      "a": "year",
+      "b": "years",
+      "c": "years"
+    },
+    "ro": {
+      "a": "an",
+      "b": "ani",
+      "c": "ani"
+    }
   };
 
   // указываем в поле word существительное в соответствующем падеже
   switch (type) {
     case 'money':
-      word.innerHTML = WAYS_ROUBLES[way];
+      word.innerHTML = WAYS_MDL[lang][way];
       break;
     case 'years':
-      word.innerHTML = WAYS_YEARS[way];
+      word.innerHTML = WAYS_YEARS[lang][way];
       break;
   }
-}
+};
 
 const makeCount = () => {
   let count = 1;
@@ -73,6 +100,6 @@ const makeCount = () => {
     }
     return count;
   };
-}
+};
 
 export { findInput, decline, makeCount };
