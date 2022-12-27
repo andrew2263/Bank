@@ -21,8 +21,6 @@ const requestOptions = {
 
 const buyCurrency = (currencyRate, trType, element) => {
   let price = (currencyRate * trType).toFixed(2);
-  //console.log(element.textContent);
-  //element.textContent(price);
   element.textContent = price;
 }
 
@@ -32,7 +30,9 @@ const getCurrencyRate = (currency, onSuccess, onError) => {
       if (response.ok) {
         return response.text();
       }
-      throw new Error(`${response.status} ${response.statusText}`);
+      if (!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
     })
     .then((result) => {
       return JSON.parse(result).result;
@@ -48,19 +48,19 @@ const getCurrencyRate = (currency, onSuccess, onError) => {
 getCurrencyRate('EUR', (data) => {
   buyCurrency(data, BUY, eurMdl);
   buyCurrency(data, SELL, mdlEur);
-}, alert);
+}, console.log);
 
 getCurrencyRate('USD', (data) => {
   buyCurrency(data, BUY, usdMdl);
   buyCurrency(data, SELL, mdlUsd);
-}, alert);
+}, console.log);
 
 getCurrencyRate('RON', (data) => {
   buyCurrency(data, BUY, ronMdl);
   buyCurrency(data, SELL, mdlRon);
-}, alert);
+}, console.log);
 
 getCurrencyRate('UAH', (data) => {
   buyCurrency(data, BUY, uahMdl);
   buyCurrency(data, SELL, mdlUah);
-}, alert);
+}, console.log);

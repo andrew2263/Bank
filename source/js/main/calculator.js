@@ -48,7 +48,7 @@ const onInputPrice = (input) => {
     let percent = input.parentNode.parentNode.parentNode.parentNode.querySelector('.calculator__initial-range').querySelector('input').value;
     initial.value = parseInt((Number(input.value) * Number(percent / 100)), 10);
     let roubles = initial.parentNode.querySelector('.calculator__price-currency');
-    decline(parseInt(initial.value, 10), roubles, 'roubles');
+    decline(parseInt(initial.value, 10), roubles, 'money');
   }
 };
 
@@ -60,7 +60,7 @@ const onChangePrice = (inputPrice) => {
     inputPrice.value = 'Некорректное значение';
   }
   let roubles = inputPrice.parentNode.querySelector('.calculator__price-currency');
-  decline(parseInt(inputPrice.value, 10), roubles, 'roubles');
+  decline(parseInt(inputPrice.value, 10), roubles, 'money');
   requestParams = calculateCredit(block, id);
 };
 
@@ -127,7 +127,7 @@ const onInputInitRange = (initRange) => {
   inputInit.value = parseInt(price * percent, 10);
   initRange.parentNode.querySelector('.calculator__initial-percent').querySelector('p').innerHTML = initRange.value + '%';
   let roubles = inputInit.parentNode.querySelector('.calculator__price-currency');
-  decline(parseInt(inputInit.value, 10), roubles, 'roubles');
+  decline(parseInt(inputInit.value, 10), roubles, 'money');
   requestParams = calculateCredit(block, id);
 };
 
@@ -152,7 +152,7 @@ const onFocusInputPrice = (inputPrice) => {
 
 const onInputInitial = (inputInitial) => {
   let roubles = inputInitial.parentNode.querySelector('.calculator__price-currency');
-  decline(parseInt(inputInitial.value, 10), roubles, 'roubles');
+  decline(parseInt(inputInitial.value, 10), roubles, 'money');
   requestParams = calculateCredit(block, id);
 };
 
@@ -196,12 +196,12 @@ const calculateCredit = (paramsBlock, creditType) => {
 
   switch (creditType) {
     case 'mortgage':
-      if (calcOfferParams.sumCredit >= 500000) {
+      if (calcOfferParams.sumCredit >= 150000) {
         isSumCredit = true;
       }
       break;
     case 'car':
-      if (calcOfferParams.sumCredit >= 200000) {
+      if (calcOfferParams.sumCredit >= 70000) {
         isSumCredit = true;
       }
       break;
@@ -238,9 +238,9 @@ const calculateCredit = (paramsBlock, creditType) => {
 
   if (isSumCredit) {
     renderCalcOffer(calcOfferParams);
-    decline(calcOfferParams.payCredit, payCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
-    decline(calcOfferParams.sumCredit, sumCreditField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
-    decline(calcOfferParams.salary, salaryField.parentNode.querySelector('.calculator__offer-currency'), 'roubles');
+    decline(calcOfferParams.payCredit, payCreditField.parentNode.querySelector('.calculator__offer-currency'), 'money');
+    decline(calcOfferParams.sumCredit, sumCreditField.parentNode.querySelector('.calculator__offer-currency'), 'money');
+    decline(calcOfferParams.salary, salaryField.parentNode.querySelector('.calculator__offer-currency'), 'money');
     calculatorOffer.classList.add('calculator__offer_active');
   }
 
@@ -333,9 +333,9 @@ calculatorOfferButton.addEventListener('click', (e) => {
   calculatorRequest.classList.add('calculator__request_active');
   requestParams.requestNumber = newRequestNumberString;
   renderFormalizationRequest(requestParams);
-  decline(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'roubles');
+  decline(requestParams.price, document.getElementById('request-price').parentNode.querySelector('.calculator__request-currency'), 'money');
   if (requestParams.initial) {
-    decline(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'roubles');
+    decline(requestParams.initial, document.getElementById('request-initial').parentNode.querySelector('.calculator__request-currency'), 'money');
   }
   decline(requestParams.term, document.getElementById('request-term').parentNode.querySelector('.calculator__request-years'), 'years');
   window.scrollTo({

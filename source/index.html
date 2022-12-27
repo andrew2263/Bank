@@ -53,6 +53,9 @@
           </div>
         </div>
         <div class="header__right">
+          <button type="button" class="button header__login" aria-label="Войти в Интернет-банк">
+            <span class="header__login-text lang__sign-in">Войти в Интернет-банк</span>
+          </button>
           <div class="header__lang">
             <input type="hidden" id="language" name="language">
             <button type="button" class="header__lang-sel" value="">RU</button>
@@ -68,9 +71,6 @@
               </li>
             </ul>
           </div>
-          <button type="button" class="button header__login" aria-label="Войти в Интернет-банк">
-            <span class="header__login-text lang__sign-in">Войти в Интернет-банк</span>
-          </button>
         </div>
       </div>
     </div>
@@ -330,22 +330,22 @@
                 </div>
                 <div class="calculator__price calculator__price_range">
                   <button type="button" class="button calculator__price-button calculator__price-button_minus"
-                    data-add="-100000">
+                    data-add="-30000">
                     –
                   </button>
                   <p>
-                    <input type="text" id="mortgage-price" value="2000000" size="6" maxlength="8"
-                      data-min="1200000" data-max="25000000">
+                    <input type="text" id="mortgage-price" value="650000" size="6" maxlength="8"
+                      data-min="400000" data-max="8000000">
                     <label for="mortgage-price" class="visually-hidden"></label>
-                    <span class="calculator__price-currency lang__calculator-currency">евро</span>
+                    <span class="calculator__price-currency lang__calculator-currency">леев</span>
                   </p>
                   <button type="button" class="button calculator__price-button calculator__price-button_plus"
-                    data-add="100000">
+                    data-add="30000">
                     +
                   </button>
                 </div>
                 <div class="calculator__below">
-                  <p>От 1&nbsp;200&nbsp;000 до 25&nbsp;000&nbsp;000 рублей</p>
+                  <p>От 400&nbsp;000 до 8&nbsp;000&nbsp;000 леев</p>
                 </div>
               </div>
               <div class="calculator__initial">
@@ -354,9 +354,9 @@
                 </div>
                 <div class="calculator__price calculator__price_initial">
                   <p>
-                    <input type="text" id="mortgage-initial" value="200000" size="6" maxlength="8">
+                    <input type="text" id="mortgage-initial" value="65000" size="6" maxlength="8">
                     <label for="mortgage-initial" class="visually-hidden"></label>
-                    <span class="calculator__price-currency lang__calculator-currency">евро</span>
+                    <span class="calculator__price-currency lang__calculator-currency">леев</span>
                   </p>
                 </div>
                 <div class="calculator__initial-range">
@@ -401,22 +401,22 @@
                 </div>
                 <div class="calculator__price calculator__price_range">
                   <button type="button" class="button calculator__price-button calculator__price-button_minus"
-                    data-add="-50000">
+                    data-add="-15000">
                     –
                   </button>
                   <p>
-                    <input type="text" id="car-price" value="1000000" size="5" maxlength="7"
-                      data-min="500000" data-max="5000000">
+                    <input type="text" id="car-price" value="350000" size="5" maxlength="7"
+                      data-min="150000" data-max="2000000">
                     <label for="car-price" class="visually-hidden"></label>
-                    <span class="calculator__price-currency lang__calculator-currency">евро</span>
+                    <span class="calculator__price-currency lang__calculator-currency">леев</span>
                   </p>
                   <button type="button" class="button calculator__price-button calculator__price-button_plus"
-                    data-add="50000">
+                    data-add="15000">
                     +
                   </button>
                 </div>
                 <div class="calculator__below">
-                  <p>От 500&nbsp;000 до 5&nbsp;000&nbsp;000 рублей</p>
+                  <p>От 150&nbsp;000 до 2&nbsp;000&nbsp;000 леев</p>
                 </div>
               </div>
               <div class="calculator__initial">
@@ -425,9 +425,9 @@
                 </div>
                 <div class="calculator__price calculator__price_initial">
                   <p>
-                    <input type="text" id="car-initial" value="200000" size="5" maxlength="7">
+                    <input type="text" id="car-initial" value="70000" size="5" maxlength="7">
                     <label for="car-initial" class="visually-hidden"></label>
-                    <span class="calculator__price-currency lang__calculator-currency">евро</span>
+                    <span class="calculator__price-currency lang__calculator-currency">леев</span>
                   </p>
                 </div>
                 <div class="calculator__initial-range">
@@ -473,21 +473,21 @@
                   <p class="lang__calculator-sum-consumer">Сумма потребительского кредита</p>
                 </div>
                 <div class="calculator__price calculator__price_range">
-                  <button type="button" class="button calculator__price-button calculator__price-button_minus" data-add="-50000">
+                  <button type="button" class="button calculator__price-button calculator__price-button_minus" data-add="-15000">
                     –
                   </button>
                   <p>
-                    <input type="text" id="consumer-price" value="100000" size="5" maxlength="7"
-                      data-min="50000" data-max="3000000">
+                    <input type="text" id="consumer-price" value="30000" size="5" maxlength="7"
+                      data-min="15000" data-max="1000000">
                     <label for="consumer-price" class="visually-hidden"></label>
                     <span class="calculator__price-currency lang__calculator-currency">евро</span>
                   </p>
-                  <button type="button" class="button calculator__price-button calculator__price-button_plus" data-add="50000">
+                  <button type="button" class="button calculator__price-button calculator__price-button_plus" data-add="15000">
                     +
                   </button>
                 </div>
                 <div class="calculator__below">
-                  <p>От 50&nbsp;000 до 3&nbsp;000&nbsp;000 рублей</p>
+                  <p>От 15&nbsp;000 до 1&nbsp;000&nbsp;000 леев</p>
                 </div>
               </div>
               <div class="calculator__term">
@@ -520,7 +520,7 @@
             <div class="calculator__message calculator__message_mortgage">
               <div class="calculator__msg-main">
                 <p class="lang__calculator-msg-main">
-                  Наш банк не выдаёт ипотечные кредиты меньше&nbsp;500 000 рублей.
+                  Наш банк не выдаёт ипотечные кредиты меньше&nbsp;150 000 леев.
                 </p>
               </div>
               <div class="calculator__msg-below">
@@ -532,7 +532,7 @@
             <div class="calculator__message calculator__message_car">
               <div class="calculator__msg-main">
                 <p class="lang__calculator-msg-main_auto">
-                  Наш банк не выдаёт автокредиты меньше&nbsp;200 000 рублей.
+                  Наш банк не выдаёт автокредиты меньше&nbsp;70 000 леев.
                 </p>
               </div>
               <div class="calculator__msg-below">
@@ -551,7 +551,7 @@
                     <div class="calculator__offer-price">
                       <p>
                         <span class="calculator__offer-sum">1&nbsp;330&nbsp;000</span>
-                        <span class="calculator__offer-currency lang__calculator-currency">евро</span>
+                        <span class="calculator__offer-currency lang__calculator-currency">леев</span>
                       </p>
                     </div>
                     <div class="calculator__offer-text calculator__offer-text_credit">
@@ -562,7 +562,7 @@
                     <div class="calculator__offer-price">
                       <p>
                         <span class="calculator__offer-month">27&nbsp;868</span>
-                        <span class="calculator__offer-currency lang__calculator-currency">евро</span>
+                        <span class="calculator__offer-currency lang__calculator-currency">леев</span>
                       </p>
                     </div>
                     <div class="calculator__offer-text">
@@ -586,7 +586,7 @@
                     <div class="calculator__offer-price">
                       <p>
                         <span class="calculator__offer-salary">61&nbsp;929</span>
-                        <span class="calculator__offer-currency lang__calculator-currency">евро</span>
+                        <span class="calculator__offer-currency lang__calculator-currency">леев</span>
                       </p>
                     </div>
                     <div class="calculator__offer-text">
@@ -658,11 +658,17 @@
         <div class="offices__map-wrapper">
           <div class="offices__checkbox-group">
             <input type="checkbox" id="offices-atm" value="isBankomat">
-            <label for="offices-atm" class="offices-atm">Банкоматы</label>
+            <label for="offices-atm" class="offices-atm lang__offices-atm">
+              Банкоматы
+            </label>
             <input type="checkbox" id="offices-cashin" value="isCashIn" checked>
-            <label for="offices-cashin" class="lang__offices-cashin">Банкоматы с внесением наличных</label>
+            <label for="offices-cashin" class="lang__offices-cashin lalng__offices-atm-cashin">
+              Банкоматы с внесением наличных
+            </label>
             <input type="checkbox" id="offices-offices" value="isOffice" checked>
-            <label for="offices-offices" class="lang__offices-offices">Отделения</label>
+            <label for="offices-offices" class="lang__offices-offices lalng__offices-offices">
+              Отделения
+            </label>
           </div>
           <div id="map" class="offices__map"></div>
         </div>
@@ -673,9 +679,9 @@
         <h2 class="lang__currency">Курсы валют в отделениях банка</h2>
         <table class="currtncy__rates">
           <tr>
-            <th>Покупка</th>
-            <th>Валюта</th>
-            <th>Продажа</th>
+            <th class="lang__currency-buy">Покупка</th>
+            <th class="lang__currency-curr">Валюта</th>
+            <th class="lang__currency-sell">Продажа</th>
           </tr>
           <tr>
             <td class="currency__rate" id="usd-mdl">0.00</td>
@@ -708,11 +714,11 @@
           <div class="footer__logo"><a>NIKA Bank</a></div>
         </div>
         <div class="footer__info">
-          <address class="footer__text footer__address">
-            150015, г. Москва, ул. Московская, д. 32
+          <address class="footer__text footer__address lang__footer-address">
+            MD 2012, Республика Молдова, мун. Кишинэу, ул. Александра Пушкина, 28
           </address>
-          <p>Генеральная лицензия Банка России №1050</p>
-          <p>© Лига Банк, 2019</p>
+          <p class="lang__footer-copyright">Все права защищены</p>
+          <p>© NIKA Bank 2022</p>
         </div>
         <ul class="list footer__list">
           <li class="footer__item"><a href="#services" class="anchor-link footer__link lang__header-serv">
@@ -735,8 +741,8 @@
             <img src="img/mobile_icon.svg" alt="mobile" width="10" height="16">
             <div class="footer__phone-info">
               <a href="tel:*0904" class="footer__mobile-phone">*0904</a>
-              <p>Бесплатно для абонентов<br>
-                МТС, Билайн, Мегафон, Теле2</p>
+              <p><span class="lang__footer-abonents">Бесплатно для абонентов</span><br>
+                Orange, Moldell, Unite</p>
             </div>
           </div>
         </div>
@@ -744,9 +750,8 @@
           <div class="footer__phone-item">
             <img src="img/phone_icon.svg" alt="phone" width="16" height="16">
             <div class="footer__phone-info">
-              <a href="tel:+78001112233" class="footer__phone-phone">8 800 111 22 33</a>
-              <p>Бесплатно для всех<br>
-                городов России</p>
+              <a href="tel:+37322894546" class="footer__phone-phone">+373 (22) 89 45 86</a>
+              <p class="lang__footer-tel">Международный номер</p>
             </div>
           </div>
         </div>

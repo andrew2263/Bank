@@ -40,11 +40,11 @@ const decline = (value, word, type) => {
       way = 'c'; // по умолчанию склонение "рублей"
   }
 
-  // объект с вариантами склонения слова "рубль"
+  // объект с вариантами склонения слова "лей"
   let WAYS_ROUBLES = {
-    'a': 'рубль',
-    'b': 'рубля',
-    'c': 'рублей'
+    'a': 'лей',
+    'b': 'лея',
+    'c': 'леев'
   };
 
   // объект с вариантами склонения слова "год"
@@ -56,7 +56,7 @@ const decline = (value, word, type) => {
 
   // указываем в поле word существительное в соответствующем падеже
   switch (type) {
-    case 'roubles':
+    case 'money':
       word.innerHTML = WAYS_ROUBLES[way];
       break;
     case 'years':
