@@ -106,6 +106,10 @@
   &:hover {
     background-color: #d3dbf2;
     transition: all 0.5s;
+
+    & button {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -230,16 +234,20 @@
   }
 
   .header__logo {
-    padding-left: 32px;
+    padding-left: 27px;
     font-size: 18px;
     line-height: 18px;
-    margin-right: 76px;
+    margin-right: 35px;
 
     &::before {
       left: 0;
       width: 24px;
       height: 22px;
     }
+  }
+
+  .header__lang {
+    margin-left: 20px;
   }
 }
 
@@ -375,7 +383,7 @@
     }
   }
 
-  .header__login {
+  .header__right {
     position: absolute;
     right: 15px;
   }

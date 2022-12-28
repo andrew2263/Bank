@@ -77,12 +77,12 @@ export const langArr = {
   "serv-perc": {
     "en": "Deposit interest up to 7%",
     "ru": "Проценты по вкладам до 7%",
-    "ro": ""
+    "ro": "Dobândă de depozit de până la 7%"
   },
   "serv-diff": {
     "en": "Different conditions",
     "ru": "Разнообразные условия",
-    "ro": "Dobândă de depozit de până la 7%"
+    "ro": "Condiții diferite"
   },
   "serv-ab": {
     "en": "Possibility of capitalizing interest or withdrawing interest to a bank card",

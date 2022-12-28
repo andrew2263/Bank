@@ -24,3 +24,21 @@
 .currency__currency {
   font-weight: 700;
 }
+
+@media (max-width: 767px) {
+  .currency h2 {
+    max-width: 180px;
+  }
+
+  .currtncy__rates {
+    & td {
+      padding: 7px 20px;
+      font-size: 16px;
+    }
+
+    & th {
+      padding: 8px 22px;
+      font-size: 20px;
+    }
+  }
+}
