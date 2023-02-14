@@ -17,30 +17,8 @@ import minify from "gulp-minify";
 import webpack from "webpack-stream";
 import dartSass from "sass";
 import gulpSass from "gulp-sass";
-import gulpPlumber from "gulp-plumber";
 
 const server = bsCreate();
-
-/*
-const gulp = require("gulp");
-const plumber = require("gulp-plumber");
-const sourcemap = require("gulp-sourcemaps");
-const sass = require("gulp-sass")(require("sass"));
-const postcss = require("gulp-postcss");
-const autoprefixer = require("autoprefixer");
-const server = require("browser-sync").create();
-const csso = require("gulp-csso");
-const rename = require("gulp-rename");
-const webp = require("gulp-webp");
-const svgstore = require("gulp-svgstore")
-const posthtml = require("gulp-posthtml");
-const include = require("posthtml-include");
-const del = require("del");
-const concat = require("gulp-concat");
-const minify = require("gulp-minify");
-const webpack = require("webpack-stream");
-const gulpPlumber = require("gulp-plumber");
-*/
 
 const sass = gulpSass(dartSass);
 

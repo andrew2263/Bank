@@ -387,6 +387,7 @@ calculatorForm.addEventListener('submit', (e) => {
   }
   requests.push(request);
   myStorage.setItem('requests', JSON.stringify(requests));
+  sendDataHandler(request);
   popupContainer.classList.add('popup-container_active');
   popupThanks.classList.add('popup__thanks_active');
   document.querySelector('body').classList.add('body-hidden');
@@ -397,3 +398,10 @@ calculatorForm.addEventListener('submit', (e) => {
     }
   });
 });
+
+const sendDataHandler = async (data) => {
+  await fetch('https://bank-7df52-default-rtdb.firebaseio.com/loans.json', {
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+};
