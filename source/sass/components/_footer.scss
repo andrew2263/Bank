@@ -25,6 +25,7 @@
   padding-left: 37px;
   font-size: 20px;
   font-weight: bold;
+  margin-bottom: 15px;
 
   &::before {
     content: "";
@@ -46,6 +47,8 @@
   line-height: 140%;
   font-style: normal;
   color: #707c87;
+  max-width: 250px;
+  margin-bottom: 10px;
 }
 
 .footer__info {

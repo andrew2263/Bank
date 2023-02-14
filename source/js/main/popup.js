@@ -1,111 +1,97 @@
-'use strict';
-(function () {
-  var calculatorForm = document.querySelector('#calculator-form');
-  var popupContainer = document.querySelector('.popup-container');
-  var popupClose = document.querySelectorAll('.popup__close');
-  var popupThanks = document.querySelector('.popup__thanks');
-  var loginButton = document.querySelector('.header__login');
-  var popupLogin = document.querySelector('.popup__login');
-  var loginInput = document.getElementById('login');
-  var passwordInput = document.getElementById('password');
-  var passwordCheckbox = document.getElementById('show-password');
-  var passwordForm = document.querySelector('#popup-form');
-  var myStorage = localStorage;
-  var passwords = [];
+const popupContainer = document.querySelector('.popup-container');
+const popupClose = document.querySelectorAll('.popup__close');
+const popupThanks = document.querySelector('.popup__thanks');
+const loginButton = document.querySelector('.header__login');
+const popupLogin = document.querySelector('.popup__login');
+const loginInput = document.getElementById('login');
+const passwordInput = document.getElementById('password');
+const passwordCheckbox = document.getElementById('show-password');
+const passwordForm = document.querySelector('#popup-form');
+const myStorage = localStorage;
+let passwords = [];
 
-  loginButton.addEventListener('click', function (e) {
-    e.preventDefault();
-    popupContainer.classList.add('popup-container_active');
-    popupLogin.classList.add('popup__login_active');
-    document.querySelector('body').classList.add('body-hidden');
-    loginInput.focus();
-  });
+loginButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  popupContainer.classList.add('popup-container_active');
+  popupLogin.classList.add('popup__login_active');
+  document.querySelector('body').classList.add('body-hidden');
+  loginInput.focus();
+});
 
-  passwordCheckbox.addEventListener('change', function (e) {
-    if (e.target.checked) {
-      passwordInput.type = 'text';
-    }
-    if (!e.target.checked) {
-      passwordInput.type = 'password';
-    }
-  });
+passwordCheckbox.addEventListener('change', (e) => {
+  if (e.target.checked) {
+    passwordInput.type = 'text';
+  }
+  if (!e.target.checked) {
+    passwordInput.type = 'password';
+  }
+});
 
-  passwordForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var passwordInTheList = false;
-    var login = loginInput.value;
-    var password = document.getElementById('password').value;
+passwordForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  let passwordInTheList = false;
+  let login = loginInput.value;
+  let password = document.getElementById('password').value;
 
-    if (myStorage.getItem('passwords') && isPassword(JSON.parse(myStorage.getItem('passwords')), login, password)) {
-      passwordInTheList = true;
-    }
-    if (!myStorage.getItem('passwords') && isPassword(passwords, login, password)) {
-      passwordInTheList = true;
-    }
-    if (!passwordInTheList && (login !== '') && (password !== '')) {
-      var newPassword = {
-        'login': login,
-        'password': password
-      };
-      if (passwords.length === 0 && myStorage.getItem('passwords')) {
-        for (var i = 0; i < JSON.parse(myStorage.getItem('passwords')).length; i++) {
-          passwords.push(JSON.parse(myStorage.getItem('passwords'))[i]);
-        }
+  if (myStorage.getItem('passwords') && isPassword(JSON.parse(myStorage.getItem('passwords')), login, password)) {
+    passwordInTheList = true;
+  }
+  if (!myStorage.getItem('passwords') && isPassword(passwords, login, password)) {
+    passwordInTheList = true;
+  }
+  if (!passwordInTheList && (login !== '') && (password !== '')) {
+    let newPassword = {
+      'login': login,
+      'password': password
+    };
+    if (passwords.length === 0 && myStorage.getItem('passwords')) {
+      for (let i = 0; i < JSON.parse(myStorage.getItem('passwords')).length; i++) {
+        passwords.push(JSON.parse(myStorage.getItem('passwords'))[i]);
       }
-      passwords.push(newPassword);
-      myStorage.setItem('passwords', JSON.stringify(passwords));
     }
+    passwords.push(newPassword);
+    myStorage.setItem('passwords', JSON.stringify(passwords));
+  }
+  close();
+});
+
+popupClose.forEach((popup) => {
+  popup.addEventListener('click', () => {
     close();
   });
+});
 
-  calculatorForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    popupContainer.classList.add('popup-container_active');
-    popupThanks.classList.add('popup__thanks_active');
-    document.querySelector('body').classList.add('body-hidden');
-    var inputs = e.target.querySelectorAll('input');
-    for (var i = 0; i < inputs.length; i++) {
-      if (inputs[i].type !== 'submit') {
-        inputs[i].value = '';
-      }
+const isPassword = function (myPasswords, myLogin, myPassword) {
+  for (let j = 0; j < myPasswords.length; j++)
+  myPasswords.forEach((password) => {
+    if (password.login === myLogin && password.password === myPassword) {
+      return true;
     }
   });
+  return false;
+};
 
-  for (var i = 0; i < popupClose.length; i++) {
-    popupClose[i].addEventListener('click', function () {
-      close();
-    });
+document.addEventListener('keydown', (e) => {
+  if (popupContainer.classList.contains('popup-container_active') && e.code === 'Escape') {
+    close();
   }
+});
 
-  var isPassword = function (myPasswords, myLogin, myPassword) {
-    for (var j = 0; j < myPasswords.length; j++) {
-      if (myPasswords[j].login === myLogin && myPasswords[j].password === myPassword) {
-        return true;
-      }
-    }
-    return false;
-  };
+popupContainer.addEventListener('click', (e) => {
+  if (e.target === popupContainer) {
+    close();
+  }
+});
 
-  document.addEventListener('keydown', function (e) {
-    if (popupContainer.classList.contains('popup-container_active') && e.code === 'Escape') {
-      close();
-    }
-  });
+const close = () => {
+  popupContainer.classList.remove('popup-container_active');
+  popupLogin.classList.remove('popup__login_active');
+  popupThanks.classList.remove('popup__thanks_active');
+  document.querySelector('body').classList.remove('body-hidden');
+  passwordInput.value = '';
+  loginInput.value = '';
+  passwordCheckbox.checked = false;
+  passwordInput.type = 'password';
+};
 
-  popupContainer.addEventListener('click', function (e) {
-    if (e.target === popupContainer) {
-      close();
-    }
-  });
-
-  var close = function () {
-    popupContainer.classList.remove('popup-container_active');
-    popupLogin.classList.remove('popup__login_active');
-    popupThanks.classList.remove('popup__thanks_active');
-    document.querySelector('body').classList.remove('body-hidden');
-    passwordInput.value = '';
-    loginInput.value = '';
-    passwordCheckbox.checked = false;
-    passwordInput.type = 'password';
-  };
-})();
+export { popupContainer, popupThanks, myStorage };

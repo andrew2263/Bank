@@ -1,4 +1,5 @@
-'use strict';
+'use strict'
+
 ymaps.ready(function () {
   var checkboxRussia = document.getElementById('offices-russia');
   var checkboxCIS = document.getElementById('offices-sng');

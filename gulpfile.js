@@ -1,23 +1,26 @@
-"use strict";
+import imagemin from "gulp-imagemin";
+import gulp from "gulp";
+import plumber from "gulp-plumber";
+import sourcemap from "gulp-sourcemaps";
+import postcss from "gulp-postcss";
+import autoprefixer from "autoprefixer";
+import { create as bsCreate } from "browser-sync";
+import csso from "gulp-csso";
+import rename from "gulp-rename";
+import webp from "gulp-webp";
+import svgstore from "gulp-svgstore";
+import posthtml from "gulp-posthtml";
+import include from "posthtml-include";
+import del from "del";
+import concat from "gulp-concat";
+import minify from "gulp-minify";
+import webpack from "webpack-stream";
+import dartSass from "sass";
+import gulpSass from "gulp-sass";
 
-var gulp = require("gulp");
-var plumber = require("gulp-plumber");
-var sourcemap = require("gulp-sourcemaps");
-var sass = require("gulp-sass");
-var postcss = require("gulp-postcss");
-var autoprefixer = require("autoprefixer");
-var server = require("browser-sync").create();
-var csso = require("gulp-csso");
-var rename = require("gulp-rename");
-var imagemin = require("gulp-imagemin");
-var webp = require("gulp-webp");
-var svgstore = require("gulp-svgstore")
-var posthtml = require("gulp-posthtml");
-var include = require("posthtml-include");
-var del = require("del");
-var concat = require("gulp-concat");
-var minify = require("gulp-minify");
-const gulpPlumber = require("gulp-plumber");
+const server = bsCreate();
+
+const sass = gulpSass(dartSass);
 
 gulp.task("css", function () {
   return gulp.src("source/sass/style.scss")
@@ -59,7 +62,6 @@ gulp.task("images", function() {
       imagemin.jpegtran({progressive: true}),
       imagemin.svgo()
     ]))
-
     .pipe(gulp.dest("source/img"));
 
 });
@@ -86,12 +88,12 @@ gulp.task("html", function () {
 });
 
 gulp.task("js-main", function () {
-  return gulp.src(["source/js/main/helper.js", "source/js/main/*.js"])
-    .pipe(concat("main.js"))
-    .pipe(minify({
-      ext: {
-        min: '.min.js'
-      },
+  return gulp.src("source/js/main/main.js")
+    .pipe(webpack({
+      mode: 'development',
+      output: {
+        filename: 'main.min.js',
+      }
     }))
     .pipe(gulp.dest("build/js"));
 });
