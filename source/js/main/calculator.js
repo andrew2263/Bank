@@ -262,9 +262,6 @@ const calculateCredit = (paramsBlock, creditType) => {
     calculatorOffer.classList.add('calculator__offer_active');
   }
 
-  //console.log(langArr[paramsBlock.dataset.type][lang]);
-  //console.log(langArr[paramsBlock.dataset.pricename][lang]);
-
   return {
     'goal': langArr[paramsBlock.dataset.type][lang],
     'priceName': langArr[paramsBlock.dataset.pricename][lang],

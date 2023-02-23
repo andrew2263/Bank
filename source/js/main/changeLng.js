@@ -25,7 +25,6 @@ const onClickLngButton = (button) => {
 
 const changeURLLanguage = (select) => {
   let lang = select.value;
-  console.log(langSel.textContent);
   location.href = window.location.pathname + '#' + lang;
   location.reload();
 };

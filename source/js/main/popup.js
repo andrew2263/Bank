@@ -33,6 +33,16 @@ passwordForm.addEventListener('submit', (e) => {
   let login = loginInput.value;
   let password = document.getElementById('password').value;
 
+  const isPassword = function (myPasswords, myLogin, myPassword) {
+    for (let j = 0; j < myPasswords.length; j++)
+    myPasswords.forEach((password) => {
+      if (password.login === myLogin && password.password === myPassword) {
+        return true;
+      }
+    });
+    return false;
+  };
+
   if (myStorage.getItem('passwords') && isPassword(JSON.parse(myStorage.getItem('passwords')), login, password)) {
     passwordInTheList = true;
   }
@@ -60,16 +70,6 @@ popupClose.forEach((popup) => {
     close();
   });
 });
-
-const isPassword = function (myPasswords, myLogin, myPassword) {
-  for (let j = 0; j < myPasswords.length; j++)
-  myPasswords.forEach((password) => {
-    if (password.login === myLogin && password.password === myPassword) {
-      return true;
-    }
-  });
-  return false;
-};
 
 document.addEventListener('keydown', (e) => {
   if (popupContainer.classList.contains('popup-container_active') && e.code === 'Escape') {
