@@ -124,7 +124,7 @@
   z-index: 1500;
   border: 1px solid #1f1e25;
   border-radius: 0 0 4px 4px;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .calculator__list_expanded {
@@ -140,7 +140,7 @@
   padding-left: 24px;
   border-bottom: 1px solid #c1c2ca;
   cursor: pointer;
-  background-color: #ffffff;
+  background-color: #fff;
   transition: all 0.5s;
 
   &:last-child {
@@ -206,13 +206,14 @@
 
 .calculator__price {
   @include calculator-border;
+
   justify-content: center;
   font-size: 18px;
   margin-bottom: 8px;
 }
 
 .calculator__price_red {
-  border-color: #ff0000;
+  border-color: #f00;
 }
 
 .calculator__price_range {
@@ -244,14 +245,10 @@
   font-size: inherit;
   font-weight: 500;
   outline: none;
-
-  &:focus {
-    border-bottom: 1px solid #707c87;
-  }
 }
 
 .calculator__price-input_red {
-  color: #ff0000;
+  color: #f00;
   width: 200px;
 }
 
@@ -261,6 +258,30 @@
 
 .calculator__price_term-car input {
   width: 15px;
+}
+
+.calculator__contacts input {
+  width: 300px;
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  padding-left: 24px;
+  border: 1px solid #0a1e32;
+  border-radius: 4px;
+  background-color: transparent;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: 0.03em;
+
+  &::placeholder {
+    font-size: 18px;
+    letter-spacing: 0.03em;
+    color: #707c87;
+  }
+}
+
+.calculator__price input:focus {
+  border-bottom: 1px solid #707c87;
 }
 
 .calculator__term-years {
@@ -273,10 +294,6 @@
   position: absolute;
   z-index: -1;
   opacity: 0;
-
-  &:focus + label::before {
-    outline: #b5b5b5 solid 2px;
-  }
 
   & + label {
     display: flex;
@@ -313,6 +330,10 @@
   &:checked + label::before {
     background-color: $dark-blue;
     background-image: url("../img/checkbox.svg");
+  }
+
+  &:focus + label::before {
+    outline: #b5b5b5 solid 2px;
   }
 }
 
@@ -597,26 +618,6 @@ input[type="range"] {
   justify-content: space-between;
   width: 100%;
   margin-bottom: 40px;
-}
-
-.calculator__contacts input {
-  width: 300px;
-  height: 60px;
-  display: inline-flex;
-  align-items: center;
-  padding-left: 24px;
-  border: 1px solid #0a1e32;
-  border-radius: 4px;
-  background-color: transparent;
-  font-size: 18px;
-  line-height: 140%;
-  letter-spacing: 0.03em;
-
-  &::placeholder {
-    font-size: 18px;
-    letter-spacing: 0.03em;
-    color: #707c87;
-  }
 }
 
 .calculator-form__submit {

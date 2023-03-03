@@ -77,7 +77,7 @@ export const langArr = {
   "serv-perc": {
     "en": "Deposit interest up to 7%",
     "ru": "Проценты по вкладам до 7%",
-    "ro": "Dobândă de depozit de până la 7%"
+    "ro": "Dobândă de\u00A0depozit de\u00A0până\u00A0la\u00A07%"
   },
   "serv-diff": {
     "en": "Different conditions",
@@ -85,7 +85,7 @@ export const langArr = {
     "ro": "Condiții diferite"
   },
   "serv-ab": {
-    "en": "Possibility of capitalizing interest or withdrawing interest to a bank card",
+    "en": "Possibility of capitalizing interest or withdrawing interest to a\u00A0bank\u00A0card",
     "ru": "Возможность ежемесячной капитализации или вывод процентов на банковскую карту",
     "ro": "Posibilitate de capitalizare a dobânzii sau de retragere a dobânzii pe un card bancar"
   },
@@ -359,20 +359,10 @@ export const langArr = {
     "ru": "Наш менеджер скоро свяжется с\u00A0вами по\u00A0указанному номеру телефона.",
     "ro": "Managerul nostru vă va contacta cât mai curând posibil"
   },
-  "offices-atm": {
-    "en": "ATM",
-    "ru": "Банкоматы",
-    "ro": "Bancomate"
-  },
   "offices-cashin": {
     "en": "Cash-in ATM",
     "ru": "Банкоматы с внесением наличных",
     "ro": "Cash-in bancomate"
-  },
-  "offices-atm": {
-    "en": "Offices",
-    "ru": "Отделения",
-    "ro": "Sucursale"
   },
   "footer-address": {
     "en": "MD 2012, Republic of Moldova, mun. Chisinau, Alexander Pushkin str., 28",
@@ -395,9 +385,9 @@ export const langArr = {
     "ro": "Telefon internațional"
   },
   "currency": {
-    "en": "Currency rates at Bank Offices",
-    "ru": "Курсы валют в отделениях банка",
-    "ro": "Cursurile de schimb în sucursalele"
+    "en": "Currency rates at\u00A0Bank\u00A0Offices",
+    "ru": "Курсы валют в\u00A0отделениях банка",
+    "ro": "Cursurile de schimb în\u00A0sucursalele"
   },
   "currency-curr": {
     "en": "Currency",

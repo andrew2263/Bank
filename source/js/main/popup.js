@@ -10,6 +10,17 @@ const passwordForm = document.querySelector('#popup-form');
 const myStorage = localStorage;
 let passwords = [];
 
+const close = () => {
+  popupContainer.classList.remove('popup-container_active');
+  popupLogin.classList.remove('popup__login_active');
+  popupThanks.classList.remove('popup__thanks_active');
+  document.querySelector('body').classList.remove('body-hidden');
+  passwordInput.value = '';
+  loginInput.value = '';
+  passwordCheckbox.checked = false;
+  passwordInput.type = 'password';
+};
+
 loginButton.addEventListener('click', (e) => {
   e.preventDefault();
   popupContainer.classList.add('popup-container_active');
@@ -33,14 +44,8 @@ passwordForm.addEventListener('submit', (e) => {
   let login = loginInput.value;
   let password = document.getElementById('password').value;
 
-  const isPassword = function (myPasswords, myLogin, myPassword) {
-    for (let j = 0; j < myPasswords.length; j++)
-    myPasswords.forEach((password) => {
-      if (password.login === myLogin && password.password === myPassword) {
-        return true;
-      }
-    });
-    return false;
+  const isPassword = (myPasswords, myLogin, myPassword) => {
+    return myPasswords.some(el => el.login === myLogin && el.password === myPassword);
   };
 
   if (myStorage.getItem('passwords') && isPassword(JSON.parse(myStorage.getItem('passwords')), login, password)) {
@@ -82,16 +87,5 @@ popupContainer.addEventListener('click', (e) => {
     close();
   }
 });
-
-const close = () => {
-  popupContainer.classList.remove('popup-container_active');
-  popupLogin.classList.remove('popup__login_active');
-  popupThanks.classList.remove('popup__thanks_active');
-  document.querySelector('body').classList.remove('body-hidden');
-  passwordInput.value = '';
-  loginInput.value = '';
-  passwordCheckbox.checked = false;
-  passwordInput.type = 'password';
-};
 
 export { popupContainer, popupThanks, myStorage };

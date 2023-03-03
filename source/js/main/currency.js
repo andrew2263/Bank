@@ -1,7 +1,5 @@
-const myHeaders = new Headers();
-const BUY = 0.985;
-const SELL = 1.015;
-myHeaders.append("apikey", "tzJZhovsv9IlRpzzzZAuKFrDbMdEBM8m");
+const BUY = 0.99;
+const SELL = 1.01;
 
 const usdMdl = document.querySelector('#usd-mdl');
 const eurMdl = document.querySelector('#eur-mdl');
@@ -13,32 +11,31 @@ const mdlEur = document.querySelector('#mdl-eur');
 const mdlRon = document.querySelector('#mdl-ron');
 const mdlUah = document.querySelector('#mdl-uah');
 
-const requestOptions = {
-  method: 'GET',
-  redirect: 'follow',
-  headers: myHeaders
-};
-
 const buyCurrency = (currencyRate, trType, element) => {
   let price = (currencyRate * trType).toFixed(2);
   element.textContent = price;
-}
+};
 
 const getCurrencyRate = (currency, onSuccess, onError) => {
-  fetch(`https://api.apilayer.com/exchangerates_data/convert?to=MDL&from=${currency}&amount=1`, requestOptions)
+  const headers = new Headers();
+  headers.append("apikey", "tzJZhovsv9IlRpzzzZAuKFrDbMdEBM8m");
+
+  fetch(`https://api.apilayer.com/exchangerates_data/convert?to=MDL&from=${currency}&amount=1`,
+  {
+    method: 'GET',
+    redirect: 'follow',
+    headers
+  })
     .then((response) => {
       if (response.ok) {
-        return response.text();
+        return response.json();
       }
       if (!response.ok) {
         throw new Error(`${response.status} ${response.statusText}`);
       }
     })
-    .then((result) => {
-      return JSON.parse(result).result;
-    })
     .then((data) => {
-      onSuccess(data)
+      onSuccess(data.result)
     })
     .catch((error) => {
       onError(error)

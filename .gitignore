@@ -1,7 +1,6 @@
 .DS_Store
 .idea
 .vscode
-package-lock.json
 *.ai
 *.log
 *.pdf
@@ -13,3 +12,4 @@ npm-debug.*
 source/css/*.css
 source/css/*.map
 Thumbs.db
+build/*
